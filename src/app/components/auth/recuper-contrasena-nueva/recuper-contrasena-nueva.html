@@ -1,0 +1,111 @@
+<main class="password-layout">
+  <section class="brand-aside">
+    <div class="pattern-overlay"></div>
+    
+    <div class="brand-container">
+      <div class="brand-top-logo">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span class="brand-name">HelpWithTEACCH</span>
+      </div>
+
+      <div class="brand-center-content">
+        <div class="image-frame-decoration">
+          <img alt="Imagen de apoyo tranquilo" 
+               class="brand-illustration" 
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp5q_-7kYiF9dyy7AJrDb9JIAMTNv2x1s01QStslYzb77e5HYG12Vw7lrWu1LMOBh1GS0btUR5LNbKHOLFY5tOE7yjq236_eR4GYcsIhlZZAkYWOinRvbqKEn9vnlJCxXdGVM3Ql6vRg0MrQxh6nfRCtADLf-UoynmNYXrPUoqXb5SUqksdWjrjy33IjUYxCdePLvF0lTIcV6F4gb5PuSxrDb6IYCxmPnPu-JDqMIWPGb9gPcYCEJeKSLWzmwn9nOU0XoMXBXvtQ"/>
+        </div>
+        <h2 class="brand-heading">Un camino seguro hacia el aprendizaje.</h2>
+        <p class="brand-body">Diseñamos herramientas estructuradas para potenciar el desarrollo con calma y claridad.</p>
+      </div>
+
+      <div class="carousel-dots-indicator">
+        <div class="dot-bar"></div>
+        <div class="dot-bar"></div>
+        <div class="dot-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="form-wrapper">
+      
+      <header class="form-header">
+        <h1>Crea una nueva contraseña</h1>
+        <p>Asegúrate de que sea segura y fácil de recordar</p>
+      </header>
+
+      <form #passwordForm="ngForm" (ngSubmit)="onResetPassword(passwordForm)" class="password-form" novalidate>
+        
+        <div class="form-group">
+          <label class="form-label" for="new-password">Nueva contraseña</label>
+          <div class="input-relative-container">
+            <span class="material-symbols-outlined input-icon-left">lock</span>
+            <input class="form-input" 
+                   [type]="showNewPassword ? 'text' : 'password'"
+                   id="new-password" 
+                   name="newPassword" 
+                   placeholder="••••••••" 
+                   [(ngModel)]="passwords.new"
+                   #newPwd="ngModel"
+                   required
+                   minlength="8"/>
+            <button class="btn-toggle-visibility" type="button" (click)="showNewPassword = !showNewPassword">
+              <span class="material-symbols-outlined">
+                {{ showNewPassword ? 'visibility_off' : 'visibility' }}
+              </span>
+            </button>
+          </div>
+          @if (newPwd.invalid && newPwd.touched) {
+            <p class="text-error">La contraseña debe tener mínimo 8 caracteres.</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirm-password">Confirmar contraseña</label>
+          <div class="input-relative-container">
+            <span class="material-symbols-outlined input-icon-left">lock</span>
+            <input class="form-input" 
+                   [type]="showConfirmPassword ? 'text' : 'password'"
+                   id="confirm-password" 
+                   name="confirmPassword" 
+                   placeholder="••••••••" 
+                   [(ngModel)]="passwords.confirm"
+                   #confirmPwd="ngModel"
+                   required/>
+            <button class="btn-toggle-visibility" type="button" (click)="showConfirmPassword = !showConfirmPassword">
+              <span class="material-symbols-outlined">
+                {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+              </span>
+            </button>
+          </div>
+          @if (confirmPwd.touched && passwords.new !== passwords.confirm) {
+            <p class="text-error">Las contraseñas ingresadas no coinciden.</p>
+          }
+        </div>
+
+        <div class="info-visual-box">
+          <span class="material-symbols-outlined info-icon">info</span>
+          <p class="info-text">La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula y un número.</p>
+        </div>
+
+        <button class="btn-submit-action" 
+                type="submit" 
+                [disabled]="passwordForm.invalid || passwords.new !== passwords.confirm">
+          <span>Cambiar contraseña</span>
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+
+        <div class="navigation-footer-link">
+          <a class="login-redirect-link" href="/login" (click)="goToLogin($event)">
+            Volver al inicio de sesión
+          </a>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="absolute-bottom-credits">
+      <p>© 2024 HelpWithTEACCH. Un guía confiable para el aprendizaje.</p>
+    </div>
+  </section>
+</main>

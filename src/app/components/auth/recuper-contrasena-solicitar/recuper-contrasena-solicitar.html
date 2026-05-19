@@ -1,0 +1,85 @@
+<main class="recovery-layout">
+  <section class="brand-column">
+    <div class="image-overlay-container">
+      <img class="brand-bg-image" 
+           alt="Un entorno educativo sereno y minimalista con materiales estructurados" 
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm-d0SYkegxYM4uJ89bKUIUbIeLe9wQwrA0_jEuZnu5HCLkamRtCCASAGwHKD83ZXHOz5bwgxXJKGZvU5AjohViElAD-PkC5yxGKgLqgigUuuU1wJxIKx8_n8TxEqMYOapc66m_M1-JKWjahUlRLxhEo9DrsQTOlouPhiiW3TGHXXbCSD_u4Bv2jqg4romAPBT-XHayjZLcRlS3Y7aocyzrZJ37ys3xGhiNvsz7I-SsBQ7DnA9R7rGos7mcZ3NPw6LqK88OuRTcA"/>
+      <div class="gradient-overlay"></div>
+    </div>
+    
+    <div class="brand-text-content">
+      <h1 class="brand-heading">HelpWithTEACCH</h1>
+      <p class="brand-description">
+        Acompañamos a educadores y familias en el camino del aprendizaje estructurado, brindando herramientas claras para un desarrollo armónico.
+      </p>
+      <div class="carousel-indicators">
+        <div class="indicator active"></div>
+        <div class="indicator"></div>
+        <div class="indicator"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-column">
+    <div class="form-wrapper">
+      
+      <div class="mobile-brand">
+        <span>HelpWithTEACCH</span>
+      </div>
+
+      <header class="form-header">
+        <h2>¿Olvidaste tu contraseña?</h2>
+        <p>Ingresa tu correo electrónico para recibir un código de recuperación</p>
+      </header>
+
+      <form #recoveryForm="ngForm" (ngSubmit)="onSendCode(recoveryForm)" class="recovery-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="email">Correo electrónico</label>
+          
+          <div class="input-container-group">
+            <div class="input-icon-wrapper">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <input class="form-input" 
+                   id="email" 
+                   name="email" 
+                   type="email" 
+                   placeholder="ejemplo@correo.com" 
+                   [(ngModel)]="emailAddress"
+                   #emailField="ngModel"
+                   required 
+                   email/>
+          </div>
+
+          @if (emailField.invalid && emailField.touched) {
+            <p class="text-error">Por favor, ingresa un correo electrónico válido.</p>
+          }
+        </div>
+
+        <button class="btn-submit" type="submit" [disabled]="recoveryForm.invalid">
+          <span>Enviar código</span>
+          <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="back-navigation">
+        <a class="back-link" href="/login" (click)="goToLogin($event)">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Volver al inicio de sesión</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="shared-footer">
+  <div class="footer-content">
+    <p>© 2026 HelpWithTEACCH. Un guía confiable para el aprendizaje.</p>
+    <div class="footer-links">
+      <a href="#" (click)="$event.preventDefault()">Privacidad</a>
+      <a href="#" (click)="$event.preventDefault()">Soporte</a>
+      <a href="#" (click)="$event.preventDefault()">Metodología</a>
+    </div>
+  </div>
+</footer>

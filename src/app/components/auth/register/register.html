@@ -1,0 +1,110 @@
+<main class="login-layout">
+  <section class="brand-column">
+    <div class="decorative-blur-top"></div>
+    <div class="decorative-blur-bottom"></div>
+    
+    <div class="brand-content">
+      <div class="brand-header-group">
+        <span class="brand-title">HelpWithTEACCH</span>
+        <p class="brand-subtitle">Educación estructurada para todos</p>
+      </div>
+
+      <div class="image-container">
+        <img alt="Niño aprendiendo con bloques visuales" 
+             class="illustration-image" 
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbFOAXfpLBtaIciA8aQs6j3-w361n8RQicEXsnvFbf7g2Uhy-DpUyrWuKGe7Cwwp1TCRJDrzJIL5XmhYZcDd__a_uhJ0Q4FuuMRe4YjkLrmxDO_TaHnSErN0IFF-d8gDYBc8nD5rnIhoqrgLSkwocgXJ3Y97pciRNcgKRDqSZXzbDzTEDhW6m_6k1O8koRY1h4rnqorl6e8BklbgK6_HyX0rJ7qm8BGpA4SQndMFDAC2na6rj-Chc4S6XSdj8PvU3OOVZ__hZpeA"/>
+      </div>
+      
+      <div class="tag-routine">
+        <span class="material-symbols-outlined">lightbulb</span>
+        <span>Rutinas claras y amigables</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-column">
+    <div class="form-container">
+      
+      <div class="login-card">
+        <header class="card-header">
+          <h1>¡Hola!</h1>
+          <p>Ingresa tus datos para comenzar tus actividades.</p>
+        </header>
+
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+          
+          <div class="form-group">
+            <label class="form-label" for="email">
+              <span class="material-symbols-outlined">mail</span>
+              Correo Electrónico
+            </label>
+            <input class="form-input" 
+                   id="email" 
+                   name="email" 
+                   type="email" 
+                   placeholder="ejemplo@correo.com" 
+                   [(ngModel)]="credentials.email"
+                   #emailField="ngModel"
+                   required 
+                   email/>
+            
+            @if (emailField.invalid && emailField.touched) {
+              <p class="text-error">Ingresa un correo electrónico válido.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">
+              <span class="material-symbols-outlined">lock</span>
+              Contraseña
+            </label>
+            <input class="form-input" 
+                   id="password" 
+                   name="password" 
+                   type="password" 
+                   placeholder="••••••••" 
+                   [(ngModel)]="credentials.password"
+                   #passwordField="ngModel"
+                   required/>
+            
+            @if (passwordField.invalid && passwordField.touched) {
+              <p class="text-error">La contraseña es requerida para ingresar.</p>
+            }
+          </div>
+
+          <div class="actions-group">
+            <button class="btn-submit-tactile" 
+                    type="submit"
+                    [disabled]="loginForm.invalid">
+              <span class="material-symbols-outlined">login</span>
+              Iniciar Sesión
+            </button>
+
+            <div class="link-center">
+              <a class="forgot-password-link" href="#" routerLink="/olvide-mi-contrasena">
+                <span class="material-symbols-outlined icon-small">help_outline</span>
+                ¿Olvidaste tu contraseña?
+              </a>
+              <a class="forgot-password-link" href="#" routerLink="/login">
+                <span class="material-symbols-outlined icon-small">person</span>
+                Iniciar sesión
+              </a>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <footer class="form-footer">
+        <span class="version-info">Versión 2.0.4 - TEACCH Perú</span>
+        <button class="btn-accessibility" 
+                title="Ajustes de accesibilidad"
+                type="button"
+                (click)="onAccessibilityClick()">
+          <span class="material-symbols-outlined">accessibility_new</span>
+        </button>
+      </footer>
+
+    </div>
+  </section>
+</main>

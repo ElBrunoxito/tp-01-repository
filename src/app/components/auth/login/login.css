@@ -1,0 +1,265 @@
+/* Variables de la paleta de colores TEACCH y espaciados */
+:host {
+  --primary: #075fab;
+  --on-primary: #ffffff;
+  --surface-container-low: #eef4fd;
+  --surface-container-highest: #dce3ec;
+  --surface-container-lowest: #ffffff;
+  --on-surface: #151c22;
+  --on-surface-variant: #414751;
+  --outline: #727782;
+  --outline-variant: #c1c6d3;
+  --surface: #f6f9ff;
+  --error: #ba1a1a;
+  
+  --font-main: 'Lexend', sans-serif;
+  
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-main);
+}
+
+/* Contenedor Principal en dos columnas */
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Columna Izquierda: Ilustración */
+.illustration-section {
+  background-color: var(--surface-container-low);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.brand-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--outline);
+  margin: 0 0 40px 0;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+}
+
+.illustration-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.75rem;
+}
+
+.tag-routine {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--primary);
+  background-color: var(--surface-container-highest);
+  padding: 24px 40px;
+  border-radius: 0.5rem;
+}
+
+.tag-routine span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Columna Derecha: Formulario */
+.form-section {
+  background-color: var(--surface-container-lowest);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-header {
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0 0 4px 0;
+}
+
+.form-header p {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+/* Campos de Formulario */
+.form-group {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-input {
+  width: 100%;
+  height: 64px;
+  padding: 0 16px;
+  border-radius: 0.5rem;
+  border: 2px solid var(--outline-variant);
+  background-color: var(--surface);
+  font-family: var(--font-main);
+  font-size: 18px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.text-error {
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px 0 0 0;
+}
+
+/* Acciones y Botón */
+.actions-group {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  height: 72px;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.link-wrapper {
+  text-align: center;
+}
+
+.forgot-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Footer y Accesibilidad */
+.form-footer {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--outline-variant);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.version-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--outline);
+}
+
+.btn-accessibility {
+  padding: 4px;
+  border: none;
+  background: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--outline);
+  transition: background-color 0.2s;
+}
+
+.btn-accessibility:hover {
+  background-color: var(--surface-container-highest);
+}
+
+/* Estilo para iconos de Material font-face */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}

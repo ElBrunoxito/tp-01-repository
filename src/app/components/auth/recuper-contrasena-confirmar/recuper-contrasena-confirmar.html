@@ -1,0 +1,80 @@
+<main class="verification-layout">
+  <section class="visual-column">
+    <div class="image-background-wrapper">
+      <img class="bg-illustration" 
+           alt="Entorno educativo estructurado TEACCH" 
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFRJt2ctZubdZpB5DgJhBPTi9ij33ZaTcFTtcqd9KNOF93Ts__khhn4Qcb-yUPFcBSRLML6WUANcxJCqjG51veicGptEgBZ_LRC_ZRTMFt5ZY-a5VSTSPocmANU3WMK8URmGnhHqXXvwQegYnZVSatxoOILs8dqCkBh-TsScHz9W3McmBXtWIDq7AazIA1opyiW_CA4D2ZPpV_oUPFd1f-zaCFBSdyW9RlIjDzSUQeR9MHDlE9YhrjTssYMKs7fMZJ-ZOJclnVuA"/>
+      <div class="gradient-mask"></div>
+    </div>
+    
+    <div class="visual-content-card">
+      <div class="icon-badge">
+        <span class="material-symbols-outlined icon-display">verified_user</span>
+      </div>
+      <h2 class="visual-heading">Seguridad y Claridad</h2>
+      <p class="visual-description">
+        Un paso más cerca de recuperar tu acceso. Diseñamos este proceso para ser previsible y libre de estrés, siguiendo nuestra metodología de apoyo estructurado.
+      </p>
+    </div>
+  </section>
+
+  <section class="interaction-column">
+    <div class="interaction-wrapper">
+      
+      <div class="mobile-brand-header">
+        <span>HelpWithTEACCH</span>
+      </div>
+
+      <header class="text-header">
+        <h1>Verifica tu identidad</h1>
+        <p>Hemos enviado un código de 6 dígitos a tu correo electrónico. Por favor, introdúcelo a continuación.</p>
+      </header>
+
+      <form (ngSubmit)="onVerify()" class="otp-form">
+        <div class="otp-container" id="otp-inputs-row">
+          @for (box of otpBoxes; track $index) {
+            <input class="otp-field"
+                   type="text"
+                   inputmode="numeric"
+                   maxlength="1"
+                   pattern="\d*"
+                   [id]="'otp-' + $index"
+                   [(ngModel)]="otpValues[$index]"
+                   [name]="'otpChar' + $index"
+                   (input)="onInputFocus($event, $index)"
+                   (keydown)="onKeyDownFocus($event, $index)"
+                   [autofocus]="$index === 0"/>
+          }
+        </div>
+
+        <button class="btn-submit-verify" type="submit" [disabled]="!isOtpComplete()">
+          <span>Verificar código</span>
+          <span class="material-symbols-outlined">check_circle</span>
+        </button>
+      </form>
+
+      <div class="navigation-actions">
+        <p class="resend-text">
+          ¿No recibiste el código? 
+          <a class="link-action" href="#" (click)="onResendCode($event)">Reenviar código</a>
+        </p>
+        
+        <a class="back-link-btn" href="/recovery" (click)="goBack($event)">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Volver</span>
+        </a>
+      </div>
+
+      <div class="visual-task-aid">
+        <div class="aid-icon-circle">
+          <span class="material-symbols-outlined icon-filled">lightbulb</span>
+        </div>
+        <div class="aid-text-content">
+          <p class="aid-tag">Ayuda Visual</p>
+          <p class="aid-body">Busca en tu carpeta de "Promociones" o "Spam" si el código no aparece en tu bandeja principal.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

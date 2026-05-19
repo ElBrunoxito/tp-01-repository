@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-nav-left',
+  imports: [],
+  templateUrl: './nav-left.html',
+  styleUrl: './nav-left.css',
+})
+export class NavLeft {
+
+}
