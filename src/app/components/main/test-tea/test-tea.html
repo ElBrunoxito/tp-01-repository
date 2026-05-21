@@ -1,0 +1,157 @@
+<div class="main-content-canvas">
+  <div class="content-max-container">
+    
+    <section class="hero-action-section">
+      <div class="hero-text-block">
+        <h3 class="hero-title">Evaluación Continua</h3>
+        <p class="hero-description">
+          Monitoriza la evolución del espectro de manera regular para ajustar las intervenciones del programa TEACCH.
+        </p>
+      </div>
+      <button class="btn-start-level" (click)="onStartLevel()">
+        <span class="material-symbols-outlined">add_circle</span>
+        Empezar Nivel
+      </button>
+    </section>
+
+    <div class="analytical-bento-grid">
+      
+      <div class="bento-card summary-card">
+        <div class="card-top">
+          <span class="card-subtitle-label">Última Evaluación</span>
+          <div class="evaluation-badge-row">
+            <span class="evaluation-level-text">Nivel {{ lastEvaluationLevel }}</span>
+            <span class="status-badge-pill">ESTABLE</span>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <p class="footer-timestamp">Registrado el 12 de Oct, 2023</p>
+          <span class="material-symbols-outlined arrow-icon">trending_flat</span>
+        </div>
+      </div>
+
+      <div class="bento-card chart-card">
+        <div class="chart-card-header">
+          <div>
+            <span class="card-subtitle-label">Progreso Semestral</span>
+            <h4 class="chart-title-heading">Evolución Temporal del Nivel TEA</h4>
+          </div>
+          <div class="decorator-dots">
+            <div class="dot dot-primary"></div>
+            <div class="dot dot-secondary"></div>
+          </div>
+        </div>
+        
+        <div class="chart-canvas-container">
+          <svg class="svg-chart-graphics" preserveAspectRatio="none" viewBox="0 0 600 120">
+            <line stroke="var(--surface-variant)" stroke-width="1" x1="0" x2="600" y1="100" y2="100"></line>
+            <line stroke="var(--surface-variant)" stroke-dasharray="4" stroke-width="1" x1="0" x2="600" y1="50" y2="50"></line>
+            
+            <path d="M0 120 L0 80 L100 65 L200 75 L300 45 L400 50 L500 35 L600 40 L600 120 Z" fill="url(#gradientArea)" opacity="0.1"></path>
+            
+            <path d="M0 80 L100 65 L200 75 L300 45 L400 50 L500 35 L600 40" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+            
+            <circle cx="100" cy="65" fill="#ffffff" r="4" stroke="var(--primary)" stroke-width="2"></circle>
+            <circle cx="300" cy="45" fill="#ffffff" r="4" stroke="var(--primary)" stroke-width="2"></circle>
+            <circle cx="500" cy="35" fill="#ffffff" r="4" stroke="var(--primary)" stroke-width="2"></circle>
+            <circle cx="600" cy="40" fill="var(--primary)" r="5"></circle>
+            
+            <defs>
+              <linearGradient id="gradientArea" x1="0%" x2="0%" y1="0%" y2="100%">
+                <stop offset="0%" stop-color="var(--primary)"></stop>
+                <stop offset="100%" stop-color="var(--primary)" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="chart-timeline-labels">
+            <span>May</span>
+            <span>Jun</span>
+            <span>Jul</span>
+            <span>Ago</span>
+            <span>Sep</span>
+            <span>Oct</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="records-table-container-card">
+      <div class="table-header-toolbar">
+        <h3 class="table-title-heading">Historial de Registros</h3>
+        <div class="toolbar-actions-group">
+          <button class="toolbar-btn" (click)="onFilter()">
+            <span class="material-symbols-outlined">filter_list</span>
+          </button>
+          <button class="toolbar-btn" (click)="onDownload()">
+            <span class="material-symbols-outlined">download</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="responsive-table-scroll-wrapper custom-scrollbar">
+        <table class="dense-data-table">
+          <thead>
+            <tr>
+              <th>Día Registrado</th>
+              <th>Nivel</th>
+              <th>Tendencia</th>
+              <th class="text-right-aligned">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (entry of historyEntries; track entry.id) {
+              <tr class="table-row-interactive" (click)="onRowClick(entry)">
+                <td>
+                  <div class="date-stacked-cell">
+                    <span class="cell-primary-text">{{ entry.date }}</span>
+                    <span class="cell-sub-text">{{ entry.time }} - {{ entry.evaluator }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="grade-pill-tag" [ngClass]="entry.gradeClass">
+                    {{ entry.grade }}
+                  </span>
+                </td>
+
+                <td>
+                  <div class="trend-indicator-block" [ngClass]="entry.trendClass">
+                    <span class="material-symbols-outlined mini-trend-icon">{{ entry.trendIcon }}</span>
+                    <span class="trend-percentage-text">{{ entry.trendValue }}</span>
+                  </div>
+                </td>
+                <td class="text-right-aligned" (click)="$event.stopPropagation()">
+                  <button class="action-menu-trigger-btn" (click)="onRowActions(entry)">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer-pagination-bar">
+        <span>Mostrando 4 de 28 entradas</span>
+        <div class="pagination-buttons-cluster">
+          <button class="paginator-btn-outline" disabled>Anterior</button>
+          <button class="paginator-btn-numeric active">1</button>
+          <button class="paginator-btn-numeric">2</button>
+          <button class="paginator-btn-outline">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="analytical-insight-card-box">
+      <div class="insight-icon-frame">
+        <span class="material-symbols-outlined">lightbulb</span>
+      </div>
+      <div class="insight-text-details">
+        <h4 class="insight-label-title">Sugerencia Analítica</h4>
+        <p class="insight-description-paragraph">
+          Se observa un patrón de mejora en los niveles de autonomía durante los meses de Agosto y Octubre. Mantener las rutinas estructuradas actuales para consolidar este progreso antes del próximo test TEA trimestral.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+</div>

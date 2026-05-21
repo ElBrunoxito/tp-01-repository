@@ -1,1 +1,52 @@
-<p>nav-left works!</p>
+<aside class="sidebar-aside" [class.mobile-open]="isMobileSidebarOpen">
+  <div class="sidebar-container">
+    
+    <div class="sidebar-brand-section">
+      <h2 class="sidebar-title">Help with TEACCH</h2>
+      <span class="sidebar-subtitle">Sanctuary of Clarity</span>
+    </div>
+
+    <nav class="sidebar-navigation">
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == ''}" href="#" (click)="onNavigate($event, '')">
+        <span class="material-symbols-outlined nav-icon">home</span>
+        <span class="nav-text">Inicio</span>
+      </a>
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'test-tea'}" href="#" (click)="onNavigate($event, 'test-tea')">
+        <span class="material-symbols-outlined nav-icon">psychology</span>
+        <span class="nav-text">Test TEA</span>
+      </a>
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'historial'}" href="#" (click)="onNavigate($event, 'historial')">
+        <span class="material-symbols-outlined nav-icon">history</span>
+        <span class="nav-text">Historial de Rutinas</span>
+      </a>
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'kaufman'}" href="#" (click)="onNavigate($event, 'kaufman')">
+        <span class="material-symbols-outlined nav-icon">edit_document</span>
+        <span class="nav-text">Test de Kaufman</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer-profile">
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'perfil'}" href="#" (click)="onNavigate($event, 'perfil')">
+        <span class="material-symbols-outlined nav-icon">account_circle</span>
+        <span class="nav-text">Mi Perfil</span>
+      </a>
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'ajustes'}" href="#" (click)="onNavigate($event, 'ajustes')">
+        <span class="material-symbols-outlined nav-icon">settings</span>
+        <span class="nav-text">Ajustes</span>
+      </a>
+
+
+    </div>
+
+  </div>
+</aside>
+
+<header class="mobile-top-bar">
+  <div class="mobile-bar-content">
+    <button class="menu-toggle-btn" (click)="toggleMobileSidebar()">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="mobile-app-title">Help with TEACCH</h1>
+  </div>
+</header>
+

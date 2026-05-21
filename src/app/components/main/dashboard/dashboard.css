@@ -1,0 +1,537 @@
+:host {
+  /* Variables de la paleta de colores del contenido */
+  --surface-variant: #e0e3e2;
+  --on-primary-fixed-variant: #194b67;
+  --tertiary: #5e5c54;
+  --primary-container: #4c7a97;
+  --surface-container-low: #f1f4f3;
+  --tertiary-container: #77746c;
+  --surface-bright: #f7faf9;
+  --on-primary-container: #fcfcff;
+  --surface-container-highest: #e0e3e2;
+  --outline: #71787e;
+  --on-surface-variant: #41484d;
+  --surface-container-lowest: #ffffff;
+  --surface: #f7faf9;
+  --on-secondary-container: #446c5e;
+  --secondary-container: #c0ecda;
+  --on-secondary-fixed-variant: #264e41;
+  --primary: #32617d;
+  --on-primary: #ffffff;
+  --secondary: #3e6658;
+  --on-secondary: #ffffff;
+  --on-surface: #181c1c;
+  --surface-container-high: #e6e9e8;
+
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Lexend', 'Inter', sans-serif;
+}
+
+/* --- LIENZO CENTRAL --- */
+.main-content-canvas {
+  padding: 24px 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.content-max-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 1. Tarjeta de Información del Paciente */
+.patient-header-card {
+  background-color: var(--surface-container-lowest);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(62, 102, 88, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .patient-header-card {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.patient-identity-block {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatar-badge-wrapper {
+  position: relative;
+}
+
+.patient-avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.patient-level-tag {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.patient-display-name {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.patient-pills-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.info-pill {
+  background-color: var(--surface-container-high);
+  color: var(--on-surface-variant);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.patient-global-progress {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .patient-global-progress {
+    width: 256px;
+  }
+}
+
+.progress-txt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.progress-label-name {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--on-surface-variant);
+}
+
+.progress-numeric-val {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.progress-track-bar {
+  width: 100%;
+  height: 12px;
+  background-color: var(--surface-container-highest);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill-bar {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 9999px;
+  transition: width 1s ease-out;
+}
+
+/* 2. Botones de Acciones Rápidas */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.action-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.action-card-btn:hover {
+  filter: brightness(1.1);
+}
+
+.action-card-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-primary-theme {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn-secondary-theme {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+}
+
+.btn-outline-theme {
+  background-color: var(--surface-container-lowest);
+  color: var(--primary);
+  border: 1px solid rgba(50, 97, 125, 0.2);
+}
+
+.btn-outline-theme:hover {
+  background-color: var(--surface-container-low);
+}
+
+/* 3. Rejilla de Competencias */
+.block-heading-title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0 0 24px 0;
+}
+
+.competencies-cards-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .competencies-cards-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .competencies-cards-layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.competency-metric-card {
+  background-color: var(--surface-container-lowest);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(62, 102, 88, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.competency-metric-card:hover {
+  transform: translateY(-4px);
+}
+
+.comp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.comp-icon-box {
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-social { background-color: rgba(50, 97, 125, 0.1); color: var(--primary); }
+.box-communication { background-color: rgba(62, 102, 88, 0.1); color: var(--secondary); }
+.box-motor { background-color: rgba(94, 92, 84, 0.15); color: var(--tertiary); }
+.box-cognitive { background-color: rgba(76, 122, 151, 0.2); color: var(--primary-container); }
+
+.comp-level-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+}
+
+.comp-card-title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.comp-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4px;
+}
+
+.comp-sub-label {
+  font-size: 12px;
+  color: var(--on-surface-variant);
+}
+
+.comp-percent-number {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.comp-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--surface-container-highest);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.comp-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1s ease-out;
+}
+
+.fill-social { background-color: var(--primary); }
+.fill-communication { background-color: var(--secondary); }
+.fill-motor { background-color: var(--tertiary); }
+.fill-cognitive { background-color: var(--primary-container); }
+
+/* 4. Banner de Recomendación TEACCH */
+.teacch-suggestion-banner-box {
+  background-color: rgba(192, 236, 218, 0.3);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  border: 2px dashed rgba(62, 102, 88, 0.2);
+}
+
+.banner-decorator-bubble {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -40px;
+  margin-right: -40px;
+  width: 160px;
+  height: 160px;
+  background-color: rgba(62, 102, 88, 0.1);
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.banner-inner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .banner-inner-content {
+    flex-direction: row;
+  }
+}
+
+.banner-icon-frame {
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transform: rotate(3deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-star {
+  color: var(--secondary);
+  font-size: 48px;
+}
+
+.banner-text-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.banner-badge-label {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.banner-title-text {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  color: var(--on-secondary-fixed-variant);
+  margin: 0 0 8px 0;
+}
+
+.banner-description-paragraph {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--on-surface-variant);
+  max-width: 100%;
+  margin: 0;
+}
+
+.banner-action-links {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.link-btn-text {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.text-accent { color: var(--secondary); }
+.text-accent:hover { text-decoration: underline; }
+.text-muted { color: var(--on-surface-variant); opacity: 0.6; }
+.text-muted:hover { opacity: 1; }
+.mini-arrow { font-size: 14px; margin-left: 4px; }
+
+/* 5. Panel de Actividad Reciente */
+.panel-card-container {
+  background-color: var(--surface-container-lowest);
+  border-radius: 12px;
+  border: 1px solid rgba(62, 102, 88, 0.1);
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.panel-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-title-heading {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.panel-view-all-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.activity-items-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.activity-row-item:hover {
+  background-color: var(--surface-container-low);
+}
+
+.activity-row-item:hover .hidden-chevron {
+  opacity: 1;
+}
+
+.row-bordered {
+  border-top: 1px solid rgba(62, 102, 88, 0.05);
+}
+
+.activity-left-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.activity-status-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-success { background-color: #e6f4ea; color: #137333; }
+.circle-info { background-color: #e8f0fe; color: #1a73e8; }
+.activity-meta p { margin: 0; }
+.activity-title-name { font-size: 14px; line-height: 20px; font-weight: 700; }
+.activity-timestamp { font-size: 12px; color: var(--on-surface-variant); }
+
+.hidden-chevron {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Icons Core Base */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+}

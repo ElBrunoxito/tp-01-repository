@@ -1,0 +1,183 @@
+<div class="main-content-canvas">
+  <div class="content-max-container">
+    
+    <section class="patient-header-card">
+      <div class="patient-identity-block">
+        <div class="avatar-badge-wrapper">
+          <img [alt]="'Perfil de ' + nameChild" class="patient-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMyYx0Hx60Re_ivgfkM9lH6CKcLHZBarn96PuRqz2Qy1ekFQ7Q3UcaBs4H2ja3BtGDEOl_Jl147BWZOhHoBf_w89j9l3VbPVQDmyionH8tUvgGVQqdEitKioQ997etDLTApabI50GUtGF1wh8AP4kPUUoa8qzXtABmu6RDI9bUzh_DlYXZYpzy7pI-i9hLFzjn9ba127hqcE4sr15kMaE6w1bZdxxNFseDYBqWT9K9yv39FhTFAOiqS65fcrkKEzwtvRRc0H_HgJrG">
+          <div class="patient-level-tag">NV {{ levelChild }}</div>
+        </div>
+        <div class="patient-text-details">
+          <h2 class="patient-display-name">{{ nameChild }}</h2>
+          <div class="patient-pills-row">
+            <span class="info-pill">{{ ageChild }} años</span>
+            @if(currentLevel){
+                <span class="info-pill"> Nivel {{ currentLevel == 1 ? 'Leve' : currentLevel == 2 ? 'Moderado' : 'Severo'  }}</span>
+            }@else{
+                <span class="info-pill"> Realizar prueba</span>
+            }
+          </div>
+        </div>
+      </div>
+      
+      <div class="patient-global-progress">
+        <div class="progress-txt-row">
+          <span class="progress-label-name">Progreso Actual</span>
+          <span class="progress-numeric-val">{{ currentProgress }}%</span>
+        </div>
+        <div class="progress-track-bar">
+          <div class="progress-fill-bar" [style.width.%]="currentProgress"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-actions-grid">
+      <button class="action-card-btn btn-primary-theme" (click)="triggerAction('new-routine')">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span class="btn-label">Nueva Rutina</span>
+      </button>
+      <button class="action-card-btn btn-secondary-theme" (click)="triggerAction('start-test')">
+        <span class="material-symbols-outlined">play_arrow</span>
+        <span class="btn-label">Iniciar Test</span>
+      </button>
+      <button class="action-card-btn btn-outline-theme" (click)="triggerAction('view-report')">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="btn-label">Ver Reporte Semanal</span>
+      </button>
+    </section>
+
+    <section class="competencies-block">
+      <h3 class="block-heading-title">Desarrollo de Competencias</h3>
+      <div class="competencies-cards-layout">
+        
+        <div class="competency-metric-card">
+          <div class="comp-card-header">
+            <div class="comp-icon-box box-social">
+              <span class="material-symbols-outlined">groups</span>
+            </div>
+            <span class="comp-level-text">Nivel 3</span>
+          </div>
+          <h4 class="comp-card-title">Social</h4>
+          <div class="comp-progress-info">
+            <span class="comp-sub-label">Interacción</span>
+            <span class="comp-percent-number">{{ social }}%</span>
+          </div>
+          <div class="comp-track">
+            <div class="comp-fill fill-social" [style.width.%]="animateBars ? social : 0"></div>
+          </div>
+        </div>
+
+        <div class="competency-metric-card">
+          <div class="comp-card-header">
+            <div class="comp-icon-box box-communication">
+              <span class="material-symbols-outlined">record_voice_over</span>
+            </div>
+            <span class="comp-level-text">Nivel 2</span>
+          </div>
+          <h4 class="comp-card-title">Comunicación</h4>
+          <div class="comp-progress-info">
+            <span class="comp-sub-label">Expresión</span>
+            <span class="comp-percent-number">{{ communication }}%</span>
+          </div>
+          <div class="comp-track">
+            <div class="comp-fill fill-communication" [style.width.%]="animateBars ? communication : 0"></div>
+          </div>
+        </div>
+
+        <div class="competency-metric-card">
+          <div class="comp-card-header">
+            <div class="comp-icon-box box-motor">
+              <span class="material-symbols-outlined">directions_run</span>
+            </div>
+            <span class="comp-level-text">Nivel 4</span>
+          </div>
+          <h4 class="comp-card-title">Motricidad</h4>
+          <div class="comp-progress-info">
+            <span class="comp-sub-label">Coordinación</span>
+            <span class="comp-percent-number">{{ motor }}%</span>
+          </div>
+          <div class="comp-track">
+            <div class="comp-fill fill-motor" [style.width.%]="animateBars ? motor : 0"></div>
+          </div>
+        </div>
+
+        <div class="competency-metric-card">
+          <div class="comp-card-header">
+            <div class="comp-icon-box box-cognitive">
+              <span class="material-symbols-outlined">lightbulb</span>
+            </div>
+            <span class="comp-level-text">Nivel 3</span>
+          </div>
+          <h4 class="comp-card-title">Cognitivo</h4>
+          <div class="comp-progress-info">
+            <span class="comp-sub-label">Atención</span>
+            <span class="comp-percent-number">{{ cognitive }}%</span>
+          </div>
+          <div class="comp-track">
+            <div class="comp-fill fill-cognitive" [style.width.%]="animateBars ? cognitive : 0"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="teacch-suggestion-banner-box">
+      <div class="banner-decorator-bubble"></div>
+      <div class="banner-inner-content">
+        <div class="banner-icon-frame">
+          <span class="material-symbols-outlined highlight-star">auto_awesome</span>
+        </div>
+        <div class="banner-text-details">
+          <span class="banner-badge-label">TEACCH</span>
+          <h3 class="banner-title-text">¿Que es la metodología TEACCH?</h3>
+          <p class="banner-description-paragraph">
+            "El trastorno del espectro autista (TEA) está relacionado y afecta a la socialización y comunicación de la persona, así como a su conducta y pensamiento. La metodología TEACCH fomenta el desarrollo del alumnado en los diferentes ámbitos, pudiendo ser utilizado tanto en aulas específicas como ordinarias”. 
+          </p>
+          <div class="banner-action-links">
+            <button class="link-btn-text text-accent">
+              Ver guía completa <span class="material-symbols-outlined mini-arrow">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recent-activity-panel">
+      <div class="panel-card-container">
+        <div class="panel-header-row">
+          <h3 class="panel-title-heading">Actividad Reciente</h3>
+          <button class="panel-view-all-btn" (click)="triggerAction('view-all-activity')">Ver todo</button>
+        </div>
+        
+        <div class="activity-items-stack">
+
+          <div class="activity-row-item">
+            <div class="activity-left-side">
+              <div class="activity-status-circle circle-success">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div class="activity-meta">
+                <p class="activity-title-name">Rutina Mañana Completada</p>
+                <p class="activity-timestamp">Hoy a las 09:15 AM</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-row-item row-bordered">
+            <div class="activity-left-side">
+              <div class="activity-status-circle circle-info">
+                <span class="material-symbols-outlined">edit</span>
+              </div>
+              <div class="activity-meta">
+                <p class="activity-title-name">Nuevo Test de TEA realizado</p>
+                <p class="activity-timestamp">Ayer a las 05:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</div>

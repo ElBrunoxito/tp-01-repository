@@ -1,0 +1,23 @@
+<div style="background-color: #f7faf9; min-height: 100vh; position: relative;">
+  
+  <app-nav-left></app-nav-left>
+
+  <main style="padding-top: 96px; padding-bottom: 48px; box-sizing: border-box;" class="main-canvas">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 16px;">
+      
+      <router-outlet></router-outlet>
+      
+    </div>
+  </main>
+</div>
+
+<style>
+  /* Margen izquierdo dinámico según la barra lateral fija */
+  @media (min-width: 768px) {
+    .main-canvas {
+      margin-left: 288px;
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+  }
+</style>

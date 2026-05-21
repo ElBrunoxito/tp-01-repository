@@ -18,7 +18,7 @@ export class Login {
   onSubmit(form: NgForm): void {
     if (form.valid) {
       console.log('Formulario procesado con éxito:', this.credentials);
-      // Aquí integras la llamada HTTP a tu API de autenticación
+      console
     }
   }
 
