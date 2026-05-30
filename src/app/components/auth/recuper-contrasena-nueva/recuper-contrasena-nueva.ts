@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuper-contrasena-nueva',
@@ -11,7 +12,7 @@ export class RecuperContrasenaNueva {
   // Banderas de control de interfaz para alternar 'text' / 'password'
   showNewPassword = false;
   showConfirmPassword = false;
-
+  router = inject(Router);
   // Objeto de enlace bidireccional para ngModel
   passwords = {
     new: '',
@@ -26,6 +27,7 @@ export class RecuperContrasenaNueva {
     if (form.valid && this.passwords.new === this.passwords.confirm) {
       console.log('Solicitud enviada con éxito. Nueva clave lista para actualizar.');
       // Aquí invocas tu servicio REST (ej: AuthService.updatePassword(this.passwords.new))
+      this.router.navigate(['/login']);
     }
   }
 

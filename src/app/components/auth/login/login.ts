@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink, RouterModule } from "@angular/router";
+import { Router, RouterLink, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule,RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -14,11 +14,12 @@ export class Login {
     email: '',
     password: ''
   };
+  router = inject(Router);
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
       console.log('Formulario procesado con éxito:', this.credentials);
-      console
+      this.router.navigate(['/app']);
     }
   }
 

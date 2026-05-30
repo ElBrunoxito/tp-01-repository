@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuper-contrasena-solicitar',
@@ -10,6 +11,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class RecuperContrasenaSolicitar {
   emailAddress: string = '';
 
+  router = inject(Router);
   /**
    * Ejecuta la petición para despachar el token de restauración de password
    * @param form Instancia del formulario local NgForm
@@ -18,6 +20,7 @@ export class RecuperContrasenaSolicitar {
     if (form.valid) {
       console.log('Enviando código de recuperación al correo:', this.emailAddress);
       // Aquí se invoca el método HTTP del servicio de control de credenciales
+      this.router.navigate(['/recuperar-contrasena/confirmar']);
     }
   }
 

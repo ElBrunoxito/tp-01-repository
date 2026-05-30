@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuper-contrasena-confirmar',
@@ -15,6 +16,8 @@ export class RecuperContrasenaConfirmar {
   // Modelo para almacenar cada caracter del código de verificación
   otpValues: string[] = ['', '', '', '', '', ''];
   
+  router = inject(Router);
+
   private location = inject(Location);
   /**
    * Controla el comportamiento automático cuando el usuario digita un valor
@@ -58,6 +61,9 @@ export class RecuperContrasenaConfirmar {
     if (this.isOtpComplete()) {
       const fullCode = this.otpValues.join('');
       console.log('Código OTP armado listo para validar:', fullCode);
+      if (fullCode === '123456') {
+        this.router.navigate(['/recuperar-contrasena/nueva']);
+      }
       // Aquí amarras tu servicio HTTP para consumir tu API (ej. AuthService.verifyOtp(fullCode))
     }
   }
