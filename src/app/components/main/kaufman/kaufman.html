@@ -1,0 +1,97 @@
+<div class="kaufman-view-wrapper">
+  
+  <header class="view-header">
+    <h2>Evaluación Cognitiva K-ABC</h2>
+  </header>
+
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon-wrapper icon-primary">
+        <span class="material-symbols-outlined icon-3xl">insights</span>
+      </div>
+      <div class="metric-info">
+        <span class="metric-title">Puntaje Promedio</span>
+        <h3 class="metric-value value-primary">{{ promedioPuntaje }}</h3>
+        <p class="metric-trend trend-up">
+          <span class="material-symbols-outlined">trending_up</span>
+          {{ incrementoPorcentaje }} vs mes anterior
+        </p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon-wrapper icon-secondary">
+        <span class="material-symbols-outlined icon-3xl">task_alt</span>
+      </div>
+      <div class="metric-info">
+        <span class="metric-title">Tests Realizados</span>
+        <h3 class="metric-value">{{ totalTests }}</h3>
+        <p class="metric-subtitle">Últimos 30 días</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="table-header">
+      <h3>Historial de Evaluaciones</h3>
+      <button (click)="onNuevaEvaluacion()" class="btn btn-primary">
+        <span class="material-symbols-outlined">add</span>
+        Nueva Evaluación
+      </button>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Atención</th>
+            <th>Clasificación</th>
+            <th>Memoria</th>
+            <th>Secuencia</th>
+            <th>Asociación</th>
+            <th class="text-center">Índice</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of evaluaciones; track item.fecha) {
+            <tr>
+              <td class="font-medium">{{ item.fecha }}</td>
+              <td>{{ item.atencion }}</td>
+              <td>{{ item.clasificacion }}</td>
+              <td>{{ item.memoria }}</td>
+              <td>{{ item.secuencia }}</td>
+              <td>{{ item.asociacion }}</td>
+              <td class="text-center">
+                <span class="badge-index">{{ item.indice }}</span>
+              </td>
+              <td class="text-right">
+                <button (click)="verDetalle(item)" class="btn-link">
+                  Ver detalle
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="table-footer">
+      <p>Mostrando {{ evaluaciones.length }} de {{ totalTests }} registros</p>
+      <div class="pagination-actions">
+        <button class="btn-icon"><span class="material-symbols-outlined">chevron_left</span></button>
+        <button class="btn-icon"><span class="material-symbols-outlined">chevron_right</span></button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="action-footer">
+    <button (click)="exportarPDF()" class="btn btn-secondary">
+      <span class="material-symbols-outlined">file_download</span>
+      Exportar Historial (PDF)
+    </button>
+  </footer>
+
+</div>

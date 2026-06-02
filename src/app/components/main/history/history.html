@@ -1,0 +1,95 @@
+<div class="main-content-canvas">
+  <div class="content-max-container">
+    
+    <header class="page-master-header">
+      <h2 class="page-master-title">Registro Maestro</h2>
+      <p class="page-master-subtitle">Supervisión detallada de actividades y niveles de apoyo para pacientes TEA.</p>
+    </header>
+
+    <div class="table-master-card shadow-sm">
+      
+      <div class="table-filters-toolbar">
+        <div class="filters-scroll-group">
+          
+          <div class="filter-select-field">
+            <label class="filter-field-label">Nivel TEA</label>
+            <select class="custom-select-input" (change)="onFilterChange('nivel', $event)">
+              <option value="">Todos los niveles</option>
+              <option value="1">Grado 1</option>
+              <option value="2">Grado 2</option>
+              <option value="3">Grado 3</option>
+            </select>
+          </div>
+
+          <div class="filter-select-field">
+            <label class="filter-field-label">Estado</label>
+            <select class="custom-select-input" (change)="onFilterChange('estado', $event)">
+              <option value="">Cualquier estado</option>
+              <option value="completado">Completado</option>
+              <option value="progreso">En progreso</option>
+            </select>
+          </div>
+
+
+        </div>
+
+        <button class="btn-export-csv" (click)="onExportCSV()">
+          <span class="material-symbols-outlined">file_download</span>
+          Exportar CSV
+        </button>
+      </div>
+
+      <div class="responsive-table-scroll-wrapper custom-scrollbar">
+        <table class="dense-data-table">
+          <thead>
+            <tr>
+              <th>Fecha y Hora</th>
+              <th>Actividad</th>
+              <th>Nivel TEA</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of filteredRecords; track row.id) {
+              <tr class="table-row-interactive">
+                <td>
+                  <div class="datetime-stacked-cell">
+                    <span class="cell-primary-text">{{ row.date }}</span>
+                    <span class="cell-sub-text">{{ row.time }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="activity-title-link">{{ row.activityName }}</span>
+                </td>
+                <td>
+                  <span class="tea-grade-badge" [ngClass]="row.gradeBadgeClass">
+                    Grado {{ row.grade }}
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill-badge" [ngClass]="row.statusBadgeClass">
+                    <span class="status-indicator-dot" [ngClass]="row.statusDotClass"></span>
+                    {{ row.statusText }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer-pagination-bar">
+        <span class="pagination-summary-text">Mostrando {{ routineRecords.length }} registros</span>
+        <div class="pagination-buttons-cluster">
+          <button class="paginator-arrow-btn" disabled>
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>

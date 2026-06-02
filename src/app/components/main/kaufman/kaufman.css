@@ -1,0 +1,328 @@
+/* --- Variables Locales de la Vista --- */
+:host {
+  --surface-lowest: #ffffff;
+  --surface-low: #f1f4f3;
+  --surface-high: #e6e9e8;
+  --surface-highest: #e0e3e2;
+  --primary-color: #32617d;
+  --primary-container: rgba(76, 122, 151, 0.2);
+  --secondary-color: #3e6658;
+  --secondary-container: #c0ecda;
+  --text-main: #181c1c;
+  --text-variant: #41484d;
+  --border-color: rgba(62, 102, 88, 0.1);
+  --font-family: 'Inter', sans-serif;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor interno de la ruta */
+.kaufman-view-wrapper {
+  font-family: var(--font-family);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* --- Encabezado de la Vista --- */
+.view-header {
+  margin-bottom: 8px;
+}
+
+.view-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* --- Grid de Tarjetas de Métricas --- */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.metric-card {
+  background-color: var(--surface-lowest);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.metric-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-primary {
+  background-color: var(--primary-container);
+  color: var(--primary-color);
+}
+
+.icon-secondary {
+  background-color: var(--secondary-container);
+  color: var(--secondary-color);
+}
+
+.icon-3xl {
+  font-size: 36px;
+}
+
+.metric-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-title {
+  font-size: 13px;
+  color: var(--text-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 4px 0 0 0;
+}
+
+.value-primary {
+  color: var(--primary-color);
+}
+
+.metric-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.trend-up {
+  color: var(--secondary-color);
+}
+
+.metric-subtitle {
+  font-size: 12px;
+  color: var(--text-variant);
+  margin: 4px 0 0 0;
+}
+
+/* --- Tarjeta de Tabla Histórica --- */
+.table-card {
+  background-color: var(--surface-lowest);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(241, 244, 243, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.table-header h3 {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: 600;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 14px 16px;
+  background-color: rgba(241, 244, 243, 0.3);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-variant);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.data-table th:first-child, .data-table td:first-child {
+  padding-left: 24px;
+}
+
+.data-table th:last-child, .data-table td:last-child {
+  padding-right: 24px;
+}
+
+.data-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 15px;
+}
+
+.data-table tr:hover {
+  background-color: rgba(241, 244, 243, 0.2);
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.badge-index {
+  padding: 4px 12px;
+  background-color: rgba(50, 97, 125, 0.1);
+  color: var(--primary-color);
+  border-radius: 9999px;
+  font-weight: 700;
+}
+
+.table-footer {
+  padding: 16px 24px;
+  background-color: rgba(241, 244, 243, 0.3);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-variant);
+}
+
+.pagination-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* --- Botones --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background-color: var(--surface-highest);
+  color: var(--text-variant);
+  padding: 12px 24px;
+  border-radius: 9999px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-high);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-variant);
+  display: flex;
+  align-items: center;
+}
+
+.btn-icon:hover {
+  background-color: var(--surface-high);
+}
+
+/* --- Footer de Acciones Inferiores --- */
+.action-footer {
+  display: flex;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+/* --- Botón de Acción Flotante (FAB) --- */
+.fab-support {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fab-support:hover {
+  transform: scale(1.1);
+}
+
+.fab-support:active {
+  transform: scale(0.95);
+}
+
+/* --- Ajustes Globales de Iconos y Alineación --- */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}

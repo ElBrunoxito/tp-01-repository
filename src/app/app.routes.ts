@@ -6,8 +6,9 @@ import { RecuperContrasenaConfirmar } from './components/auth/recuper-contrasena
 import { RecuperContrasenaNueva } from './components/auth/recuper-contrasena-nueva/recuper-contrasena-nueva';
 import { Main } from './components/main/main/main';
 import { Dashboard } from './components/main/dashboard/dashboard';
-import path from 'path/win32';
 import { TestTea } from './components/main/test-tea/test-tea';
+import { History } from './components/main/history/history';
+import { Kaufman } from './components/main/kaufman/kaufman';
 
 export const routes: Routes = [
     {
@@ -45,6 +46,14 @@ export const routes: Routes = [
            {
             path:'test-tea' ,
             component: TestTea
+           },
+           {
+            path:'history' ,
+            component: History
+           },
+           {
+            path:'kaufman' ,
+            component: Kaufman
            }
         ]
     }
