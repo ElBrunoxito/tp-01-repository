@@ -1,0 +1,90 @@
+
+<header class="header">
+    <div class="logo-container">
+        <span class="logo-text">HelpWithTEACCH</span>
+    </div>
+    <div class="header-actions">
+        <button class="material-symbols-outlined icon-button">help</button>
+        <button class="material-symbols-outlined icon-button">settings</button>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="title">
+        <h1 class="main-title">Evaluación del Desarrollo</h1>
+        <p class="subtitle">Por favor, responda con sinceridad basándose en el comportamiento habitual de su hijo.</p>
+    </div>
+
+    <div class="work-system-container">
+
+        <div class="questions-space">
+            @for (pregunta of preguntasDelBloque; track $index) {
+            <section class="question-card">
+                <h2 class="question-title">{{ pregunta.id }}. {{ pregunta.texto }}</h2>
+                <p class="question-description">{{ pregunta.ejemplo }}</p>
+
+                <div class="button-grid">
+                    <button type="button" class="btn"
+                        [ngClass]="pregunta.respuestaSeleccionada === 1 ? 'btn-selected' : 'btn-normal'"
+                        (click)="seleccionarRespuesta(pregunta.id, 1)">
+                        Sí
+                    </button>
+
+                    <button type="button" class="btn"
+                        [ngClass]="pregunta.respuestaSeleccionada === 0 ? 'btn-selected' : 'btn-normal'"
+                        (click)="seleccionarRespuesta(pregunta.id, 0)">
+                        No
+                    </button>
+                </div>
+            </section>
+            }
+
+
+        </div>
+
+        <div class="navigation-controls">
+            <button class="btn-back" (click)="anteriorPagina()" [disabled]="paginaActual === 0"
+                [style.opacity]="paginaActual === 0 ? '0.4' : '1'">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Anterior
+            </button>
+
+            @if (paginaActual < totalPasos - 1) { <button class="btn-next" (click)="siguientePagina()">
+                Siguiente
+                </button>
+                }
+                @if (paginaActual === totalPasos -1) {
+                <button class="btn-next btn-finish" (click)="finalizarTest()" [disabled]="porcentajeProgreso < 100">
+                    Finalizar
+                </button>
+                }
+
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-labels">
+                <span class="progress-step">Paso {{ pasoActual }} de {{ totalPasos }}</span>
+                <span class="progress-percentage">{{ porcentajeProgreso }}% COMPLETADO</span>
+            </div>
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" [style.width.%]="porcentajeProgreso"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <span class="footer-logo-text">HelpWithTEACCH</span>
+        </div>
+        <div class="footer-credits">
+            © 2026 HelpWithTEACCH. Una guía confiable para el aprendizaje.
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacidad</a>
+            <a href="#">Soporte</a>
+            <a href="#">Metodología</a>
+        </div>
+    </div>
+</footer>

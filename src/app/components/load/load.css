@@ -1,0 +1,159 @@
+:host {
+  --primary: #4352a5;
+  --secondary: #006a62;
+  --secondary-container: #81f3e5;
+  --background: #f7f9fc;
+  --on-surface: #191c1e;
+  --on-surface-variant: #454651;
+  --surface-container-high: #e6e8eb;
+  --outline: #767683;
+}
+
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--background);
+  font-family: 'Lexend', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 448px;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.branding-header {
+  margin-bottom: 64px;
+}
+
+.brand-title {
+  font-size: 24px;
+  color: var(--primary);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+/* Spinner e Indicator */
+.spinner-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  height: 128px;
+}
+
+.spinner-bg-ring {
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  border-radius: 9999px;
+  border: 6px solid var(--surface-container-high);
+  opacity: 0.4;
+  box-sizing: border-box;
+}
+
+.spinner-svg {
+  width: 128px;
+  height: 128px;
+  transform: rotate(-90deg);
+}
+
+.spinner-circle {
+  color: var(--primary);
+  stroke-dasharray: 276;
+  stroke-dashoffset: 70;
+  transform-origin: center;
+  animation: spinSmooth 2s linear infinite;
+}
+
+.center-icon-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-icon {
+  color: var(--primary);
+  font-size: 36px;
+}
+
+/* Textos */
+.status-box {
+  margin-top: 40px;
+}
+
+.status-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* Dots */
+.dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--secondary-container);
+}
+
+.dot-active {
+  background-color: var(--secondary);
+}
+
+.background-visual-wrapper {
+  margin-top: 64px;
+  opacity: 0.2;
+  filter: grayscale(100%) blur(1px);
+}
+
+.visual-img {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 2.01;
+}
+
+.footer-anchor {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--outline);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+@keyframes spinSmooth {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

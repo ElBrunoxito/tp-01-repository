@@ -1,0 +1,87 @@
+<header class="results-header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="btn-icon-back" routerLink="/app">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1 class="header-title">Resultado de Evaluación</h1>
+    </div>
+  </div>
+</header>
+
+<main class="results-layout">
+  
+  <div class="result-card">
+    
+    <div class="card-header">
+      <span class="badge-status">Evaluación Completada</span>
+      <h2 class="card-main-title">Resultado Obtenido</h2>
+      <p class="card-subtitle">
+        Basado en las respuestas proporcionadas, se ha generado el siguiente perfil de apoyo terapéutico.
+      </p>
+    </div>
+
+    <div class="score-grid">
+      
+      <div class="chart-container">
+        <div class="svg-wrapper">
+          <svg class="progress-svg">
+            <circle class="circle-bg" cx="64" cy="64" fill="transparent" r="58" stroke-width="8"></circle>
+            <circle 
+              class="circle-fill" 
+              cx="64" 
+              cy="64" 
+              fill="transparent" 
+              r="58" 
+              stroke-width="8"
+              [style.strokeDasharray]="364.4"
+              [style.strokeDashoffset]="strokeDashoffset">
+            </circle>
+          </svg>
+          <span class="score-text">{{ puntuacionActual }}/20</span>
+        </div>
+        <span class="chart-label">Puntuación Total</span>
+      </div>
+
+      <div class="info-block">
+        <div class="level-indicator-box">
+          <h3 class="level-badge-title">Nivel Detectado</h3>
+          <p class="level-text-main">Nivel: {{ nivelDetectado }} {{ nivelTitle }}</p>
+        </div>
+        <p class="level-description">
+          {{ descripcionNivel }}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="tasks-container">
+      <div class="task-row item-checked">
+        <span class="material-symbols-outlined icon-check">check_circle</span>
+        <span class="task-text">Estructura visual recomendada</span>
+      </div>
+      <div class="task-row item-pending">
+        <span class="material-symbols-outlined icon-pending">pending_actions</span>
+        <span class="task-text font-medium">Próximo paso: Configurar Agenda TEACCH</span>
+      </div>
+    </div>
+
+    <div class="actions-wrapper">
+      <button class="btn-primary tactile-button" routerLink="/app">
+        <span>Finalizar Evaluación</span>
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+      <button class="btn-outline" routerLink="/app">
+        Volver al Menú
+      </button>
+    </div>
+
+  </div>
+
+  <footer class="results-footnote">
+    <p class="footnote-text">
+      Esta evaluación es una herramienta de orientación basada en principios TEACCH y no sustituye un diagnóstico clínico profesional.
+    </p>
+  </footer>
+
+</main>

@@ -9,11 +9,18 @@ import { Dashboard } from './components/main/dashboard/dashboard';
 import { TestTea } from './components/main/test-tea/test-tea';
 import { History } from './components/main/history/history';
 import { Kaufman } from './components/main/kaufman/kaufman';
+import { TestTeaForms } from './components/main/test-tea-forms/test-tea-forms';
+import { Load } from './components/load/load';
+import { ResultTestTea } from './components/main/result-test-tea/result-test-tea';
 
 export const routes: Routes = [
     {
         path:'',redirectTo:'app',pathMatch:'full'
     },
+    /*{
+        path:'load',
+        component: Load
+    },*/
     {
         path:'login', 
         component: Login
@@ -56,6 +63,16 @@ export const routes: Routes = [
             component: Kaufman
            }
         ]
+    },
+
+    //TEST-TEA
+    {
+        path:'app/test-tea-forms',
+        component: TestTeaForms
+    },
+    {
+        path:'app/resultados/:id',
+        component: ResultTestTea
     }
 
 ];
