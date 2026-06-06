@@ -1,0 +1,472 @@
+/* ==========================================================================
+   SISTEMA DE ESTILOS PURO Y NATIVO (COMPLETAMENTE LIBRE DE TAILWIND)
+   ========================================================================== */
+
+:host {
+  --k-primary: #075fab;
+  --k-on-primary: #ffffff;
+  --k-bg: #f4f6f8;
+  --k-surface: #ffffff;
+  --k-surface-variant: #f8fafc;
+  --k-text-title: #0f172a;
+  --k-text-body: #475569;
+  --k-border: #cbd5e1;
+  --k-success: #16a34a;
+  --k-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --k-radius-lg: 20px;
+  --k-radius-md: 12px;
+  --k-transition: all 0.2s ease-in-out;
+}
+
+.kaufman-container {
+  min-height: 100vh;
+  background-color: var(--k-bg);
+  font-family: 'Lexend', sans-serif;
+  color: var(--k-text-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.kaufman-card {
+  width: 100%;
+  max-width: 780px;
+  background-color: var(--k-surface);
+  border-radius: var(--k-radius-lg);
+  box-shadow: var(--k-shadow);
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.kaufman-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.kaufman-header h2 {
+  font-size: 26px;
+  color: var(--k-text-title);
+  margin: 14px 0 8px 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.kaufman-header p {
+  font-size: 15px;
+  color: var(--k-text-body);
+  margin: 0;
+}
+
+.indicator-tag {
+  background-color: var(--k-surface-variant);
+  color: var(--k-primary);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--k-border);
+}
+
+.kaufman-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-content {
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-3-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.option-box {
+  background-color: var(--k-surface);
+  border: 2px solid var(--k-border);
+  border-radius: var(--k-radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--k-transition);
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--k-text-title);
+}
+
+.option-box:hover {
+  border-color: var(--k-primary);
+  background-color: var(--k-surface-variant);
+  transform: translateY(-3px);
+}
+
+.correct-indicator:hover {
+  border-color: var(--k-success) !important;
+}
+
+.box-emoji {
+  font-size: 54px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  padding: 14px 32px;
+  border-radius: var(--k-radius-md);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--k-transition);
+}
+
+.btn-primary {
+  background-color: var(--k-primary);
+  color: var(--k-on-primary);
+}
+
+.btn-primary:hover {
+  background-color: #054e8c;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background-color: var(--k-border);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background-color: var(--k-surface-variant);
+  color: var(--k-text-title);
+  border: 1px solid var(--k-border);
+}
+
+.btn-mini {
+  background: var(--k-surface);
+  border: 1px solid var(--k-border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: var(--k-transition);
+}
+
+.btn-mini:hover {
+  background: var(--k-primary);
+  color: var(--k-on-primary);
+}
+
+.character-preview {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.huge-emoji {
+  font-size: 84px;
+  display: block;
+}
+
+.active-float {
+  animation: floatingEffect 3s ease-in-out infinite;
+}
+
+.chromatic-quadrant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 260px;
+}
+
+.color-quadrant {
+  aspect-ratio: 1;
+  border-radius: var(--k-radius-md);
+  cursor: pointer;
+  transition: var(--k-transition);
+}
+
+.color-quadrant:hover {
+  transform: scale(1.05);
+}
+
+.item-blue { background-color: #1a73e8; }
+.item-anomaly { background-color: #f9ab00; }
+
+.box-shape {
+  font-size: 60px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.square-css { color: #16a34a; }
+.triangle-css { color: var(--k-primary); }
+.star-css { color: #eab308; }
+
+.flip-card-wrapper {
+  width: 180px;
+  height: 240px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--k-radius-md);
+  border: 2px dashed var(--k-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+}
+
+.flip-card-front {
+  background-color: var(--k-surface-variant);
+}
+
+.flip-card-back {
+  background-color: #f0f7ff;
+  color: var(--k-primary);
+  transform: rotateY(180deg);
+  border-style: solid;
+  border-color: var(--k-primary);
+}
+
+.flip-label {
+  font-size: 13px;
+  color: var(--k-text-body);
+  margin-top: 8px;
+}
+
+.casillero-box {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed var(--k-border);
+  border-radius: var(--k-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--k-transition);
+}
+
+.selected-border {
+  border-style: solid;
+  border-color: var(--k-success);
+  background-color: #f0fdf4;
+}
+
+.container-split {
+  width: 100%;
+}
+
+.items-list {
+  width: 100%;
+}
+
+.item-row {
+  background-color: var(--k-surface-variant);
+  border: 1px solid var(--k-border);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions-mini {
+  display: flex;
+  gap: 8px;
+}
+
+.assignment-feedback {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--k-success);
+}
+
+.matrix-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background-color: var(--k-surface-variant);
+  padding: 16px;
+  border-radius: var(--k-radius-md);
+}
+
+.matrix-slot {
+  width: 60px;
+  height: 60px;
+  background-color: var(--k-surface);
+  border: 2px solid var(--k-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.missing-slot {
+  border-style: dashed;
+  color: var(--k-primary);
+}
+
+.mt-xl { margin-top: 24px; }
+
+.kaufman-footer {
+  margin-top: 24px;
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.secure-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--k-success);
+  border-radius: 50%;
+}
+
+.fade-in {
+  animation: frameView 0.3s ease-out;
+}
+
+@keyframes frameView {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatingEffect {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ==========================================================================
+   RENDERIZADO DE LA PELOTA DE PLAYA (PANTALLA 8)
+   ========================================================================== */
+.beach-ball-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.beach-ball {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--k-text-title);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  animation: floatingEffect 3s ease-in-out infinite;
+}
+
+.ball-gajo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+}
+
+/* Distribución radial de los gajos de colores */
+.gajo-red {
+  background-color: #ef4444;
+  transform: rotate(0deg);
+}
+
+.gajo-blue {
+  background-color: #1d4ed8;
+  transform: rotate(90deg);
+}
+
+.gajo-yellow {
+  background-color: #f59e0b;
+  transform: rotate(180deg);
+}
+
+.gajo-green {
+  background-color: #10b981;
+  transform: rotate(270deg);
+}
+
+/* Tapón central de la pelota para dar perspectiva */
+.ball-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+  border: 3px solid var(--k-text-title);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* Miniaturas ilustrativas dentro de las opciones de respuesta */
+.shape-snippet {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+}
+
+.component-cube {
+  background-color: #cbd5e1;
+  border: 2px solid var(--k-text-title);
+}
+
+.component-arc {
+  background-color: #ef4444;
+  border-radius: 0 100% 0 0;
+  border: 2px solid var(--k-text-title);
+}
+
+.component-zigzag {
+  border-bottom: 4px dashed #ef4444;
+  transform: translateY(15px);
+}

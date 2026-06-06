@@ -1,0 +1,166 @@
+<header class="top-app-bar">
+  <div class="header-container">
+    <h1 class="header-title">Resultados de Evaluación</h1>
+    <div class="header-actions">
+      <span class="header-pagination">{{ currentIndex }} de {{ totalIndex }}</span>
+      <button class="icon-button" (click)="printResults()">print</button>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  
+  <section class="hero-card">
+    <div class="hero-progress-container">
+      <div class="circular-progress" [style.background]="getCircularProgressBg()">
+        <div class="progress-inner">
+          <span class="progress-value">{{ data.indice_general }}%</span>
+          <span class="progress-label">Índice</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-text-container">
+      <div class="user-info">
+        Evaluación para: <strong>{{ userName }}</strong>
+      </div>
+      <h2 class="section-title">Resumen General</h2>
+      <p class="summary-paragraph">
+        El perfil cognitivo muestra una capacidad de procesamiento superior a la media, con fortalezas notables en asociación visual y secuencias lógicas.
+      </p>
+      <div class="tag-container">
+        <span class="tag" [ngClass]="{
+          'tag-high': getPerformanceLevel(data.indice_general) === 'Alto',
+          'tag-medium': getPerformanceLevel(data.indice_general) === 'Medio',
+          'tag-low': getPerformanceLevel(data.indice_general) === 'Bajo'
+        }">Nivel {{ getPerformanceLevel(data.indice_general) }}</span>
+        <span class="tag tag-neutral">Evaluación Completa</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="metrics-grid">
+    
+    <div class="card radar-card">
+      <h3 class="card-subtitle">Perfil Multidimensional</h3>
+      <div class="radar-chart-container">
+        <svg class="radar-svg" viewBox="0 0 200 200">
+          <polygon fill="none" points="100,20 176,75 147,165 53,165 24,75" stroke="#e1e3e4" stroke-width="1"></polygon>
+          <polygon fill="none" points="100,50 145,83 128,135 72,135 55,83" stroke="#e1e3e4" stroke-width="1"></polygon>
+          <line stroke="#e1e3e4" stroke-width="1" x1="100" x2="100" y1="100" y2="20"></line>
+          <line stroke="#e1e3e4" stroke-width="1" x1="100" x2="176" y1="100" y2="75"></line>
+          <line stroke="#e1e3e4" stroke-width="1" x1="100" x2="147" y1="100" y2="165"></line>
+          <line stroke="#e1e3e4" stroke-width="1" x1="100" x2="53" y1="100" y2="165"></line>
+          <line stroke="#e1e3e4" stroke-width="1" x1="100" x2="24" y1="100" y2="75"></line>
+          
+          <polygon fill="rgba(7, 95, 171, 0.15)" [attr.points]="radarPoints" stroke="#075fab" stroke-width="2.5"></polygon>
+        </svg>
+        
+        <div class="radar-label label-top">Atención</div>
+        <div class="radar-label label-right-top">Memoria</div>
+        <div class="radar-label label-right-bottom">Asociación</div>
+        <div class="radar-label label-left-bottom">Secuencia</div>
+        <div class="radar-label label-left-top">Clasificación</div>
+      </div>
+    </div>
+
+    <div class="flex-column gap-32">
+      
+      <div class="card bars-card">
+        
+        <div class="stat-item">
+          <div class="stat-header">
+            <span class="stat-name">Atención Visual</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.atencion) === 'Alto'}">{{ data.atencion }}%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" [style.width.%]="data.atencion" [ngClass]="{'bg-secondary': getPerformanceLevel(data.atencion) === 'Alto', 'bg-primary': getPerformanceLevel(data.atencion) !== 'Alto'}"></div>
+          </div>
+          <div class="stat-footer-labels">
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.atencion) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.atencion) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.atencion) === 'Alto'}">Alto</span>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-header">
+            <span class="stat-name">Memoria</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.memoria) === 'Alto'}">{{ data.memoria }}%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" [style.width.%]="data.memoria" [ngClass]="{'bg-secondary': getPerformanceLevel(data.memoria) === 'Alto', 'bg-primary': getPerformanceLevel(data.memoria) !== 'Alto'}"></div>
+          </div>
+          <div class="stat-footer-labels">
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.memoria) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.memoria) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.memoria) === 'Alto'}">Alto</span>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-header">
+            <span class="stat-name">Asociación</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.asociacion) === 'Alto'}">{{ data.asociacion }}%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" [style.width.%]="data.asociacion" [ngClass]="{'bg-secondary': getPerformanceLevel(data.asociacion) === 'Alto', 'bg-primary': getPerformanceLevel(data.asociacion) !== 'Alto'}"></div>
+          </div>
+          <div class="stat-footer-labels">
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.asociacion) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.asociacion) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.asociacion) === 'Alto'}">Alto</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mini-cards-grid">
+        
+        <div class="card mini-card">
+          <span class="mini-card-title">Secuencia Lógica</span>
+          <div class="mini-card-body">
+            <div class="mini-card-value">{{ data.secuenciacion }}%</div>
+            <span class="mini-badge" [ngClass]="{
+              'badge-high': getPerformanceLevel(data.secuenciacion) === 'Alto',
+              'badge-medium': getPerformanceLevel(data.secuenciacion) === 'Medio',
+              'badge-low': getPerformanceLevel(data.secuenciacion) === 'Bajo'
+            }">Nivel {{ getPerformanceLevel(data.secuenciacion) }}</span>
+          </div>
+        </div>
+
+        <div class="card mini-card">
+          <span class="mini-card-title">Clasificación</span>
+          <div class="mini-card-body">
+            <div class="mini-card-value">{{ data.clasificacion }}%</div>
+            <span class="mini-badge" [ngClass]="{
+              'badge-high': getPerformanceLevel(data.clasificacion) === 'Alto',
+              'badge-medium': getPerformanceLevel(data.clasificacion) === 'Medio',
+              'badge-low': getPerformanceLevel(data.clasificacion) === 'Bajo'
+            }">Nivel {{ getPerformanceLevel(data.clasificacion) }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="action-row">
+    <button class="btn-primary" (click)="downloadReport()">
+      <span class="icon">description</span>
+      Descargar Informe Detallado
+    </button>
+  </div>
+</main>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-badge">
+      <span class="icon">verified</span>
+      <span>Protocolo Estandarizado</span>
+    </div>
+    <div class="footer-copyright">
+      © 2026 HELPWITHTEACCH - KAUFMAN ADAPTADO - Sistema de Evaluación Cognitiva
+    </div>
+  </div>
+</footer>

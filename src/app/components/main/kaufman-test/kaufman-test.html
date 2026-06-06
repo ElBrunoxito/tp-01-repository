@@ -1,0 +1,273 @@
+<div class="kaufman-container">
+
+  @if (pantallaActual === 0) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Exposición Inicial</span>
+        <h2>Observa con atención al personaje</h2>
+        <p>Intenta recordar la mayor cantidad de detalles del Búho Guardián.</p>
+      </div>
+      <div class="kaufman-body center-content">
+        <div class="character-preview">
+          <span class="huge-emoji active-float">🦉</span>
+          <h3>Búho Guardián</h3>
+        </div>
+        <button class="btn btn-primary" (click)="siguientePantalla()">
+          Comenzar Evaluación <span class="arrow-icon">→</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 1) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 1 - Memoria</span>
+        <h2>¿Cuál fue el personaje que viste al inicio de la prueba?</h2>
+      </div>
+      <div class="kaufman-body grid-3-columns">
+        <button class="option-box" (click)="registrarRespuesta('p1', false)">
+          <span class="box-emoji">🐱</span>
+          <span>Gatito</span>
+        </button>
+        <button class="option-box correct-indicator" (click)="registrarRespuesta('p1', true)">
+          <span class="box-emoji">🦉</span>
+          <span>Búho Guardián</span>
+        </button>
+        <button class="option-box" (click)="registrarRespuesta('p1', false)">
+          <span class="box-emoji">🐶</span>
+          <span>Perrito</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 2) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 2 - Matriz Cromática</span>
+        <h2>Selecciona el cuadrante con el color diferente que rompe el patrón</h2>
+      </div>
+      <div class="kaufman-body center-content">
+        <div class="chromatic-quadrant-grid">
+          <div class="color-quadrant item-blue" (click)="registrarRespuesta('p2', false)"></div>
+          <div class="color-quadrant item-blue" (click)="registrarRespuesta('p2', false)"></div>
+          <div class="color-quadrant item-anomaly" (click)="registrarRespuesta('p2', true)"></div>
+          <div class="color-quadrant item-blue" (click)="registrarRespuesta('p2', false)"></div>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 3) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 3 - Discriminación de Figuras</span>
+        <h2>Selecciona la figura geométrica de tres lados (Triángulo)</h2>
+      </div>
+      <div class="kaufman-body grid-3-columns">
+        <button class="option-box" (click)="registrarRespuesta('p3', false)">
+          <span class="box-shape square-css">■</span>
+          <span>Cuadrado</span>
+        </button>
+        <button class="option-box correct-indicator" (click)="registrarRespuesta('p3', true)">
+          <span class="box-shape triangle-css">▲</span>
+          <span>Triángulo</span>
+        </button>
+        <button class="option-box" (click)="registrarRespuesta('p3', false)">
+          <span class="box-shape star-css">★</span>
+          <span>Estrella</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 4) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 4 - Progresión Lógica</span>
+        <h2>Voltea la tarjeta para verificar e identificar la secuencia lógica</h2>
+      </div>
+      <div class="kaufman-body center-content">
+        <div class="flip-card-wrapper" [class.is-flipped]="p4Volteada" (click)="voltearTarjetaP4(true)">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">❓</div>
+            <div class="flip-card-back">
+              <span>☁️</span>
+              <p class="flip-label">Secuencia Válida</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary mt-xl" (click)="siguientePantalla()">Confirmar y Siguiente</button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 5) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 5 - Par Semántico</span>
+        <h2>¿Cuál objeto se asocia o relaciona directamente con el Patito de Goma?</h2>
+      </div>
+      <div class="kaufman-body grid-3-columns">
+        <button class="option-box" (click)="registrarRespuesta('p5', false)">
+          <span class="box-emoji">🧱</span>
+          <span>Bloque de Juguete</span>
+        </button>
+        <button class="option-box correct-indicator" (click)="registrarRespuesta('p5', true)">
+          <span class="box-emoji">🛁</span>
+          <span>Tina de Baño</span>
+        </button>
+        <button class="option-box" (click)="registrarRespuesta('p5', false)">
+          <span class="box-emoji">🚗</span>
+          <span>Carrito</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 6) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 6 - Control de Casilleros</span>
+        <h2>Selecciona el elemento correspondiente asignado al casillero seguro</h2>
+      </div>
+      <div class="kaufman-body center-content">
+        <div class="casillero-box" 
+             [class.selected-border]="p6CasilleroSeleccionado === 'target'" 
+             (click)="seleccionarCasilleroP6('target', true)">
+          <span class="box-emoji">🔒</span>
+          <p>Casillero Objetivo</p>
+        </div>
+        <button class="btn btn-primary mt-xl" [disabled]="!p6CasilleroSeleccionado" (click)="siguientePantalla()">
+          Validar Ubicación
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 7) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 7 - Categorización Directa</span>
+        <h2>Clasifica los elementos en sus respectivos contenedores conceptuales</h2>
+      </div>
+      <div class="kaufman-body container-split">
+        <div class="items-list">
+          @for (item of p7Items; track item.id) {
+            <div class="item-row">
+              <span class="item-text">{{ item.nombre }}</span>
+              <div class="actions-mini">
+                <button class="btn-mini" (click)="asignarCategoriaP7(item.id, 'Animales')">A Animales</button>
+                <button class="btn-mini" (click)="asignarCategoriaP7(item.id, 'Otros')">A Otros</button>
+              </div>
+              @if (item.asignado) {
+                <span class="assignment-feedback">En: {{ item.asignado }}</span>
+              }
+            </div>
+          }
+        </div>
+        <button class="btn btn-primary mt-xl" (click)="siguientePantalla()">Guardar Clasificación</button>
+      </div>
+    </div>
+  }
+
+@if (pantallaActual === 8) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 8 - Desglose Cromático</span>
+        <h2>Analiza la Pelota de Playa y escoge el elemento base que forma su diseño</h2>
+      </div>
+      <div class="kaufman-body center-content">
+        
+        <div class="beach-ball-container">
+          <div class="beach-ball">
+            <div class="ball-gajo gajo-red"></div>
+            <div class="ball-gajo gajo-blue"></div>
+            <div class="ball-gajo gajo-yellow"></div>
+            <div class="ball-gajo gajo-green"></div>
+            <div class="ball-center"></div>
+          </div>
+        </div>
+
+        <div class="grid-3-columns full-width mt-xl">
+          <button class="option-box" (click)="registrarRespuesta('p8', false)">
+            <div class="shape-snippet component-cube"></div>
+            <span>Cubo Geométrico</span>
+          </button>
+          <button class="option-box correct-indicator" (click)="registrarRespuesta('p8', true)">
+            <div class="shape-snippet component-arc"></div>
+            <span>Gajo Curvo de Color</span>
+          </button>
+          <button class="option-box" (click)="registrarRespuesta('p8', false)">
+            <div class="shape-snippet component-zigzag"></div>
+            <span>Línea en Zigzag</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 9) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 9 - Asociación Verbal</span>
+        <h2>Selecciona el identificador textual correcto de la imagen previa</h2>
+      </div>
+      <div class="kaufman-body grid-3-columns">
+        <button class="option-box" (click)="registrarRespuesta('p9', false)">
+          <span class="box-emoji">🐱</span>
+          <span>Gato</span>
+        </button>
+        <button class="option-box correct-indicator" (click)="registrarRespuesta('p9', true)">
+          <span class="box-emoji">⚽</span>
+          <span>Pelota</span>
+        </button>
+        <button class="option-box" (click)="registrarRespuesta('p9', false)">
+          <span class="box-emoji">🪑</span>
+          <span>Mesa</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (pantallaActual === 10) {
+    <div class="kaufman-card fade-in">
+      <div class="kaufman-header">
+        <span class="indicator-tag">Pantalla 10 - Matriz de Patrón</span>
+        <h2>Completa el espacio faltante de la matriz lógica tridimensional</h2>
+        <p>Identifica la regla de cierre geométrico correspondiente.</p>
+      </div>
+      <div class="kaufman-body center-content">
+        <div class="matrix-board">
+          <div class="matrix-slot">📐</div>
+          <div class="matrix-slot">📐</div>
+          <div class="matrix-slot missing-slot">❓</div>
+        </div>
+
+        <div class="grid-3-columns full-width mt-xl">
+          <button class="option-box" (click)="registrarRespuesta('p10', false)">
+            <span class="box-emoji">⬡</span>
+            <span>Hexágono Regular</span>
+          </button>
+          <button class="option-box correct-indicator" (click)="registrarRespuesta('p10', true)">
+            <span class="box-emoji">📐</span>
+            <span>Ángulo de Cierre</span>
+          </button>
+          <button class="option-box" (click)="registrarRespuesta('p10', false)">
+            <span class="box-emoji">↤</span>
+            <span>Flecha de Retorno</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <footer class="kaufman-footer">
+    <div class="footer-status">
+      <span class="secure-pulse"></span>
+      <p>Entorno Seguro de Evaluación Médica • Test de Kaufman</p>
+    </div>
+  </footer>
+
+</div>

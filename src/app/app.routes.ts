@@ -12,6 +12,8 @@ import { Kaufman } from './components/main/kaufman/kaufman';
 import { TestTeaForms } from './components/main/test-tea-forms/test-tea-forms';
 import { Load } from './components/load/load';
 import { ResultTestTea } from './components/main/result-test-tea/result-test-tea';
+import { KaufmanTest } from './components/main/kaufman-test/kaufman-test';
+import { KaufmanResult } from './components/main/kaufman-result/kaufman-result';
 
 export const routes: Routes = [
     {
@@ -73,6 +75,17 @@ export const routes: Routes = [
     {
         path:'app/resultados/:id',
         component: ResultTestTea
+    },
+    //KAUFMAN
+    {
+        path:'app/kaufman/test',
+        component: KaufmanTest
+    },
+    {
+        path:'app/kaufman/result',
+        component: KaufmanResult
     }
+
+
 
 ];
