@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  display: block;
+}
+
+/* --- Layout Base Adaptado a 1080p Sin Scroll --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* --- Canvas Principal Optimizado para Caber Todo Juntos --- */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Distribución equilibrada */
+  padding: 24px 40px 140px 40px; /* Margen inferior para que no choque con el nav fixed */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- Barra de Progreso (7/10) --- */
+.progress-bar-container {
+  width: 100%;
+  max-width: 42rem;
+  background-color: #e2e2e2;
+  border: 2px solid #0f172a;
+  border-radius: 9999px;
+  height: 32px;
+  overflow: hidden;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.progress-bar-fill {
+  background-color: #42617d;
+  height: 100%;
+  width: 70%; /* 70% representativo */
+  border-right: 2px solid #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.progress-text {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* --- Textos de Instrucción --- */
+.instruction-header {
+  text-align: center;
+}
+
+.instruction-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.instruction-subtitle {
+  font-size: 22px;
+  color: #42474d;
+  margin: 4px 0 0 0;
+}
+
+/* --- Matriz de Destino (Workspace Area) --- */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  background-color: #f3f3f3;
+  border: 2px dashed #0f172a;
+  padding: 24px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.drop-zone {
+  aspect-ratio: 1 / 1;
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.empty-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 2px solid #c2c7ce;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c2c7ce;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.step-placeholder-text {
+  font-weight: 600;
+  color: #c2c7ce;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* REPETICIÓN DE ERROR -> Resaltado TEACCH en bordes discontinuos */
+.drop-zone.help-outline {
+  border: 4px dashed #2563eb !important;
+  background-color: #eff6ff;
+}
+.drop-zone.help-outline .step-placeholder-text {
+  color: #2563eb;
+}
+
+/* Estado de Zona Completada Correctamente */
+.drop-zone.zone-occupied {
+  border: none;
+}
+
+.occupied-card {
+  width: 100%;
+  height: 100%;
+  background-color: #a7c7e7;
+  border: 4px solid #0f172a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 4px 4px 0px 0px rgba(15, 23, 42, 1);
+  box-sizing: border-box;
+}
+
+.icon-scale-md {
+  font-size: 54px;
+  color: #0f172a;
+}
+
+.label-text-card {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* --- BANCO DE ORIGEN (Tarjetas disponibles abajo del workspace) --- */
+.source-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.step-card {
+  width: 180px;
+  height: 230px;
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: grab;
+  box-sizing: border-box;
+}
+
+.step-card:active {
+  cursor: grabbing;
+  border-width: 4px;
+}
+
+.card-icon-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.icon-scale-lg {
+  font-size: 72px;
+  color: #1a1c1c;
+}
+
+.card-footer-label {
+  width: calc(100% + 32px);
+  background-color: #cbebca;
+  border-top: 2px solid #0f172a;
+  padding: 12px 0;
+  text-align: center;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin: 0 -16px -16px -16px;
+}
+
+.label-text-footer {
+  font-weight: 600;
+  color: #06210d;
+  font-size: 18px;
+}
+
+/* --- BARRA DE NAVEGACIÓN INFERIOR ESTABLE --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 112px;
+  background-color: #ffffff;
+  border-top: 2px solid #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  box-sizing: border-box;
+}
+
+.nav-container {
+  display: flex;
+  width: 100%;
+  max-width: 42rem;
+  gap: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  flex: 1;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.button-text {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.icon-nav {
+  font-size: 36px;
+}
+
+/* Estilos de botones condicionales sin Tailwind */
+.btn-primary-style {
+  background-color: #dbeafe;
+  border: 4px solid #2563eb;
+  color: #2563eb;
+}
+
+.btn-secondary-style {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  color: #0f172a;
+}
+
+.btn-success-style {
+  background-color: #42617d;
+  border: 2px solid #0f172a;
+  color: #ffffff;
+}
+
+.btn-disabled-style {
+  background-color: #e2e2e2;
+  border: 2px solid #73777e;
+  color: #73777e;
+  cursor: not-allowed;
+}
+.btn-siguiente {
+  background-color: #dbeafe; /* bg-primary-container ligero */
+  border: 4px solid #2563eb;
+  color: #2563eb;
+}
+.btn-listo {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  color: #0f172a;
+}

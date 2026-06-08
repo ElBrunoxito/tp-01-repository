@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  display: block;
+}
+
+/* --- Base Layout 1080p Fijo Sin Scroll --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* --- Main Framework (Fiel a tus clases flex-col items-center justify-center) --- */
+.main-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 7rem; /* Deja el espacio exacto para el Nav fijo de abajo */
+}
+
+.center-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* --- Avatar Container (Círculo Gris con la Imagen adentro) --- */
+.avatar-container {
+  width: 560px;
+  height: 300px;
+  background-color: #e2e2e2; /* bg-surface-container-highest */
+  overflow: hidden; /* Asegura que la imagen mantenga la forma circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem; /* mb-10 */
+  border: 2px solid black;
+}
+
+.star-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Se adapta perfectamente al contenedor circular */
+}
+
+/* --- Título Headline --- */
+.title-text {
+  font-size: 2.5rem; /* text-headline-lg */
+  font-weight: 400;
+  color: #1a1c1c; /* text-slate-900 */
+  letter-spacing: -0.02em; /* tracking-tight */
+  margin: 0 0 3.5rem 0; /* mb-14 */
+}
+
+/* --- Botón Continuar / Temporizador Centralizado --- */
+.btn-continuar {
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+  height: 5rem; /* h-20 */
+  background-color: #cbebca; /* bg-secondary-container */
+  color: #06210d; /* text-on-secondary-container */
+  border: 4px solid #0f172a; /* border-4 border-slate-900 */
+  border-radius: 0.75rem; /* rounded-xl */
+  font-size: 1.5rem; /* text-headline-md */
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* gap-4 */
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.1s ease;
+}
+
+.btn-continuar:hover:not(:disabled) {
+  background-color: #afcfaf; /* bg-secondary-fixed */
+}
+
+.btn-continuar:active:not(:disabled) {
+  transform: translateY(4px); /* active:translate-y-1 */
+}
+
+/* Estado deshabilitado mientras corre la cuenta regresiva */
+.btn-continuar:disabled {
+  background-color: #f3f3f3;
+  color: #73777e;
+  border-color: #73777e;
+  cursor: not-allowed;
+}
+
+.icon-btn {
+  font-size: 36px;
+  font-variation-settings: 'FILL' 1;
+}
+
+/* --- BARRA DE NAVEGACIÓN INFERIOR (Idéntica a tu HTML y screen.jpg) --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 7rem; /* h-28 */
+  background-color: #ffffff;
+  border-top: 2px solid #0f172a; /* border-t-2 border-slate-900 */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  z-index: 50;
+  box-sizing: border-box;
+}
+
+/* Estructura Base de los dos botones divididos flex-1 */
+.nav-button {
+  flex: 1; /* flex-1 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem; /* gap-1 */
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.icon-nav {
+  font-size: 3.125rem; /* text-5xl */
+  color: #0f172a; /* text-slate-900 */
+}
+
+.label-nav {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: #0f172a; /* text-slate-900 */
+  text-transform: uppercase;
+}
+
+/* Botón Siguiente (Lado Izquierdo con fondo blanco y divisor) */
+.btn-siguiente {
+  background-color: #ffffff;
+  border-right: 2px solid #0f172a; /* border-r-2 border-slate-900 */
+}
+
+.btn-siguiente:hover {
+  background-color: #f3f3f3; /* hover:bg-surface-container */
+}
+
+/* Botón Listo (Lado Derecho Verde Suave) */
+.btn-listo {
+  background-color: #cbebca; /* bg-secondary-container */
+}
+
+.btn-listo:hover {
+  background-color: #afcfaf; /* hover:bg-secondary-fixed */
+}
+
+.btn-listo .icon-nav {
+  font-variation-settings: 'FILL' 1, 'wght' 700;
+}

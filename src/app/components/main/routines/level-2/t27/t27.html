@@ -1,0 +1,84 @@
+<div class="screen-wrapper">
+  <main class="canvas-container">
+    
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill">
+        <span class="progress-text">7/10</span>
+      </div>
+    </div>
+
+    <div class="instruction-header">
+      <h1 class="instruction-title">Ordena los pasos</h1>
+      <p class="instruction-subtitle">¿Cómo nos lavamos las manos?</p>
+    </div>
+
+    <div class="workspace-grid">
+      @for (zona of zonasDestino; track zona.paso) {
+        <div 
+          class="drop-zone"
+          [ngClass]="{
+            'zone-occupied': zona.elementoContenido !== null,
+            'help-outline': mostrarGuiaAyuda && zona.elementoContenido === null
+          }"
+          (dragover)="allowDrop($event)"
+          (drop)="onDrop($event, zona.paso)">
+          
+          @if (zona.elementoContenido) {
+            <div class="occupied-card">
+              <span class="material-symbols-outlined icon-scale-md">
+                {{ zona.elementoContenido.icono }}
+              </span>
+              <p class="label-text-card">{{ zona.elementoContenido.nombre }}</p>
+            </div>
+          } @else {
+            <div class="empty-badge">{{ zona.paso }}</div>
+            <p class="step-placeholder-text">
+              {{ mostrarGuiaAyuda ? 'Pon aquí: ' + getNombrePasoCorrecto(zona.paso) : 'Paso ' + zona.paso }}
+            </p>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="source-cards-container">
+      @for (tarjeta of bancoTarjetas; track tarjeta.id) {
+        <button 
+          class="step-card"
+          [attr.draggable]="!actividadCompletada"
+          (dragstart)="onDragStart($event, tarjeta)">
+          
+          <div class="card-icon-wrapper">
+            <span class="material-symbols-outlined icon-scale-lg">
+              {{ tarjeta.icono }}
+            </span>
+          </div>
+          
+          <div class="card-footer-label">
+            <span class="label-text-footer">{{ tarjeta.nombre }}</span>
+          </div>
+        </button>
+      }
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <div class="nav-container">
+      
+      <button 
+        class="nav-button btn-listo" 
+        (click)="onSiguiente()">
+        <span class="material-symbols-outlined icon-nav">arrow_forward</span>
+        <span class="button-text">Siguiente</span>
+      </button>
+
+      <button class="nav-button" (click)="onListo()"
+        [ngClass]="actividadCompletada ? 'btn-siguiente' : 'btn-secondary-style'"
+      >
+        <span class="material-symbols-outlined icon-nav">check_circle</span>
+        <span class="button-text">Listo</span>
+      </button>
+
+    </div>
+  </nav>
+</div>

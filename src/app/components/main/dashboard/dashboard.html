@@ -11,9 +11,14 @@
           <h2 class="patient-display-name">{{ nameChild }}</h2>
           <div class="patient-pills-row">
             <span class="info-pill">{{ ageChild }} años</span>
-            @if(currentLevel){
-                <span class="info-pill"> Nivel {{ currentLevel == 1 ? 'Leve' : currentLevel == 2 ? 'Moderado' : 'Severo'  }}</span>
-            }@else{
+              @if(levelChild === 1){
+                <span class="info-pill"> Nivel Leve</span>
+              }@else if (levelChild === 2) {
+                <span class="info-pill"> Nivel Moderado</span>
+              }@else if(levelChild === 3) {
+                <span class="info-pill"> Nivel Severo</span>
+              }
+            @else {
                 <span class="info-pill"> Realizar prueba</span>
             }
           </div>

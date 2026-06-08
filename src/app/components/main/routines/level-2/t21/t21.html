@@ -1,0 +1,41 @@
+<main class="canvas-container">
+  <div class="task-wrapper">
+    
+    <div class="progress-tracker">
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill"></div>
+      </div>
+      <span class="progress-text">1/10</span>
+    </div>
+
+    <div class="task-card">
+      <div class="illustration-container">
+        <img 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD21Byk5FeFMAsTP4iy9RGH4MXM25vBQVZJc3NYOp791rVgt0dWrfRB9ctBs2tnMJjO9ApoIML0CanDRAHWyOQZ2prQy2FohSSKodB0SVXlazpuZq1ajRen5NChEJNjxPLsD6iScf-5ja9YaGnU8nqz0g3uAtaNtlLmto2TJRzVyOP32yJnEDdx4VXVK6H0R8XOb8fLDCaZ1OBjzhRwogPCEyxANZnzynCaLaGp40PN52kwMnPtDoGVutZR8Zs5U_xyZeCdFCYAppY" 
+          alt="A friendly, high-contrast digital illustration of a smiling yellow sun and a simple blue bird, set against a soft pastel landscape. The style is minimalist and functional with thick, clean black outlines and flat color fills to ensure cognitive clarity." 
+          class="illustration-img"
+        />
+      </div>
+
+      <div class="text-content">
+        <h1 class="welcome-title">Hola, empecemos</h1>
+        <p class="welcome-subtitle">Bienvenido a tu lección de hoy. Vamos a trabajar juntos paso a paso.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<nav class="bottom-nav">
+  
+  <button class="nav-button btn-next" (click)="onSiguiente()">
+    <span class="material-symbols-outlined icon-large">arrow_forward</span>
+    <span class="button-text">Siguiente</span>
+  </button>
+
+  <button class="nav-button btn-ready" (click)="onListo()">
+    <span class="material-symbols-outlined icon-large">check_circle</span>
+    <span class="button-text">Listo</span>
+  </button>
+  
+</nav>

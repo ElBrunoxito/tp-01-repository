@@ -1,0 +1,91 @@
+<div class="screen-wrapper">
+  <main class="canvas-container">
+    
+    <div class="progress-section">
+      <div class="progress-labels">
+        <span class="label-text">Progreso</span>
+        <span class="label-text">3 de 10</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <section class="instruction-card">
+      <h1 class="instruction-title">Selecciona el color rojo</h1>
+    </section>
+
+    <div class="color-grid">
+      
+      <button 
+        class="color-card" 
+        [ngClass]="{'target-highlight': mostrarAyuda, 'selected-correct': intentoExitoso}"
+        (click)="seleccionarColor('rojo')">
+        <div class="color-sample sample-red"></div>
+        <span class="card-label">ROJO</span>
+      </button>
+
+      <button 
+        class="color-card" 
+        [class.disabled-opacity]="intentoExitoso"
+        (click)="seleccionarColor('azul')">
+        <div class="color-sample sample-blue"></div>
+        <span class="card-label">AZUL</span>
+      </button>
+
+      <button 
+        class="color-card" 
+        [class.disabled-opacity]="intentoExitoso"
+        (click)="seleccionarColor('verde')">
+        <div class="color-sample sample-green"></div>
+        <span class="card-label">VERDE</span>
+      </button>
+
+    </div>
+
+    <div class="feedback-area" [ngClass]="{'status-error': errores > 0 && !intentoExitoso, 'status-success': intentoExitoso}">
+      
+      @if (errores === 0 && !intentoExitoso) {
+        <p class="feedback-text">Toca un cuadrado de color</p>
+      }
+
+      @if (errores === 1 && !intentoExitoso) {
+        <p class="feedback-text error-text">
+          <span class="material-symbols-outlined icon-inline">error</span> Intenta otra vez
+        </p>
+      }
+
+      @if (errores >= 2 && !intentoExitoso) {
+        <p class="feedback-text error-text">
+          <span class="material-symbols-outlined icon-inline">lightbulb</span> ¡Mira el borde grueso! Intenta otra vez
+        </p>
+      }
+
+      @if (intentoExitoso) {
+        <p class="feedback-text success-text">
+          <span class="material-symbols-outlined icon-inline">check_circle</span> ¡Excelente! Muy bien hecho
+        </p>
+      }
+
+    </div>
+  </main>
+
+  <footer class="bottom-nav">
+    
+    <button 
+      class="nav-button btn-secondary-style" 
+      (click)="onSiguiente()">
+      <span class="material-symbols-outlined icon-large">arrow_forward</span>
+      <span class="button-text">Siguiente</span>
+    </button>
+
+    <button 
+      class="nav-button" 
+      [ngClass]="intentoExitoso ? 'btn-primary-style' : 'btn-secondary-style'" 
+      (click)="onListo()">
+      <span class="material-symbols-outlined icon-large">done_all</span>
+      <span class="button-text">Listo</span>
+    </button>
+    
+  </footer>
+</div>

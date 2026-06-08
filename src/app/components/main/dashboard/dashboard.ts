@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +11,6 @@ export class Dashboard implements OnInit, AfterViewInit {
   
   // Propiedades reactivas del Paciente y Progreso
   currentProgress! : number;
-  currentLevel!: number ;
   animateBars: boolean = false;
 
   social!: number;
@@ -22,6 +21,8 @@ export class Dashboard implements OnInit, AfterViewInit {
   nameChild!: string;
   levelChild!: number;
   ageChild!: number;
+
+  router = inject(Router)
 
   constructor() {}
 
@@ -51,7 +52,8 @@ export class Dashboard implements OnInit, AfterViewInit {
    */
   triggerAction(actionType: string): void {
     console.log(`Acción del panel derecho ejecutada: [${actionType}]`);
+    if(actionType === "new-routine"){
+      this.router.navigate([`/app/routine/level-${this.levelChild}`]);
+    }
   }
-
-
 }

@@ -1,0 +1,99 @@
+<div class="screen-wrapper">
+  <main class="main-layout">
+    
+    <div class="progress-container">
+      <div class="progress-bar">
+        <span class="progress-text">9/10</span>
+      </div>
+    </div>
+
+    <div class="header-section">
+      <h1 class="instruction-title">¿Dónde va cada objeto?</h1>
+      <p class="instruction-subtitle">Arrastra el elemento hacia su grupo correcto</p>
+    </div>
+
+    <div class="categories-grid">
+      @for (cat of categorias; track cat.id) {
+        <div 
+          class="category-column"
+          [ngClass]="{ 'help-highlight': mostrarGuiaAyuda && cat.id === idCategoriaCorrectaActual }"
+          (dragover)="allowDrop($event)"
+          (drop)="onDrop($event, cat.id)">
+          
+          <h2 class="category-title">{{ cat.nombre }}</h2>
+
+          @if(cat.itemsClasificados.length === 0){
+            <div class="drop-zone-placeholder">
+                <span class="drop-text-underlined">colocar aquí</span>
+            </div>
+          }
+
+
+          <div class="dropped-items-zone">
+            @for (item of cat.itemsClasificados; track item.id) {
+              <div class="classified-card">
+                <img [src]="item.imagenUrl" [alt]="item.nombre" class="item-img-small" />
+                <span class="item-label">{{ item.nombre }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="source-container">
+      @if (elementoActual) {
+        <div 
+          class="draggable-card"
+          draggable="true"
+          (dragstart)="onDragStart($event)">
+          <img [src]="elementoActual.imagenUrl" [alt]="elementoActual.nombre" class="item-img-large" />
+          <span class="card-label">{{ elementoActual.nombre }}</span>
+        </div>
+      } @else {
+        <div class="empty-source-state">
+          <span class="material-symbols-outlined done-all-icon">check_circle</span>
+          <p class="done-text">¡Completado con éxito!</p>
+        </div>
+      }
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    
+    <button 
+      class="nav-button btn-siguiente" 
+      [ngClass]="actividadCompletada ? 'btn-next-active' : 'btn-next-disabled'"
+      [disabled]="!actividadCompletada" 
+      (click)="onSiguiente()">
+      <span class="material-symbols-outlined icon-nav">arrow_forward_ios</span>
+      <span class="label-nav">Siguiente</span>
+    </button>
+
+    <button class="nav-button btn-listo" (click)="onListo()">
+      <span class="material-symbols-outlined icon-nav">check</span>
+      <span class="label-nav">Listo</span>
+    </button>
+
+  </nav>
+</div>
+
+  <footer class="bottom-nav">
+    <button 
+      class="nav-button btn-secondary-style" 
+      (click)="onSiguiente()">
+      <span class="material-symbols-outlined icon-large">arrow_forward</span>
+      <span class="button-text">Siguiente</span>
+    </button>
+
+    <button 
+      class="nav-button" 
+      [ngClass]="actividadCompletada ? 'btn-primary-style' : 'btn-secondary-style'" 
+      (click)="onListo()">
+      <span class="material-symbols-outlined icon-large">done_all</span>
+      <span class="button-text">Listo</span>
+    </button>
+  </footer>
+
+

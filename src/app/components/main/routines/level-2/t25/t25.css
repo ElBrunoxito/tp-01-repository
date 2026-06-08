@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  display: block;
+}
+
+/* --- Layout Base 1080p sin Desplazamiento --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* --- Centrado y distribución vertical del Canvas --- */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.instruction-header {
+  text-align: center;
+  width: 100%;
+}
+
+.instruction-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+
+.instruction-subtitle {
+  font-size: 20px;
+  color: #73777e;
+  margin: 0;
+}
+
+.memorization-active {
+  color: #2563eb;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* --- Matriz de Memoria (Grid 2x2) --- */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+  max-width: 520px;
+  flex: 1;
+  max-height: 520px;
+  margin: 16px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-disabled {
+  pointer-events: none;
+}
+
+/* Estructura de Tarjetas Estables */
+.card-tile {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.card-face {
+  width: 100%;
+  height: 100%;
+  border: 4px solid #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.cover-icon {
+  font-size: 72px;
+  color: #73777e;
+  font-weight: 700;
+}
+
+.tile-icon {
+  font-size: 110px;
+  font-variation-settings: 'FILL' 1, 'wght' 700;
+}
+
+.icon-yellow { color: #eab308; }
+.icon-blue   { color: #3b82f6; }
+
+/* Pareja correcta ya consolidada */
+.card-tile.is-matched .card-face {
+  border: 5px solid #49654c !important;
+  background-color: #e8f5e9;
+}
+
+/* REPETICIÓN DE ERROR -> Resaltar contornos (Ayuda TEACCH) */
+.card-tile.help-outline .card-face {
+  border: 6px dashed #2563eb !important;
+  background-color: #dbeafe;
+  animation: pulse-help 1.5s infinite;
+}
+
+@keyframes pulse-help {
+  0% { border-color: #2563eb; }
+  50% { border-color: #001d32; }
+  100% { border-color: #2563eb; }
+}
+
+/* --- Área de Feedback --- */
+.feedback-area {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #c2c7ce;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.feedback-area.status-memorize {
+  border: 3px solid #2563eb;
+  background-color: #eff6ff;
+}
+
+.feedback-area.status-error {
+  border: 3px solid #ba1a1a;
+  background-color: #ffdad6;
+}
+
+.feedback-area.status-success {
+  border: 3px solid #49654c;
+  background-color: #cbebca;
+}
+
+.feedback-text {
+  font-size: 22px;
+  font-weight: 400;
+  color: #73777e;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.memorize-text { color: #1e40af; font-weight: 600; }
+.error-text { color: #ba1a1a; font-weight: 600; }
+.success-text { color: #06210d; font-weight: 600; }
+.icon-inline { font-size: 28px; }
+
+/* Animación del reloj */
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+.icon-spin {
+  animation: spin 2s linear infinite;
+  color: #2563eb;
+}
+
+/* --- Barra de Navegación Inferior --- */
+.bottom-nav {
+  height: 128px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  background-color: #ffffff;
+  padding: 0 16px 16px 16px;
+  gap: 16px;
+  border-top: 4px solid #0f172a;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.button-text {
+  font-weight: 900;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.btn-primary-style {
+  background-color: #dbeafe;
+  border: 4px solid #2563eb;
+  color: #2563eb;
+}
+.btn-primary-style:hover { background-color: #eff6ff; }
+
+.btn-secondary-style {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  color: #0f172a;
+}
+.btn-secondary-style:hover { background-color: #f1f5f9; }
+
+.icon-large { font-size: 36px; }

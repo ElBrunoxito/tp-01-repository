@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  display: block;
+}
+
+/* --- Forzar resolución fija sin Scroll --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* --- Distribución Vertical del Canvas --- */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header de instrucciones */
+.instruction-header {
+  text-align: center;
+  width: 100%;
+}
+
+.instruction-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.instruction-subtitle {
+  font-size: 20px;
+  color: #73777e;
+  margin: 0;
+}
+
+/* --- Grid Bento Adaptativo (Control estricto de altura) --- */
+.task-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  width: 100%;
+  flex: 1;
+  max-height: 460px; /* Clave para que no empuje elementos en 1080p */
+  margin: 16px 0;
+  align-items: center;
+}
+
+/* Columna Izquierda: Muestra */
+.target-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.target-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 340px;
+  background-color: #ffffff;
+  border: 4px solid #0f172a;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.image-content {
+  width: 100%;
+  height: 100%;
+  object-position: contain;
+}
+
+.target-badge {
+  background-color: #cde5ff;
+  border: 2px solid #0f172a;
+  padding: 6px 24px;
+  margin-top: 12px;
+}
+
+.badge-text {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #001d32;
+}
+
+/* Columna Derecha: Opciones */
+.options-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Botonera de Opciones Modernas */
+.option-button {
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+  border: 3px solid #0f172a;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.option-button:hover {
+  background-color: #f8fafc;
+}
+
+.image-thumb-container {
+  width: 70px;
+  height: 70px;
+  background-color: #eeeeee;
+  border: 2px solid #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  margin-right: 20px;
+}
+
+.image-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.option-label {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1c1c;
+}
+
+.radio-indicator {
+  position: absolute;
+  right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.radio-indicator .material-symbols-outlined {
+  font-size: 36px;
+  color: #73777e;
+}
+
+/* --- Estados de Interacción y Respuestas de Error/Ayuda --- */
+.option-button.selected-active {
+  border: 5px solid #2563eb !important;
+  background-color: #eff6ff;
+}
+.option-button.selected-active .radio-indicator .material-symbols-outlined {
+  color: #2563eb;
+}
+
+/* REPETICIÓN DE ERROR -> Resalta la pareja correcta */
+.option-button.help-highlight {
+  border: 6px dashed #2563eb !important;
+  background-color: #dbeafe;
+  animation: pulse-border 1.5s infinite;
+}
+.option-button.help-highlight .radio-indicator .material-symbols-outlined {
+  color: #2563eb;
+}
+
+@keyframes pulse-border {
+  0% { border-color: #2563eb; }
+  50% { border-color: #001d32; }
+  100% { border-color: #2563eb; }
+}
+
+.disabled-opacity {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --- Área de Feedback Estricta --- */
+.feedback-area {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #c2c7ce;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.feedback-area.status-error {
+  border: 3px solid #ba1a1a;
+  background-color: #ffdad6;
+}
+
+.feedback-area.status-success {
+  border: 3px solid #49654c;
+  background-color: #cbebca;
+}
+
+.feedback-text {
+  font-size: 22px;
+  font-weight: 400;
+  color: #73777e;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-text { color: #ba1a1a; font-weight: 600; }
+.success-text { color: #06210d; font-weight: 600; }
+.icon-inline { font-size: 28px; }
+
+/* --- Barra de Navegación Inferior Estricta --- */
+.bottom-nav {
+  height: 128px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  background-color: #ffffff;
+  padding: 0 16px 16px 16px;
+  gap: 16px;
+  border-top: 4px solid #0f172a;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.button-text {
+  font-weight: 900;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* Botón Destacado (Primario) */
+.btn-primary-style {
+  background-color: #dbeafe;
+  border: 4px solid #2563eb;
+  color: #2563eb;
+}
+.btn-primary-style:hover { background-color: #eff6ff; }
+.btn-primary-style:active { border-width: 6px !important; }
+
+/* Botón Plano (Secundario) */
+.btn-secondary-style {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  color: #0f172a;
+}
+.btn-secondary-style:hover { background-color: #f1f5f9; }
+.btn-secondary-style:active { border-width: 4px !important; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+.icon-large { font-size: 36px; }

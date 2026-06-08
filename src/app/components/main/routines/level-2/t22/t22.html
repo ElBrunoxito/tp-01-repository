@@ -1,0 +1,58 @@
+<div class="screen-wrapper">
+  <main class="canvas-container">
+    
+    <div class="progress-section">
+      <div class="progress-labels">
+        <span class="label-text">Paso 2 de 10</span>
+        <span class="label-text text-percent">20%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <h1 class="agenda-title">Hoy haremos esto</h1>
+
+    <div class="agenda-grid">
+      
+      <div class="agenda-card card-active">
+        <span class="material-symbols-outlined icon-giant">waving_hand</span>
+        <span class="card-label">Saludo</span>
+        <div class="badge-now">AHORA</div>
+      </div>
+
+      <div class="agenda-card card-inactive">
+        <span class="material-symbols-outlined icon-giant">palette</span>
+        <span class="card-label">Colores</span>
+      </div>
+
+      <div class="agenda-card card-inactive">
+        <span class="material-symbols-outlined icon-giant">extension</span>
+        <span class="card-label">Emparejar</span>
+      </div>
+
+      <div class="agenda-card card-inactive">
+        <span class="material-symbols-outlined icon-giant">grid_view</span>
+        <span class="card-label">Memoria</span>
+      </div>
+
+      <div class="agenda-card card-inactive">
+        <span class="material-symbols-outlined icon-giant">celebration</span>
+        <span class="card-label">Recreo</span>
+      </div>
+
+      <div class="agenda-card card-inactive">
+        <span class="material-symbols-outlined icon-giant">flag</span>
+        <span class="card-label">Fin</span>
+      </div>
+
+    </div>
+
+    <div class="action-wrapper">
+      <button class="btn-continue" (click)="onContinuar()">
+        <span class="btn-continue-text">Continuar</span>
+        <span class="material-symbols-outlined icon-medium">play_arrow</span>
+      </button>
+    </div>
+  </main>
+</div>

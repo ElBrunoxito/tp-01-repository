@@ -24,6 +24,16 @@ import { T37 } from './components/main/routines/level-3/t37/t37';
 import { T38 } from './components/main/routines/level-3/t38/t38';
 import { T39 } from './components/main/routines/level-3/t39/t39';
 import { T310 } from './components/main/routines/level-3/t310/t310';
+import { T21 } from './components/main/routines/level-2/t21/t21';
+import { T22 } from './components/main/routines/level-2/t22/t22';
+import { T23 } from './components/main/routines/level-2/t23/t23';
+import { T24 } from './components/main/routines/level-2/t24/t24';
+import { T25 } from './components/main/routines/level-2/t25/t25';
+import { T26 } from './components/main/routines/level-2/t26/t26';
+import { T27 } from './components/main/routines/level-2/t27/t27';
+import { T28 } from './components/main/routines/level-2/t28/t28';
+import { T29 } from './components/main/routines/level-2/t29/t29';
+import { T210 } from './components/main/routines/level-2/t210/t210';
 
 export const routes: Routes = [
     {
@@ -95,7 +105,27 @@ export const routes: Routes = [
         path:'app/kaufman/result',
         component: KaufmanResult
     },
+    {
+        path:'app/routine/level-2',
+        children: [
+            
+            {
+                path:'',redirectTo:'1',pathMatch:'full'
+            },
+            { path:'1',component: T21},
+            { path:'2',component: T22},
+            { path:'3',component: T23},
+            { path:'4',component: T24},
+            { path:'5',component: T25},
+            { path:'6',component: T26},
+            { path:'7',component: T27},
+            { path:'8',component: T28},
+            { path:'9',component: T29},
+            { path:'10',component: T210}
 
+
+        ]
+    },
     {
         path:'app/routine/level-3',
         children: [
@@ -104,44 +134,34 @@ export const routes: Routes = [
                 path:'',redirectTo:'1',pathMatch:'full'
             },
             {
-                path:'1',
-                component: T31
+                path:'1',component: T31
             },
             {
-                path:'2',
-                component: T32
+                path:'2',component: T32
             },
             {
-                path:'3',
-                component: T33
+                path:'3',component: T33
             },
             {
-                path:'4',
-                component: T34
+                path:'4',component: T34
             },
             {
-                path:'5',
-                component: T35
+                path:'5',component: T35
             },
             {
-                path:'6',
-                component: T36
+                path:'6',component: T36
             },
             {
-                path:'7',
-                component: T37
+                path:'7',component: T37
             },
             {
-                path:'8',
-                component: T38
+                path:'8',component: T38
             },
             {
-                path:'9',
-                component: T39
+                path:'9',component: T39
             },
             {
-                path:'10',
-                component: T310
+                path:'10',component: T310
             }
 
         ]

@@ -1,0 +1,100 @@
+<div class="screen-wrapper">
+  <main class="canvas-container">
+    
+    <div class="instruction-header">
+      <h1 class="instruction-title">Encuentra pares</h1>
+    </div>
+
+    <div class="matrix-grid" [class.grid-disabled]="faseMemorizacion">
+      
+      @for (carta of tablero; track carta.id) {
+        <button 
+          class="card-tile"
+          [ngClass]="{
+            'is-matched': carta.descubierta,
+            'help-outline': mostrarAyudaPares && !carta.descubierta && (carta.icono === 'star' || carta.icono === 'circle')
+          }"
+          [disabled]="faseMemorizacion || carta.descubierta"
+          (click)="voltearCarta(carta)">
+          
+          @if (faseMemorizacion || carta.descubierta || carta.id === primerClickId || carta.id === segundoClickId) {
+            
+            <div class="card-face card-front">
+              <span class="material-symbols-outlined tile-icon" [ngClass]="carta.colorClase">
+                {{ carta.icono }}
+              </span>
+            </div>
+
+          } @else {
+            
+            <div class="card-face card-back">
+              <span class="material-symbols-outlined cover-icon">question_mark</span>
+            </div>
+
+          }
+
+        </button>
+      }
+
+    </div>
+
+<div class="feedback-area" [ngClass]="{
+  'status-memorize': faseMemorizacion, 
+  'status-error': errores > 0 && !intentoExitoso && !faseMemorizacion && !parEncontradoJustoAhora, 
+  'status-success': intentoExitoso || parEncontradoJustoAhora
+}">
+  
+  @if (faseMemorizacion) {
+    <p class="feedback-text memorize-text">
+      <span class="material-symbols-outlined icon-inline">visibility</span> ¡Observa con atención!
+    </p>
+  }
+
+  @if (errores === 0 && !intentoExitoso && !faseMemorizacion && !parEncontradoJustoAhora) {
+    <p class="feedback-text">¡El test ha comenzado! Toca una tarjeta</p>
+  }
+
+  @if (errores === 1 && !intentoExitoso && !faseMemorizacion && !parEncontradoJustoAhora) {
+    <p class="feedback-text error-text">
+      <span class="material-symbols-outlined icon-inline">error</span> No son iguales. ¡Intenta otra vez!
+    </p>
+  }
+
+  @if (errores >= 2 && !intentoExitoso && !faseMemorizacion && !parEncontradoJustoAhora) {
+    <p class="feedback-text error-text">
+      <span class="material-symbols-outlined icon-inline">lightbulb</span> ¡Mira las tarjetas resaltadas en azul!
+    </p>
+  }
+
+  @if (parEncontradoJustoAhora && !intentoExitoso) {
+    <p class="feedback-text success-text">
+      <span class="material-symbols-outlined icon-inline">thumb_up</span> ¡Muy bien! Encontraste una pareja, busca la otra
+    </p>
+  }
+
+  @if (intentoExitoso) {
+    <p class="feedback-text success-text">
+      <span class="material-symbols-outlined icon-inline">check_circle</span> ¡Felicidades! Encontraste todos los pares
+    </p>
+  }
+
+</div>
+  </main>
+
+  <footer class="bottom-nav">
+    <button 
+      class="nav-button btn-secondary-style" 
+      (click)="onSiguiente()">
+      <span class="material-symbols-outlined icon-large">arrow_forward</span>
+      <span class="button-text">Siguiente</span>
+    </button>
+
+    <button 
+      class="nav-button" 
+      [ngClass]="intentoExitoso ? 'btn-primary-style' : 'btn-secondary-style'" 
+      (click)="onListo()">
+      <span class="material-symbols-outlined icon-large">done_all</span>
+      <span class="button-text">Listo</span>
+    </button>
+  </footer>
+</div>

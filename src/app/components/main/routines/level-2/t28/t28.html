@@ -1,0 +1,26 @@
+<div class="screen-wrapper">
+  <main class="main-layout">
+    <section class="center-section">
+      
+      <div class="avatar-container">
+        <img 
+          class="star-image" 
+          alt="Ilustración o avatar representativo del descanso" 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXA3hWJ62w5FPNhWi2RjpTx5fjyKggXb0w1_kS8GUB16-mtFHnI3gshCbRVp7AB62Y8sxN51xSndW1hG4RBOnFqXFyVeVEvMXjinzVPl4lYwch870aWHEmIoy2U4THTSPuRLwytB9sWx_tkzZ-emc-1Sg1wd8ZOyKaDZelkMlAaZErKJTERFfseCBzGXu4BwkN2kitPRXhYe5spNrWIHsSt4ST3lITLFVh8g8Pk7vHiCdkJERRE_eHRfPqx_p4AnGQTPxTH5TO8DI"
+        />
+      </div>
+
+      <h1 class="title-text">Hora de descansar</h1>
+
+      <button class="btn-continuar" [disabled]="!tiempoTerminado" (click)="onContinuar()">
+        <span class="material-symbols-outlined icon-btn">
+          {{ tiempoTerminado ? 'play_circle' : 'hourglass_empty' }}
+        </span>
+        <span class="text-btn">
+          {{ tiempoTerminado ? 'Continuar' : tiempoFormateado }}
+        </span>
+      </button>
+
+    </section>
+  </main>
+</div>

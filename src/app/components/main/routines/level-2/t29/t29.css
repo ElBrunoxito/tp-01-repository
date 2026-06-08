@@ -1,0 +1,356 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  display: block;
+}
+
+/* --- Base Layout 1080p Estricto Sin Scroll --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* --- Main Framework --- */
+.main-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 4rem 9rem 4rem;
+  box-sizing: border-box;
+}
+
+/* --- Barra de Progreso Superior (9/10) --- */
+.progress-container {
+  width: 100%;
+  max-width: 44rem;
+  background-color: #e2e2e2;
+  border: 4px solid #0f172a;
+  border-radius: 9999px;
+  height: 2.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  background-color: #42617d;
+  height: 100%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+.progress-text {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* --- Encabezado --- */
+.header-section {
+  text-align: center;
+}
+
+.instruction-title {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.instruction-subtitle {
+  font-size: 1.25rem;
+  color: #42474d;
+  margin: 0;
+}
+
+/* --- Zonas de Destino / Columnas --- */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  width: 100%;
+  max-width: 58rem;
+  box-sizing: border-box;
+}
+
+.category-column {
+  background-color: #f3f3f3; /* Fondo base claro */
+  border: 4px solid #0f172a;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #0f172a;
+}
+
+/* EL CUADRADO EN PLOMITO (Placeholder de destino solicitado) */
+.drop-zone-placeholder {
+  width: 100%;
+  max-width: 20rem;
+  height: 4.5rem;
+  background-color: #e2e2e2; /* Fondo plomito suave (surface-container-highest) */
+  border: 3px dashed #73777e; /* Borde discontinuo plomo */
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Texto subrayado dentro del recuadro plomito */
+.drop-text-underlined {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #42474d;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: lowercase;
+}
+
+.dropped-items-zone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* CONDICIÓN ❌ SI REPETIRÁ ERROR: Resalto visual TEACCH de la categoría correcta */
+.category-column.help-highlight {
+  border: 6px dashed #2563eb !important;
+  background-color: #eff6ff;
+}
+
+/* Tarjetas ya clasificadas */
+.classified-card {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 2px 2px 0px #0f172a;
+}
+
+.item-img-small {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.item-label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* --- Área del Objeto a Clasificar (Origen) --- */
+.source-container {
+  height: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.draggable-card {
+  background-color: #ffffff;
+  border: 4px solid #0f172a;
+  border-radius: 0.75rem;
+  padding: 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: grab;
+  box-shadow: 4px 4px 0px #0f172a;
+  box-sizing: border-box;
+}
+
+.draggable-card:active {
+  cursor: grabbing;
+}
+
+.item-img-large {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.card-label {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #0f172a;
+}
+
+.empty-source-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #49654c;
+}
+
+.done-all-icon {
+  font-size: 4rem;
+  font-variation-settings: 'FILL' 1;
+}
+
+.done-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0.5rem 0 0 0;
+}
+
+/* --- BARRA DE NAVEGACIÓN INFERIOR (Nav Fiel al Paso 2) --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 7rem;
+  background-color: #ffffff;
+  border-top: 2px solid #0f172a;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  z-index: 50;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.icon-nav {
+  font-size: 3.125rem;
+  color: #0f172a;
+}
+
+.label-nav {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+}
+
+/* Botón Siguiente Lado Izquierdo */
+.btn-siguiente {
+  border-right: 2px solid #0f172a;
+}
+
+.btn-next-disabled {
+  background-color: #f3f3f3;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+.btn-next-disabled .icon-nav,
+.btn-next-disabled .label-nav {
+  color: #a1a1a1;
+}
+
+.btn-next-active {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+.btn-next-active .icon-nav,
+.btn-next-active .label-nav {
+  color: #2563eb;
+}
+
+/* Botón Listo Lado Derecho (Verde Suave) */
+.btn-listo {
+  background-color: #cbebca;
+}
+
+.btn-listo:hover {
+  background-color: #afcfaf;
+}
+
+
+.bottom-nav {
+  height: 128px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  background-color: #ffffff;
+  padding: 0 16px 16px 16px;
+  gap: 16px;
+  border-top: 4px solid #0f172a;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.button-text {
+  font-weight: 900;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* Botón Destacado (Primario) */
+.btn-primary-style {
+  background-color: #dbeafe;
+  border: 4px solid #2563eb;
+  color: #2563eb;
+}
+.btn-primary-style:hover { background-color: #eff6ff; }
+.btn-primary-style:active { border-width: 6px !important; }
+
+/* Botón Plano (Secundario) */
+.btn-secondary-style {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  color: #0f172a;
+}
+.btn-secondary-style:hover { background-color: #f1f5f9; }
+.btn-secondary-style:active { border-width: 4px !important; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+.icon-large { font-size: 36px; }

@@ -1,0 +1,118 @@
+<div class="screen-wrapper">
+  <main class="canvas-container">
+    
+    <div class="instruction-header">
+      <h1 class="instruction-title">Une iguales</h1>
+      <p class="instruction-subtitle">Toca el dibujo que es igual al de la izquierda</p>
+    </div>
+
+    <div class="task-grid">
+      
+      <div class="target-column">
+        <div class="target-card">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYLFMT2kKEncwsIyNHAkP5m5RQ9e2Akz1EGV_-ZpoWPEsztbBzj_apjYrtvQkHh71rI9ffLkYAPoyJCaJ74pB-_1nGw1hSokAz2_hbQQe7CM1li3x5YJWqsJrrNwttDZq8AwzyeUYByuOiUvBXAwa2bVaKVobqFJ9RYVp3r3RvveY2fVq6UFp7hgZQpoKuIXjik6GaI4C_QnLBM3j9uWTBUkbzYlMr5UFZI9Qy1eq4JxYjCbe24-gihp5vFUQh17rY2UebWDy1OF0" alt="Muestra" class="image-content" />
+        </div>
+        <div class="target-badge">
+          <span class="badge-text">Principal</span>
+        </div>
+      </div>
+
+      <div class="options-column">
+        
+        <button 
+          class="option-button"
+          [ngClass]="{
+            'selected-active': opcionSeleccionada === 'manzana',
+            'help-highlight': mostrarAyudaCorrecta
+          }"
+          (click)="seleccionarOpcion('manzana')">
+          <div class="image-thumb-container">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC26dNpgqqhpwQCmvu2m3YMHC7w3ry47jOHjilGthsfxLRjgMRSTimXe8yMbA8N3eG4q5L6OG1fguJcYM2rOQ9BpzmvNGke_kHaNG1GRE_RVYtrG9CMjurqgg3r7QzXznD_WKJBNkv04x7_WKWkjvxGC6A9Twm9DRXMA75wXA0fIf04goXqKnwn_oH65vUzx7HLL1CbuyIPIaTNv_YaihO3YRH7YzeK9vKyf5u1CZKuz67sz611y2WFtwRtdYR9TaYP41B0-5d3sFw" alt="Manzana" class="image-thumb" />
+          </div>
+          <span class="option-label">Manzana</span>
+          <div class="radio-indicator">
+            <span class="material-symbols-outlined">
+              {{ (opcionSeleccionada === 'manzana' || mostrarAyudaCorrecta) ? 'radio_button_checked' : 'radio_button_unchecked' }}
+            </span>
+          </div>
+        </button>
+
+        <button 
+          class="option-button"
+          [class.selected-active]="opcionSeleccionada === 'platano'"
+          [class.disabled-opacity]="intentoExitoso"
+          (click)="seleccionarOpcion('platano')">
+          <div class="image-thumb-container">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ3lrVMCSTNKpo-jVuRexRXFfe45ihekKpykm1iO8MGn9OORSAApmWWjS7taMT59R2VXsACyjmKi7NT6DJePiL9gFFK4bcm8QHKokhepwxKoJ5NCrlUV9OmnyF9dxhmY_a5QyDEz-o7gyadKlxr53gW35YWJIt86cQP5lSoVa2TB5rhd9jMaDfgUbaFonWCsfuDSiywLq9qjkjUoojYq2ct5D3CQjFpoywWCMC5oK6BY3V6Ks7TEh2saPB5CuA3i15Pa8A6V7Q54c" alt="Plátano" class="image-thumb" />
+          </div>
+          <span class="option-label">Plátano</span>
+          <div class="radio-indicator">
+            <span class="material-symbols-outlined">
+              {{ opcionSeleccionada === 'platano' ? 'radio_button_checked' : 'radio_button_unchecked' }}
+            </span>
+          </div>
+        </button>
+
+        <button 
+          class="option-button"
+          [class.selected-active]="opcionSeleccionada === 'pelota'"
+          [class.disabled-opacity]="intentoExitoso"
+          (click)="seleccionarOpcion('pelota')">
+          <div class="image-thumb-container">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwE7PEjn31v6Lhrlxsd8RNpzBLbHpEv1VW6JYVlMfx_9EEmM3Pa_V_eaOBBlmDMdpB4hCAU-pAb20jZZSguWGmg2agI2YJ3VgR1cyOXQ182Y-StTqaAEa3fPcz3fPuwiK-fnng7TijwnzY8oz_LLKDHs85IErLTBEXmSUnSvr7UfIDVAbMlrBOmkQA9R4TWwVCK8ejdbooKL8qbSQEtxygE_AG9JTXRnEiu6fuKm5EwT57cxbK13t2A7NAoTI89Lkc3F_Z3thylV4" alt="Pelota" class="image-thumb" />
+          </div>
+          <span class="option-label">Pelota</span>
+          <div class="radio-indicator">
+            <span class="material-symbols-outlined">
+              {{ opcionSeleccionada === 'pelota' ? 'radio_button_checked' : 'radio_button_unchecked' }}
+            </span>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="feedback-area" [ngClass]="{'status-error': errores > 0 && !intentoExitoso, 'status-success': intentoExitoso}">
+      
+      @if (errores === 0 && !intentoExitoso) {
+        <p class="feedback-text">Selecciona la figura idéntica</p>
+      }
+
+      @if (errores === 1 && !intentoExitoso) {
+        <p class="feedback-text error-text">
+          <span class="material-symbols-outlined icon-inline">error</span> Intenta otra vez
+        </p>
+      }
+
+      @if (errores >= 2 && !intentoExitoso) {
+        <p class="feedback-text error-text">
+          <span class="material-symbols-outlined icon-inline">lightbulb</span> ¡Mira la opción resaltada en azul! Intenta otra vez
+        </p>
+      }
+
+      @if (intentoExitoso) {
+        <p class="feedback-text success-text">
+          <span class="material-symbols-outlined icon-inline">check_circle</span> ¡Excelente! Son iguales
+        </p>
+      }
+
+    </div>
+  </main>
+
+  <footer class="bottom-nav">
+    <button 
+      class="nav-button btn-secondary-style" 
+      (click)="onSiguiente()">
+      <span class="material-symbols-outlined icon-large">arrow_forward</span>
+      <span class="button-text">Siguiente</span>
+    </button>
+
+    <button 
+      class="nav-button" 
+      [ngClass]="intentoExitoso ? 'btn-primary-style' : 'btn-secondary-style'" 
+      (click)="onListo()">
+      <span class="material-symbols-outlined icon-large">done_all</span>
+      <span class="button-text">Listo</span>
+    </button>
+  </footer>
+</div>
