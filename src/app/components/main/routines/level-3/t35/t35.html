@@ -1,0 +1,62 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    
+    <div class="rest-card shadow-stroke" [ngClass]="{'rest-completed-card': isRestFinished}">
+      
+      <div class="image-viewport-high">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqDngJ5eIZ9IK9wDYV9T8QwKj-Msu2Uu26TBVZsGv7DQ7WiJZ07EIMJVU-7n9mxHOAS95Jmn8Y6W-yHLonNOUlpE7DVW8WagDJht_emIYevriXC3aGnfeR5I2BJPlmyUayLRhtHEOH5XU2zmtzoHL8ctbv8PbfKok66eYOEMKLgn_Yd8BRiznZ7bEtBe5gdOeFd0l1RI6wfz7BlDYJq8h49jVFd9wsl_oJUWBGkhT-hEwe2XGTNdYovkPH1Nicx-rjYmAWJPSUPRQ" alt="Niño Descansando" class="rest-image" />
+        
+        @if (isRestFinished) {
+          <div class="check-overlay-container">
+            <span class="material-symbols-outlined success-check-icon">check_circle</span>
+          </div>
+        }
+      </div>
+
+      <div class="card-details-panel">
+        <h1 class="rest-main-title" [ngClass]="{'success-text': isRestFinished}">
+          {{ headerText }}
+        </h1>
+
+        <div class="timer-container-wrapper">
+          <div class="timer-meta-data">
+            <span class="material-symbols-outlined timer-icon" [ngClass]="{'success-text': isRestFinished}">
+              {{ isRestFinished ? 'task_alt' : 'schedule' }}
+            </span>
+            <span class="timer-status-label" [ngClass]="{'success-text': isRestFinished}">
+              {{ statusText }}
+            </span>
+          </div>
+
+          <div class="horizontal-track">
+            <div 
+              class="track-fill-progress" 
+              [ngClass]="{'success-fill': isRestFinished}"
+              [style.width.%]="porcentajeProgreso">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="visual-schedule-footer">
+      <div class="schedule-step-item step-active">
+        <div class="step-icon-box">
+          <span class="material-symbols-outlined footer-icon">headphones</span>
+        </div>
+        <span class="step-lbl">Escuchar</span>
+      </div>
+      
+      <div class="schedule-divider-line"></div>
+      
+      <div class="schedule-step-item step-disabled">
+        <div class="step-icon-box">
+          <span class="material-symbols-outlined footer-icon">auto_stories</span>
+        </div>
+        <span class="step-lbl">Trabajar</span>
+      </div>
+    </div>
+
+  </main>
+</div>

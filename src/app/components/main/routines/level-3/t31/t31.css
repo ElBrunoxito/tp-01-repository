@@ -1,0 +1,116 @@
+:host {
+  --primary-container: #a7c7e7;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --error-border: #ba1a1a;
+  --error-bg-light: #ffdad6;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- CONTENEDOR GENERAL ADAPTADO A PANTALLAS 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* --- TARJETA --- */
+.task-card {
+  background: #ffffff;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.visual-container {
+  width: 260px;
+  height: 260px;
+  background-color: #cbebca;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.visual-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.greeting-title {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--slate-900);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+/* --- BOTÓN ESTÁNDAR --- */
+.action-button {
+  width: 100%;
+  max-width: 600px;
+  height: 70px;
+  background-color: var(--primary-container);
+  border: 3px solid var(--slate-900);
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--slate-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- CLASE DE RESALTADO AUTOMÁTICO (SE ACTIVA A LOS 10 SEGUNDOS) --- */
+.shake-highlight {
+  border-color: var(--error-border) !important;
+  animation: teacch-shake 0.6s ease-in-out, teacch-flash 1.5s infinite alternate;
+}
+
+/* Animación de vibración para capturar la atención */
+@keyframes teacch-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Parpadeo intermitente de color de fondo */
+@keyframes teacch-flash {
+  0% { background-color: var(--primary-container); }
+  100% { background-color: var(--error-bg-light); }
+}

@@ -1,0 +1,22 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    
+    <div class="task-card">
+      <div class="visual-wrapper">
+        <div class="visual-container">
+          <img [src]="imageSrc" [alt]="imageAlt" class="visual-image" />
+        </div>
+      </div>
+
+      <h1 class="greeting-title">Hola</h1>
+    </div>
+
+      <button 
+        class="action-button" 
+        [ngClass]="{'shake-highlight': isButtonShaking}"
+        (click)="onContinuar()">
+        <span class="button-text">Continuar</span>
+      </button>
+
+  </main>
+</div>

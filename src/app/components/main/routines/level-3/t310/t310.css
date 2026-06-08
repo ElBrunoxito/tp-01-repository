@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --bg-slate: #f8fafc;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  
+  /* Paleta cromática nativa TEACCH */
+  --teacch-green-bg: #cbebca;
+  --teacch-green-text: #06210d;
+  --teacch-yellow-glow: #e8e883;
+
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- LIENZO CONTROLADO EN FORMATO DE RELACIÓN ASPECTO 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-slate);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Distribución centralizada ocupando todo el alto libre sin nav inferior */
+.teacch-main-layout-fullscreen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.shadow-stroke {
+  border: 5px solid var(--slate-900); /* Bordes ligeramente más gruesos para el escalado */
+}
+
+/* --- TARJETA VISUAL CENTRAL MAXIMIZADA --- */
+.main-card-container-large {
+  background-color: var(--white);
+  border-radius: 36px;
+  width: 95%;
+  max-width: 520px; /* Incrementado para albergar elementos más grandes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 28px;
+  gap: 28px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* Caja de Imagen Optimizada a Gran Escala */
+.adios-image-box-large {
+  width: 220px; /* Aumentado sustancialmente */
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adios-img-large {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Insignia de Texto Expandida "MUY BIEN" */
+.feedback-badge-large {
+  background-color: var(--teacch-green-bg);
+  border-radius: 20px;
+  width: 100%;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.feedback-text-large {
+  font-size: clamp(2.2rem, 4vw, 3rem); /* Letra gigante y de altísima legibilidad */
+  font-weight: 900;
+  color: var(--teacch-green-text);
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+/* Botón Vertical Integrado "TERMINAR" */
+.terminar-btn-large {
+  background-color: #cbd5e1; /* Fondo base gris estructurado */
+  color: var(--slate-900);
+  width: 100%;
+  padding: 18px 0; /* Mayor área de clickeo táctil */
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 900;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-transform: uppercase;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.terminar-btn-large:active {
+  transform: scale(0.96);
+}
+
+.check-btn-icon-large {
+  font-size: 34px !important;
+  font-variation-settings: 'wght' 800;
+}
+
+/* =========================================================
+   ESTADO ADAPTATIVO SENSORIAL: BRILLO GIGANTE DE ALERTA (8s)
+   ========================================================= */
+.button-glow-large {
+  border-color: #cbcb6a !important;
+  background-color: var(--teacch-yellow-glow) !important;
+  animation: teacch-btn-pulse-large 1s infinite alternate !important;
+}
+
+@keyframes teacch-btn-pulse-large {
+  0% {
+    box-shadow: 0 0 6px rgba(232, 232, 131, 0.4);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 35px #e8e883;
+    transform: scale(1.04); /* Pulsación sutil para dirigir el foco ocular */
+  }
+}

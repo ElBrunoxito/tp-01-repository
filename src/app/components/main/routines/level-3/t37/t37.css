@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --primary: #42617d;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  --success-color: #49654c;
+  --success-bg: #e8f5e9;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- LIENZO CONTROLADO 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px calc(100vh * 0.05);
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+.shadow-stroke {
+  border: 3px solid var(--slate-900);
+}
+
+/* --- INDICADOR SUPERIOR --- */
+.progress-badge {
+  background-color: #cbebca;
+  border-radius: 12px;
+  padding: 4px 32px;
+}
+
+.badge-text {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  color: #06210d;
+}
+
+/* --- TITULO INSTRUCCIÓN --- */
+.instruction-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 900;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.success-text {
+  color: var(--success-color) !important;
+}
+
+/* --- TARJETA SENSORIAL CENTRAL --- */
+.sensory-interaction-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sensory-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--white);
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sensory-card:active {
+  transform: scale(0.96);
+}
+
+/* Estado de éxito congelado: Desactiva transiciones o cambios accidentales por Hover */
+.sensory-completed-card,
+.sensory-completed-card:hover {
+  background-color: var(--success-bg) !important;
+  border-color: var(--success-color) !important;
+  border-width: 4px !important;
+  transform: none !important;
+  cursor: default !important;
+}
+
+.sensory-viewport {
+  width: 100%;
+  height: 260px; /* Proporción ideal y alta para el estímulo táctil */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.sensory-image {
+  height: 85%;
+  width: 85%;
+  object-fit: contain;
+}
+
+/* --- GUIAS VISUALES / OVERLAYS --- */
+.touch-pulse-indicator {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: rgba(66, 97, 125, 0.15);
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: teacch-pulse-finger 1.4s infinite ease-in-out;
+}
+
+.finger-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+  font-size: 38px !important;
+  color: var(--primary);
+}
+
+@keyframes teacch-pulse-finger {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px rgba(66, 97, 125, 0.4); }
+}
+
+.success-overlay-sensory {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(73, 101, 76, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-check-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 700;
+  font-size: 90px !important;
+  color: var(--white);
+  background-color: var(--success-color);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  animation: teacch-pop-check 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes teacch-pop-check {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* --- FOOTER AGENDA --- */
+.visual-schedule-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2px;
+}
+
+.schedule-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-icon-box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.footer-icon {
+  font-size: 26px !important;
+}
+
+.step-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.step-active { color: var(--slate-900); }
+.step-disabled { opacity: 0.35; color: #94a3b8; }
+
+.schedule-divider-line {
+  width: 35px;
+  height: 3px;
+  background-color: var(--slate-900);
+  border-radius: 2px;
+}

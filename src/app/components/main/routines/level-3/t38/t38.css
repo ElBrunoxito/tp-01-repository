@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --primary: #42617d;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  --error-color: #ba1a1a;
+  --error-bg: #ffdad6;
+  --success-color: #49654c;
+  --success-bg: #e8f5e9;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- LIENZO CONTROLADO EN FORMATO DE RELACIÓN 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px calc(100vh * 0.05);
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.shadow-stroke {
+  border: 3px solid var(--slate-900);
+}
+
+/* --- MARCADORES Y TITULOS --- */
+.progress-badge {
+  background-color: #cbebca;
+  border-radius: 12px;
+  padding: 4px 32px;
+}
+
+.badge-text {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  color: #06210d;
+}
+
+.instruction-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 900;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.success-text {
+  color: var(--success-color) !important;
+}
+
+/* --- REJILLA DE ACTIVIDAD --- */
+.shapes-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+  width: 100%;
+  max-width: 720px;
+}
+
+.shape-card-btn {
+  aspect-ratio: 1.1 / 1;
+  background-color: var(--white);
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.1s ease;
+}
+
+.shape-graphic-viewport {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape-label-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--slate-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- VECTORIZADO LIMPIO DE FORMAS (CONTRALTO CONTRASTE) --- */
+.geometric-circle {
+  width: 120px;
+  height: 120px;
+  background-color: #ba1a1a; /* Rojo plano estructurado */
+  border-radius: 50%;
+  border: 4px solid var(--slate-900);
+}
+
+.geometric-triangle {
+  width: 0;
+  height: 0;
+  border-left: 65px solid transparent;
+  border-right: 65px solid transparent;
+  border-bottom: 120px solid #005faf; /* Azul plano estructurado */
+  position: relative;
+}
+
+/* =========================================================
+   ESTADOS CRÍTICOS TEACCH (BLOQUEO DE INTERACCIONES Y HOVER)
+   ========================================================= */
+
+/* 1. ERROR DETECTADO */
+.shape-wrong-error {
+  border-color: var(--error-color) !important;
+  border-width: 5px !important;
+  background-color: var(--error-bg) !important;
+  animation: teacch-shake-shapes 0.5s ease-in-out;
+}
+
+@keyframes teacch-shake-shapes {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* 2. REPETICIÓN: Resaltado Guía con Brillo Amarillo (Congela Hover) */
+.correct-glow,
+.correct-glow:hover {
+  border-color: #cbcb6a !important;
+  border-width: 5px !important;
+  animation: teacch-glow-shapes 1.2s infinite alternate !important;
+}
+
+@keyframes teacch-glow-shapes {
+  0% { box-shadow: 0 0 4px rgba(232, 232, 131, 0.3); background-color: var(--white); }
+  100% { box-shadow: 0 0 25px #e8e883; background-color: #fefeed; }
+}
+
+/* 3. SISTEMA MARCA ✔ / EXCELENTE MANUAL (Congela Hover) */
+.shape-correct-marked,
+.shape-correct-marked:hover {
+  border-color: var(--success-color) !important;
+  border-width: 5px !important;
+  background-color: var(--success-bg) !important;
+  cursor: default !important;
+  transform: none !important;
+}
+
+/* Icono Check circular */
+.check-icon-shapes {
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+  font-size: 48px !important;
+  color: var(--success-color);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--white);
+  border-radius: 50%;
+  animation: teacch-pop-check 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes teacch-pop-check {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* --- FOOTER AGENDA --- */
+.visual-schedule-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2px;
+}
+
+.schedule-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-icon-box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.footer-icon {
+  font-size: 26px !important;
+}
+
+.step-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.step-active { color: var(--slate-900); }
+.step-disabled { opacity: 0.35; color: #94a3b8; }
+
+.schedule-divider-line {
+  width: 35px;
+  height: 3px;
+  background-color: var(--slate-900);
+  border-radius: 2px;
+}

@@ -1,0 +1,50 @@
+<div class="teacch-container-169">
+
+
+  <main class="teacch-main">
+    
+    <div class="instruction-header">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSystemSolving}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="stimulus-area">
+      <div class="target-circle-color shadow-stroke"></div>
+    </div>
+
+    <div class="choices-grid">
+      
+      <button 
+        class="choice-btn target-red"
+        [ngClass]="{
+          'correct-marked': isSystemSolving,
+          'correct-glow': shouldCorrectOptionGlow
+        }"
+        [disabled]="isSystemSolving"
+        (click)="onSelectColor(true)">
+        <div class="icon-box-wrapper">
+          <span class="material-symbols-outlined inside-icon">palette</span>
+        </div>
+        <span class="color-label">Rojo</span>
+        
+        @if (isSystemSolving) {
+          <span class="material-symbols-outlined check-icon">check_circle</span>
+        }
+      </button>
+
+      <button 
+        class="choice-btn target-blue"
+        [ngClass]="{'wrong-error': hasFailed}"
+        [disabled]="isSystemSolving"
+        (click)="onSelectColor(false)">
+        <div class="icon-box-wrapper">
+          <span class="material-symbols-outlined inside-icon">format_paint</span>
+        </div>
+        <span class="color-label">Azul</span>
+      </button>
+
+    </div>
+
+  </main>
+</div>

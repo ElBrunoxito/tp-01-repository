@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --primary: #42617d;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  --error-color: #ba1a1a;
+  --success-color: #49654c;
+  --success-bg: #e8f5e9;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- LIENZO 16:9 CONTROLADO --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px calc(100vh * 0.05);
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.shadow-stroke {
+  border: 3px solid var(--slate-900);
+}
+
+.progress-badge {
+  background-color: #cbebca;
+  border-radius: 12px;
+  padding: 4px 32px;
+}
+
+.badge-text {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #06210d;
+}
+
+.instruction-title {
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  font-weight: 900;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.success-text { color: var(--success-color) !important; }
+
+/* --- GRID DE DISEÑO DEL JUEGO --- */
+.sequence-game-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  gap: 20px;
+}
+
+.top-options-bank, 
+.bottom-target-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+/* Bloques de Arriba (Opciones) */
+.sequence-block-card {
+  aspect-ratio: 1.2 / 1;
+  background-color: var(--white);
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  transition: transform 0.1s ease;
+}
+
+.sequence-block-card:active { transform: scale(0.96); }
+
+.block-placeholder-empty {
+  background-color: #f1f5f9;
+  border: 3px dotted #cbd5e1 !important;
+  cursor: default;
+}
+
+.block-render-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+/* Casilleros de Abajo (Destinos 1, 2, 3) */
+.target-drop-slot {
+  aspect-ratio: 1.2 / 1;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-style: dashed;
+  border-radius: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.slot-position-number {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: var(--slate-900);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 13px;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-add-icon { font-size: 44px !important; color: #cbd5e1; }
+
+/* =========================================================
+   ESTADOS DE CONTROL COGNITIVO TEACCH (CONGELADO TOTAL HOVER)
+   ========================================================= */
+
+/* 1. SI FALLA: El objeto regresa/tiembla arriba simulando el rebote */
+.bounce-back-error {
+  animation: teacch-shake-back 0.45s ease-in-out;
+  border-color: var(--error-color) !important;
+  background-color: #ffdad6 !important;
+}
+
+@keyframes teacch-shake-back {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* 2. SI REPETE: Resalta la posición correcta de abajo con brillo de neón (Bloquea Hover) */
+.target-glow {
+  border-color: #cbcb6a !important;
+  border-style: solid !important;
+  border-width: 4px !important;
+  animation: teacch-neon-glow 1.2s infinite alternate;
+}
+
+@keyframes teacch-neon-glow {
+  0% { box-shadow: 0 0 4px rgba(232, 232, 131, 0.2); background-color: rgba(255,255,255,0.5); }
+  100% { box-shadow: 0 0 22px #e8e883; background-color: #fefeed; }
+}
+
+/* 3. CASILLERO OCUPADO CORRECTAMENTE */
+.slot-filled-ok {
+  background-color: var(--white) !important;
+  border-style: solid !important;
+}
+
+.slot-all-finished {
+  border-color: var(--success-color) !important;
+  border-width: 4px !important;
+  background-color: var(--success-bg) !important;
+}
+
+.check-icon-slot {
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+  font-size: 36px !important;
+  color: var(--success-color);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--white);
+  border-radius: 50%;
+}
+
+.pop-animation {
+  animation: teacch-pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes teacch-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- FOOTER AGENDA --- */
+.visual-schedule-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.schedule-step-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.step-icon-box {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+.footer-icon { font-size: 24px !important; }
+.step-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.step-active { color: var(--slate-900); }
+.step-disabled { opacity: 0.35; color: #94a3b8; }
+.schedule-divider-line { width: 30px; height: 3px; background-color: var(--slate-900); }

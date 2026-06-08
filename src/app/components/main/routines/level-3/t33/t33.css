@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --primary: #42617d;
+  --primary-container: #a7c7e7;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  --error-color: #ba1a1a;
+  --success-color: #49654c;
+  --glow-color: #e8e883;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- ADAPTACIÓN FIJA AL LIENZO 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px calc(100vh * 0.05);
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* --- ENCABEZADO --- */
+.instruction-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.instruction-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.success-text {
+  color: var(--success-color) !important;
+}
+
+/* --- CONTENEDORES DE JUEGO --- */
+.activity-container {
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.target-card {
+  width: 200px;
+  height: 200px;
+  background-color: var(--white);
+  border: 2px solid var(--slate-900);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+/* --- BOTONES DE OPCIONES --- */
+.option-btn {
+  aspect-ratio: 1 / 1;
+  background-color: var(--white);
+  border: 2px solid var(--slate-900);
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.1s ease;
+}
+
+.option-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inside-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+/* =========================================================
+   ESTADOS DINÁMICOS CON CONDICIONALES TEACCH
+   ========================================================= */
+
+/* CONDICIÓN 1: Borde Rojo al Fallar el primer intento */
+.wrong-error {
+  border-color: var(--error-color) !important;
+  border-width: 5px !important;
+  background-color: #ffdad6 !important;
+  animation: teacch-shake-wrong 0.5s ease-in-out;
+}
+
+@keyframes teacch-shake-wrong {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* CONDICIÓN 2: Brillo de la Opción Correcta si repite el fallo */
+.correct-glow {
+  border-color: #cbcb6a !important;
+  border-width: 5px !important;
+  animation: teacch-neon-glow 1.2s infinite alternate !important;
+}
+
+@keyframes teacch-neon-glow {
+  0% { 
+    box-shadow: 0 0 4px rgba(232, 232, 131, 0.3); 
+    background-color: var(--white);
+  }
+  100% { 
+    box-shadow: 0 0 25px #e8e883; 
+    background-color: #fefeed;
+  }
+}
+
+/* CONDICIÓN 3: El sistema resuelve por inactividad (Marca Check ✔) */
+.correct-marked {
+  border-color: var(--success-color) !important;
+  border-width: 5px !important;
+  background-color: #e8f5e9 !important;
+}
+
+.check-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+  font-size: 50px !important;
+  color: var(--success-color);
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  animation: teacch-pop-check 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes teacch-pop-check {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}

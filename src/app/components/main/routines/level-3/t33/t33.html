@@ -1,0 +1,48 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    
+    <div class="instruction-header">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSystemSolving}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="activity-container">
+      
+      <div class="target-card">
+        <img src="{{ URL_PERRO }}" alt="Perro Objetivo" class="inside-image" />
+      </div>
+
+      <div class="options-grid">
+        
+        <button 
+          class="option-btn"
+          [ngClass]="{
+            'correct-marked': isSystemSolving,
+            'correct-glow': shouldCorrectOptionGlow
+          }"
+          [disabled]="isSystemSolving"
+          (click)="onSelectOption(true)">
+          <div class="image-wrapper">
+            <img src="{{ URL_PERRO }}" alt="Perro Opción" class="inside-image" />
+          </div>
+          @if (isSystemSolving) {
+            <span class="material-symbols-outlined check-icon">check_circle</span>
+          }
+        </button>
+
+        <button 
+          class="option-btn"
+          [ngClass]="{'wrong-error': hasFailed}"
+          [disabled]="isSystemSolving"
+          (click)="onSelectOption(false)">
+          <div class="image-wrapper">
+            <img src="{{ URL_GATO }}" alt="Gato Opción" class="inside-image" />
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+</div>

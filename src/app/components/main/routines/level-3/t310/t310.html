@@ -1,0 +1,26 @@
+<div class="teacch-container-169">
+  <main class="teacch-main-layout-fullscreen">
+    
+    <div class="main-card-container-large shadow-stroke">
+      
+      <div class="adios-image-box-large">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMA0Qh-yQRGN952EQTHLLWHFKOjUdyZYwE4QcUC4e8QeZ9NCHWyV3jUz_-1TUt6Np6dm0INlwWbYY2qkb88lPxFMEX4ATRjPBnDpY85Us5ECQ7s_sp_JTbqlQYMYAtiVTrWTLaXMPUkcbJXC_QX1ji0Nf8vyBHkXlcxFx8sg5nYmFVaJNfae2-NwgJ1gMpDhOauuXNYp5pzrWHoTEcRDtrxsnBGjMOyFLwUvL1XLlewWVJy-us6_YOYxnpJ0mUZAdQOyhh-6Hb4gI" alt="Adiós" class="adios-img-large" />
+      </div>
+
+      <div class="feedback-badge-large shadow-stroke">
+        <h1 class="feedback-text-large">MUY BIEN</h1>
+      </div>
+
+      <button 
+        class="terminar-btn-large shadow-stroke"
+        [ngClass]="{'button-glow-large': shouldButtonGlow}"
+        [disabled]="isActionLocked"
+        (click)="onPressTerminar()">
+        <span class="material-symbols-outlined check-btn-icon-large">task_alt</span>
+        <span class="btn-label-text-large">TERMINAR</span>
+      </button>
+
+    </div>
+
+  </main>
+</div>

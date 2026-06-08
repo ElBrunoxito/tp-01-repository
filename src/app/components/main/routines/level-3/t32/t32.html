@@ -1,0 +1,44 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    
+    <div class="agenda-grid">
+      <div class="agenda-item active-column">
+        <div class="icon-card" [ngClass]="isFirstStepHighlighted ? 'primary-box' : 'white-box'">
+          <span class="material-symbols-outlined giant-icon">edit_note</span>
+        </div>
+        <span class="item-label">Trabajar</span>
+      </div>
+
+      <div class="agenda-item opaque-column">
+        <div class="icon-card white-box">
+          <span class="material-symbols-outlined giant-icon">weekend</span>
+        </div>
+        <span class="item-label">Descansar</span>
+      </div>
+
+      <div class="agenda-item opaque-column">
+        <div class="icon-card white-box">
+          <span class="material-symbols-outlined giant-icon">flag</span>
+        </div>
+        <span class="item-label">Terminar</span>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h1 class="greeting-title">Vamos</h1>
+    </div>
+
+    @if (true) {
+      <button 
+        class="action-button" 
+        [ngClass]="{'button-shake-highlight': isButtonShaking}" 
+        (click)="onContinuar()">
+        <span class="button-content">
+          Continuar
+          <span class="material-symbols-outlined arrow-icon">arrow_forward</span>
+        </span>
+      </button>
+    }
+
+  </main>
+</div>

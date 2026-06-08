@@ -1,0 +1,58 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+
+    <div class="instruction-header">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSystemSolving}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="sequence-game-layout">
+      
+      <div class="top-options-bank">
+        @for (bloque of bloquesArriba; track $index) {
+          
+          @if (bloque !== null) {
+            <button 
+              class="sequence-block-card shadow-stroke"
+              [ngClass]="{'bounce-back-error': idBloqueErroneo === bloque.id}"
+              [disabled]="isSystemSolving"
+              (click)="onSeleccionarBloque(bloque, $index)">
+              <img [src]="bloque.imgUrl" [alt]="bloque.alt" class="block-render-img" />
+            </button>
+          } @else {
+            <div class="sequence-block-card shadow-stroke block-placeholder-empty"></div>
+          }
+
+        }
+      </div>
+
+      <div class="bottom-target-slots">
+        @for (slotAbajo of espaciosAbajo; track $index) {
+          
+          <div 
+            class="target-drop-slot shadow-stroke"
+            [ngClass]="{
+              'slot-filled-ok': slotAbajo !== null,
+              'target-glow': indiceResaltadoGlow === $index,
+              'slot-all-finished': isSystemSolving
+            }">
+            
+            <div class="slot-position-number">{{ $index + 1 }}</div>
+
+            @if (slotAbajo !== null) {
+              <img [src]="slotAbajo.imgUrl" [alt]="slotAbajo.alt" class="block-render-img pop-animation" />
+              
+              <span class="material-symbols-outlined check-icon-slot">check_circle</span>
+            } @else {
+              <span class="material-symbols-outlined slot-add-icon">add</span>
+            }
+          </div>
+
+        }
+      </div>
+
+    </div>
+
+  </main>
+</div>

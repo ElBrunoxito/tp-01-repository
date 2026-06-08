@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:host {
+  --primary: #42617d;
+  --background: #f9f9f9;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+  --success-color: #49654c;
+  --success-bg: #e8f5e9;
+  --font-family: 'Lexend', sans-serif;
+}
+
+/* --- LIENZO FIJO 16:9 --- */
+.teacch-container-169 {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  font-family: var(--font-family);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.teacch-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px calc(100vh * 0.05);
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.shadow-stroke {
+  border: 3px solid var(--slate-900);
+}
+
+.progress-badge {
+  background-color: #cbebca;
+  border-radius: 12px;
+  padding: 6px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-text {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  color: #06210d;
+}
+
+/* --- TARJETA DE DESCANSO --- */
+.rest-card {
+  width: 100%;
+  max-width: 680px;
+  background-color: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.rest-completed-card,
+.rest-completed-card:hover {
+  background-color: var(--success-bg) !important;
+  border-color: var(--success-color) !important;
+  border-width: 4px !important;
+}
+
+.image-viewport-high {
+  width: 100%;
+  height: 250px; 
+  background-color: #eeeeee;
+  position: relative;
+  overflow: hidden;
+}
+
+.rest-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.check-overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(73, 101, 76, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-check-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 700;
+  font-size: 95px !important;
+  color: var(--white);
+  background-color: var(--success-color);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* --- PANEL DE DETALLES --- */
+.card-details-panel {
+  padding: 16px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rest-main-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 900;
+  color: var(--slate-900);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.timer-container-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timer-meta-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.timer-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 500;
+  font-size: 26px !important;
+  color: var(--slate-900);
+}
+
+.timer-status-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.success-text {
+  color: var(--success-color) !important;
+}
+
+/* --- RIEL DE LA BARRA DE PROGRESO --- */
+.horizontal-track {
+  width: 100%;
+  height: 24px;
+  background-color: #e2e2e2;
+  border: 2px solid var(--slate-900);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.track-fill-progress {
+  height: 100%;
+  background-color: var(--primary);
+  border-right: 2px solid var(--slate-900);
+  width: 0%;
+  transition: width 1s linear; 
+}
+
+/* Forzado estricto al rellenar completamente */
+.success-fill {
+  background-color: var(--success-color) !important;
+  border-right: none !important;
+  width: 100% !important; 
+}
+
+/* --- FOOTER AGENDA --- */
+.visual-schedule-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.schedule-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-icon-box {
+  width: 55px;
+  height: 55px;
+  border: 2px solid var(--slate-900);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.footer-icon {
+  font-size: 28px !important;
+}
+
+.step-lbl {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.step-active { color: var(--slate-900); }
+.step-disabled { opacity: 0.35; color: #94a3b8; }
+
+.schedule-divider-line {
+  width: 40px;
+  height: 3px;
+  background-color: var(--slate-900);
+  border-radius: 2px;
+}

@@ -1,0 +1,48 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+
+    <div class="instruction-header">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSystemSolving}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="shapes-activity-grid">
+      
+      <button 
+        class="shape-card-btn shadow-stroke"
+        [ngClass]="{
+          'shape-correct-marked': isSystemSolving,
+          'correct-glow': shouldCorrectOptionGlow
+        }"
+        [disabled]="isSystemSolving"
+        (click)="onSelectForm(true)">
+        
+        <div class="shape-graphic-viewport">
+          <div class="geometric-circle"></div>
+        </div>
+        
+        <span class="shape-label-text">Círculo</span>
+
+        @if (isSystemSolving) {
+          <span class="material-symbols-outlined check-icon-shapes">check_circle</span>
+        }
+      </button>
+
+      <button 
+        class="shape-card-btn shadow-stroke"
+        [ngClass]="{'shape-wrong-error': hasFailed}"
+        [disabled]="isSystemSolving"
+        (click)="onSelectForm(false)">
+        
+        <div class="shape-graphic-viewport">
+          <div class="geometric-triangle"></div>
+        </div>
+        
+        <span class="shape-label-text">Triángulo</span>
+      </button>
+
+    </div>
+
+  </main>
+</div>

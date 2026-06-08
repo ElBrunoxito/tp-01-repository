@@ -1,0 +1,48 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    
+    <div class="instruction-header">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSystemSolving}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="activity-container">
+      
+      <div class="target-card">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2YWmGr31zSvxxvNGf4Gs9Re0KqiAppFATUcAcJKfgPNaWWOEnScR77ui568V0L6vjHtkvjeVocRQi0uTUlZ8ZM2YA5E4mDv-Oc_tQFdwx3Gow84WKl2z_3uiLAUk-6GhoVqsSjxt6olduFRLvm_gfW3hTamdgHRmPo60YRDQSCfWEGONOwiyP7kaZjG2uXOwqB0iGv8PsVflz2l02Ws_IYtakWcOTIQj47r_bexQm5oBiGpUuR83kz9oOdEFEjkXN9MylZN8tmCk" alt="Objeto Objetivo" class="inside-image" />
+      </div>
+
+      <div class="options-grid">
+        
+        <button 
+          class="option-btn"
+          [ngClass]="{
+            'correct-marked': isSystemSolving,
+            'correct-glow': shouldCorrectOptionGlow
+          }"
+          [disabled]="isSystemSolving"
+          (click)="onSelectOption(true)">
+          <div class="image-wrapper">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoDokQwSv9TfJTpNdqWilK_zbgfNxK8Pt32A2fNFjqSJv6N5TkejPHLLmj_KcI1CwYvP4JuJvMoBpQ_FLUEEwLJS9Bw3GpYHAlIQ1T3B-F4RleoRP7QeZXQ6JAObAxiurtEkIu3qiXT6laX3Zn02WbLlhIfsH9yQZ2RoL2RMFbYJR9ywXtr6sKXScIgUvx8IXJYoMI6HUAIwD5xVk2murUyQeSCeqzknlvZ-yISgZeYHNAAHKUUFPmoy0Xw0rfpxckW_FQIZg1VT8" alt="Opción Correcta" class="inside-image" />
+          </div>
+          @if (isSystemSolving) {
+            <span class="material-symbols-outlined check-icon">check_circle</span>
+          }
+        </button>
+
+        <button 
+          class="option-btn"
+          [ngClass]="{'wrong-error': hasFailed}"
+          [disabled]="isSystemSolving"
+          (click)="onSelectOption(false)">
+          <div class="image-wrapper">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhJjEXck8ejZ6tQ2HkE6Z5kKmP3Pw3FsCHdzoE5RUiPpQlu6hV1fWJrcY62P9Uoj3KW1N16xt5AZIUg-1eAG6nzKXOaIR2g5p0XqXqC2-FyMabpehLp9jsdaEd_tgucf-4ni5LSfl70EKfUtOpHOg9eFTVciB7xALHOrPfaLwkD17BLkPwAcEDDSvzqua7fJsWBqkj1TnU5x96HktM_lO8lDPrNF4631XP_F2alFQjWRhMbN4_-PrJpZLTKPnwKUozcon2QtpdDRA" alt="Opción Incorrecta" class="inside-image" />
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+</div>

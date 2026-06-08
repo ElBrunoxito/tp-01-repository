@@ -1,0 +1,37 @@
+<div class="teacch-container-169">
+  <main class="teacch-main">
+    <div class="instruction-header-sensory">
+      <h1 class="instruction-title" [ngClass]="{'success-text': isSensoryTouched}">
+        {{ instructionText }}
+      </h1>
+    </div>
+
+    <div class="sensory-interaction-area">
+      
+      <button 
+        class="sensory-card shadow-stroke"
+        [ngClass]="{'sensory-completed-card': isSensoryTouched}"
+        [disabled]="isSensoryTouched"
+        (click)="onTouchSensoryObject()">
+        
+        <div class="sensory-viewport">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj8MvD8LYwbdS9i4O0t0_QI3vNlTq1hQJrRIt21Z2VoTxYLHbwhThlPDT3g2sGu0ghRGv0J3y7K4CTkVUDR7BmI6tXsgzQ82d1siF2ZZzpBTknZVadx1qBd72nVfy-W6F5NTCZTnE8A-tckWrCALNT-X2h9GAy8XPbLQjbUBKgqCmbU0_iN9kXkNCE9y93Z07aYBUD2naiSDtmI0_7-j9kaziFEyKiyj1xQtZdLPzLh0YHn4y_xcpO3LD5bi8s4NeZqYcQEYWvvkA" alt="Pelota Sensorial Tactil" class="sensory-image" />
+          
+          @if (!isSensoryTouched) {
+            <div class="touch-pulse-indicator">
+              <span class="material-symbols-outlined finger-icon">touch_app</span>
+            </div>
+          }
+
+          @if (isSensoryTouched) {
+            <div class="success-overlay-sensory">
+              <span class="material-symbols-outlined success-check-icon">check_circle</span>
+            </div>
+          }
+        </div>
+
+      </button>
+
+    </div>
+  </main>
+</div>
