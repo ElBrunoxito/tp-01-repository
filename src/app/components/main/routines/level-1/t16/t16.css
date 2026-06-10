@@ -1,0 +1,350 @@
+/* --- RESETEO COMPLETO Y CONTROL ANTISCROLL --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONTENEDOR ANCLADO AL CRISTAL DE LA PANTALLA --- */
+.teacch-screen-wrapper {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  background-color: #f9f9f9;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding-bottom: 96px; /* Protege el espacio físico de la navbar */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- TRACKER DE PROGRESO SUPERIOR --- */
+.progress-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px 32px 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 28px;
+  background-color: #eeeeee;
+  border: 2px solid #1a1c1c;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #42617d;
+  border-right: 2px solid #1a1c1c;
+  width: 60%; /* Equivale a la pantalla 6/10 */
+}
+
+.progress-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1c1c;
+}
+
+/* --- CANVAS CENTRAL FLEXIBLE --- */
+.canvas-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* --- ENCABEZADO DE INSTRUCCIÓN --- */
+.instruction-header {
+  background-color: #ffffff;
+  border: 2px solid #1a1c1c;
+  padding: 16px;
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.main-title {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  color: #1a1c1c;
+}
+
+.feedback-message {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.error-text { color: #ba1a1a; }
+.success-text { color: #49654c; }
+
+/* --- COMPONENTE DEL PATRÓN CENTRAL --- */
+.exercise-card {
+  background-color: #ffffff;
+  border: 2px solid #1a1c1c;
+  padding: 24px;
+  border-radius: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+
+.pattern-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Formas Geométricas Puras */
+.shape {
+  width: 96px;
+  height: 96px;
+  border: 2px solid #1a1c1c;
+  flex-shrink: 0;
+}
+
+.circle-red {
+  background-color: #ba1a1a;
+  border-radius: 50%;
+}
+
+.square-blue {
+  background-color: #42617d;
+  border-radius: 8px;
+}
+
+/* Casillero Destino Vacío */
+.target-slot {
+  width: 96px;
+  height: 96px;
+  border: 4px dashed #73777e;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f3f3;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.target-slot.slot-filled {
+  border: 4px solid #42617d;
+  background-color: rgba(167, 199, 231, 0.2);
+}
+
+.shape-inner {
+  width: 80%;
+  height: 80%;
+  border: 2px solid #1a1c1c;
+}
+
+.square-blue-inner {
+  background-color: #42617d;
+  border-radius: 6px;
+}
+
+.help-icon {
+  font-size: 48px !important;
+  color: #73777e;
+}
+
+/* Soporte Visual Inferior (Pictogramas de Apoyo) */
+.visual-support-box {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  border: 2px solid #1a1c1c;
+  background-color: rgba(167, 199, 231, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+}
+
+.support-flex {
+  display: flex;
+  gap: 16px;
+}
+
+.support-icon {
+  font-size: 60px !important;
+}
+
+.icon-red { color: #ba1a1a; }
+.icon-blue { color: #42617d; }
+.icon-disabled { color: #c2c7ce; }
+
+/* --- BENTO GRID DE RESPUESTAS (MÁXIMO 20% ALTO DE PANTALLA) --- */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-height: 20vh;
+  flex-shrink: 0;
+}
+
+.option-button {
+  height: 88px;
+  background-color: #ffffff;
+  border: 2px solid #1a1c1c;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 75ms ease-in-out;
+}
+
+.option-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.option-selected {
+  border: 5px solid #42617d !important;
+  background-color: #a7c7e7 !important;
+}
+
+/* ✨ PISTA VISUAL POR ERROR REPETIDO (Resalta la opción correcta) */
+.option-button.force-highlight {
+  border: 5px solid #ba1a1a !important;
+  background-color: #ffdad6 !important;
+  animation: pulse-correct-option 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-correct-option {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Renderización Interna de Figuras del Bento Grid */
+.shape-item {
+  width: 56px;
+  height: 56px;
+  border: 2px solid #1a1c1c;
+}
+
+.item-rhombus {
+  background-color: #616207;
+  transform: rotate(45deg);
+  width: 42px; /* Reducido para que quepa bien rotado */
+  height: 42px;
+}
+
+.item-square {
+  background-color: #42617d;
+  border-radius: 8px;
+}
+
+.item-circle-red {
+  background-color: #ba1a1a;
+  border-radius: 50%;
+}
+
+.item-circle-green {
+  background-color: #49654c;
+  border-radius: 50%;
+}
+
+/* --- BARRA DE ACCIÓN INFERIOR NAV --- */
+.action-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border-top: 4px solid #1a1c1c;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+.nav-button-inactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #1a1c1c;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.btn-ready-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 40px;
+  background-color: #cbebca;
+  color: #06210d;
+  border-radius: 12px;
+  border: 4px solid #324d35;
+  cursor: pointer;
+  transition: transform 75ms;
+}
+
+.btn-ready-action:active {
+  transform: scale(0.97);
+}
+
+.nav-check-icon {
+  font-size: 28px !important;
+  font-variation-settings: 'FILL' 1;
+}
+
+.btn-ready-text {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Ocultar soporte visual en pantallas extremadamente pequeñas para salvar el layout */
+@media (max-height: 600px) {
+  .visual-support-box {
+    display: none;
+  }
+}

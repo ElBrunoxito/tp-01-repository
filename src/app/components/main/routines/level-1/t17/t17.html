@@ -1,0 +1,71 @@
+<div class="teacch-screen-wrapper">
+  
+  <div class="progress-container">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <span class="progress-text">7 / 10</span>
+  </div>
+
+  <main class="canvas-container">
+    
+    <div class="instruction-header">
+      <h1 class="main-title">¿Qué es?</h1>
+      
+      @if (mensajeFeedback) {
+        <p class="feedback-message" [ngClass]="{'error-text': mensajeFeedback === 'Intenta otra vez', 'success-text': mensajeFeedback === '¡Bien! ⭐'}">
+          {{ mensajeFeedback }}
+        </p>
+      }
+    </div>
+
+    <div class="exercise-card">
+      
+      <div class="pictogram-box">
+        <span class="material-symbols-outlined apple-pictogram">nutrition</span>
+      </div>
+
+      <div class="word-target-zone" [ngClass]="{'zone-filled': opcionSeleccionadaId !== null}">
+        @if (opcionSeleccionadaId === 'manzana' || mostrarSolucionAsistida) {
+          <span class="target-text-value">Manzana</span>
+        } @else {
+          <span class="material-symbols-outlined help-icon">help</span>
+        }
+      </div>
+
+    </div>
+
+    <div class="options-grid">
+      @for (opcion of opcionesLectura; track opcion.id) {
+        <button 
+          (click)="evaluarRespuesta(opcion.id)"
+          [disabled]="bloquearInteraccion"
+          class="option-text-button"
+          [ngClass]="{
+            'option-selected': opcionSeleccionadaId === opcion.id,
+            'force-highlight': activarPistaVisual && opcion.esCorrecta
+          }">
+          {{ opcion.texto }}
+        </button>
+      }
+    </div>
+
+  </main>
+</div>
+
+<nav class="action-navbar">
+  <button class="nav-button-inactive" disabled>
+    <span class="material-symbols-outlined">looks_one</span>
+    <span class="nav-label">Primero</span>
+  </button>
+
+  <button class="btn-ready-action" (click)="presionarBotonListo()">
+    <span class="material-symbols-outlined nav-check-icon">fast_forward</span>
+    <span class="btn-ready-text">Luego</span>
+  </button>
+
+  <button class="nav-button-inactive" disabled>
+    <span class="material-symbols-outlined">looks_two</span>
+    <span class="nav-label">Después</span>
+  </button>
+</nav>

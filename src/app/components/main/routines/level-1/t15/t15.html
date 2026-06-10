@@ -1,0 +1,78 @@
+<div class="teacch-screen-wrapper">
+  
+  <main class="canvas-container">
+    <div class="question-header">
+      <h1 class="main-title">Ordena los pasos</h1>
+      
+      @if (mensajeFeedback) {
+        <p class="feedback-message" [ngClass]="{'error-text': mensajeFeedback === 'Intenta otra vez', 'success-text': mensajeFeedback === '¡Bien! ⭐'}">
+          {{ mensajeFeedback }}
+        </p>
+      }
+    </div>
+
+    <div class="slots-grid">
+      @for (slot of slotsDestino; track $index) {
+        <div class="slot-dropzone"
+          [ngClass]="{
+            'slot-occupied': slot.pasoContenido !== null,
+            'force-highlight': resaltarSlotCorrecto === $index
+          }"
+          (click)="retirarPasoDelSlot($index)">
+          <span class="slot-number">{{ $index + 1 }}</span>
+          
+          @if (slot.pasoContenido) {
+            <div class="slot-inner-content">
+              <span class="slot-label">{{ slot.pasoContenido.titulo }}</span>
+            </div>
+          } @else {
+            <div class="slot-placeholder">
+              <span class="material-symbols-outlined placeholder-icon">add_circle</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="structural-divider"></div>
+
+    <div class="steps-grid">
+      @for (paso of pasosOrigen; track paso.id) {
+        <button class="step-card"
+          [disabled]="paso.colocado"
+          [ngClass]="{
+            'step-placed-hidden': paso.colocado,
+            'step-selected-active': pasoSeleccionadoId === paso.id
+          }"
+          (click)="seleccionarPasoOrigen(paso.id)">
+          
+          <div class="image-wrapper">
+            @if (paso.id === 'enjuagar') { <span class="material-symbols-outlined pictogram">water_drop</span> }
+            @if (paso.id === 'pasta') { <span class="material-symbols-outlined pictogram">brush</span> }
+            @if (paso.id === 'cepillar') { <span class="material-symbols-outlined pictogram">clean_hands</span> }
+            @if (paso.id === 'limpiar') { <span class="material-symbols-outlined pictogram">soap</span> }
+          </div>
+          <p class="step-title">{{ paso.titulo }}</p>
+        </button>
+      }
+    </div>
+  </main>
+
+</div>
+
+<nav class="action-navbar">
+  <button class="nav-button-inactive">
+    <span class="material-symbols-outlined">assignment</span>
+    <span class="nav-label">Tareas</span>
+  </button>
+
+  <button class="btn-ready-action" (click)="validarSecuenciaCompleta()">
+    <span class="material-symbols-outlined nav-check-icon">check_circle</span>
+    <span class="btn-ready-text">Listo</span>
+  </button>
+
+  <button class="nav-button-inactive">
+    <span class="material-symbols-outlined">settings</span>
+    <span class="nav-label">Ajustes</span>
+  </button>
+</nav>

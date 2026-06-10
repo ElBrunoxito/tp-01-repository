@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap');
+
+.saludo-component-box {
+  font-family: 'Lexend', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- TARJETA DE ACTIVIDAD --- */
+.saludo-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 460px;
+  padding: 32px 24px;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.image-wrapper {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin: 0 auto 24px auto;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+.teacch-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-content {
+  margin-bottom: 24px;
+}
+
+.heading-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.subheading-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+/* --- BOTÓN EMPEZAR (Azul exacto de la interfaz) --- */
+.btn-empezar {
+  font-family: 'Lexend', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  background-color: #42617d;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  width: 100%;
+  max-width: 240px;
+}
+
+.icon-play {
+  font-size: 12px;
+}
+
+.btn-text {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-empezar:active {
+  transform: translateY(2px);
+}
+
+/* ❌ ALERTA DE RESTRICCIÓN: Cambio a rojo y vibración por omisión */
+.btn-empezar.highlight-alert-danger {
+  background-color: #ef4444 !important;
+  animation: visualShakeAlert 0.4s infinite ease-in-out;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.35);
+}
+
+/* --- CUADROS DE NAVEGACIÓN / SECUENCIA INFERIOR --- */
+.sequence-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.sequence-card {
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  width: 120px;
+  padding: 20px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+/* Bloque activo: "PRIMERO" */
+.sequence-card.active {
+  background-color: #d8f1e6; /* Verde pastel de la maqueta */
+  border-color: #bee3d3;
+}
+
+/* Bloque inactivo: "DESPUÉS" */
+.sequence-card.inactive {
+  background-color: #f1f5f9;
+}
+
+.sequence-emoji {
+  font-size: 26px;
+  margin-bottom: 2px;
+}
+
+.tag-status {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.tag-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.sequence-divider {
+  font-size: 22px;
+  color: #cbd5e1;
+  font-weight: bold;
+}
+
+/* --- DETALLES DE APOYO COGNITIVO --- */
+.teacch-helper-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fef08a;
+  border: 2px dashed #eab308;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 340px;
+  box-sizing: border-box;
+}
+
+.teacch-helper-bubble p {
+  font-size: 13px;
+  font-weight: 700;
+  color: #713f12;
+  margin: 0;
+}
+
+.helper-finger {
+  font-size: 18px;
+  animation: handBounce 0.6s infinite alternate;
+}
+
+.btn-simulate-fail {
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-simulate-fail:hover {
+  color: #64748b;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes visualShakeAlert {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+@keyframes handBounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}

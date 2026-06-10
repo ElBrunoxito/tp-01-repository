@@ -32,7 +32,7 @@ export class Dashboard implements OnInit, AfterViewInit {
 
     this.nameChild = 'Salazar Garcia';
     this.ageChild = 6;
-    this.levelChild = 2;
+    this.levelChild = 1;
     
     this.social = 68;
     this.communication = 72;

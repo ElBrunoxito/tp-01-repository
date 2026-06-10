@@ -1,0 +1,279 @@
+/* --- RESETEO E INHIBICIÓN DE SCROLL --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONTENEDOR ANCLADO AL CRISTAL DE LA PANTALLA --- */
+.teacch-screen-wrapper {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  background-color: #f9f9f9;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding-bottom: 96px; /* Despeja el espacio físico de la navbar */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- TRACKER DE PROGRESO SUPERIOR --- */
+.progress-container {
+  width: 100%;
+  max-width: 760px;
+  padding: 24px 24px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 24px;
+  background-color: #eeeeee;
+  border: 2px solid #1a1c1c;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #42617d;
+  border-right: 2px solid #1a1c1c;
+  width: 80%; /* Representa el progreso de la pantalla 8/10 */
+}
+
+.progress-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1c1c;
+}
+
+/* --- CANVAS CENTRAL FLEXIBLE --- */
+.canvas-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  gap: 24px;
+  overflow: hidden;
+}
+
+/* --- BLOQUE DE ESTADO INFORMATIVO --- */
+.status-header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.main-title {
+  font-size: 38px;
+  line-height: 46px;
+  font-weight: 700;
+  color: #42617d;
+  margin-bottom: 4px;
+}
+
+.status-subtitle {
+  font-size: 20px;
+  color: #42474d;
+  font-weight: 500;
+}
+
+/* --- TARJETA DEL TEMPORIZADOR --- */
+.timer-visual-card {
+  background-color: #ffffff;
+  border: 2px solid #1a1c1c;
+  padding: 32px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.circle-svg-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Rota el origen del trazo a la parte superior */
+}
+
+/* Estilos de los anillos de carga */
+.circle-bg {
+  fill: none;
+  stroke: #eeeeee;
+  stroke-width: 16px;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: #42617d;
+  stroke-width: 16px;
+  stroke-linecap: round;
+  /* Perímetro exacto de r=95 es 2 * PI * 95 = 596.9 */
+  stroke-dasharray: 596.9; 
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Texto superpuesto en el epicentro del círculo */
+.timer-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-counter-number {
+  font-size: 56px;
+  font-weight: 900;
+  color: #1a1c1c;
+  line-height: 56px;
+}
+
+.time-unit-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #73777e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* --- BANNER DE COMPLETADO --- */
+.completion-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #cbebca;
+  border: 2px solid #324d35;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  animation: pop-in 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.check-banner-icon {
+  font-size: 24px !important;
+  color: #06210d;
+  font-variation-settings: 'FILL' 1;
+}
+
+.banner-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #06210d;
+}
+
+/* --- BARRA DE ACCIÓN INFERIOR NAV --- */
+.action-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border-top: 4px solid #1a1c1c;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+.nav-button-inactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #1a1c1c;
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Botón de acción principal de la navbar */
+.btn-ready-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 40px;
+  background-color: #a7c7e7;
+  color: #001d32;
+  border-radius: 12px;
+  border: 4px solid #42617d;
+  cursor: pointer;
+  transition: transform 75ms, opacity 0.2s ease;
+}
+
+.btn-ready-action:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Estado bloqueado restrictivo (Mientras el descanso corre) */
+.btn-disabled-locked {
+  background-color: #e2e2e2 !important;
+  color: #73777e !important;
+  border: 4px solid #c2c7ce !important;
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.nav-check-icon {
+  font-size: 28px !important;
+}
+
+.btn-ready-text {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Soporte adaptativo para pantallas compactas */
+@media (max-height: 580px) {
+  .main-title { font-size: 28px; }
+  .timer-visual-card { padding: 16px; }
+  .circle-svg-wrapper { width: 160px; height: 160px; }
+  .time-counter-number { font-size: 40px; }
+}

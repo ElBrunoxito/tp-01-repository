@@ -1,0 +1,120 @@
+.teacch-container {
+  font-family: 'Lexend', sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Header Superior con Información Integrada */
+.teacch-header {
+  background-color: #ffffff;
+  padding: 16px 20px;
+  border-bottom: 4px solid #1e293b;
+  text-align: center;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.step-badge {
+  background-color: #e2e8f0;
+  border: 2px solid #1e293b;
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.step-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* Barra de progreso */
+.progress-bar-wrapper {
+  background-color: #e2e8f0;
+  border: 3px solid #1e293b;
+  border-radius: 12px;
+  height: 18px;
+  overflow: hidden;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.progress-bar-fill {
+  background-color: #a7c7e7;
+  height: 100%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Área central de renderizado */
+.teacch-main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  margin-bottom: 96px; 
+}
+
+/* Footer de Navegación */
+.teacch-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  background-color: #ffffff;
+  padding: 0 32px;
+  border-top: 4px solid #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.btn-nav {
+  padding: 12px 24px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  border: 3px solid #1e293b;
+  background-color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 0px #1e293b;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-nav:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0px #1e293b;
+}
+
+.btn-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0px #1e293b;
+}
+
+.footer-status {
+  font-weight: 700;
+  font-size: 15px;
+  color: #64748b;
+  border: 2px dashed #cbd5e1;
+  padding: 6px 16px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+}

@@ -34,6 +34,17 @@ import { T27 } from './components/main/routines/level-2/t27/t27';
 import { T28 } from './components/main/routines/level-2/t28/t28';
 import { T29 } from './components/main/routines/level-2/t29/t29';
 import { T210 } from './components/main/routines/level-2/t210/t210';
+import { T11 } from './components/main/routines/level-1/t11/t11';
+import { T12 } from './components/main/routines/level-1/t12/t12';
+import { T13 } from './components/main/routines/level-1/t13/t13';
+import { T14 } from './components/main/routines/level-1/t14/t14';
+import { T15 } from './components/main/routines/level-1/t15/t15';
+import { T16 } from './components/main/routines/level-1/t16/t16';
+import { T17 } from './components/main/routines/level-1/t17/t17';
+import { T18 } from './components/main/routines/level-1/t18/t18';
+import { T19 } from './components/main/routines/level-1/t19/t19';
+import { T110 } from './components/main/routines/level-1/t110/t110';
+import { Nav } from './components/main/routines/level-1/nav/nav';
 
 export const routes: Routes = [
     {
@@ -104,6 +115,28 @@ export const routes: Routes = [
     {
         path:'app/kaufman/result',
         component: KaufmanResult
+    },
+    {
+        path:'app/routine/level-1',
+        component: Nav,
+        children: [
+            
+            {
+                path:'',redirectTo:'1',pathMatch:'full'
+            },
+            { path:'1',component: T11},
+            { path:'2',component: T12},
+            { path:'3',component: T13},
+            { path:'4',component: T14},
+            { path:'5',component: T15},
+            { path:'6',component: T16},
+            { path:'7',component: T17},
+            { path:'8',component: T18},
+            { path:'9',component: T19},
+            { path:'10',component: T110}
+
+
+        ]
     },
     {
         path:'app/routine/level-2',

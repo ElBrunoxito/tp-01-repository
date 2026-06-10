@@ -1,0 +1,50 @@
+<div class="teacch-screen-wrapper">
+  
+  <main class="canvas-container">
+    
+    <div class="question-header">
+      <h1 class="main-title">¿Cuál es el color rojo?</h1>
+      
+      @if (mensajeFeedback) {
+        <p class="feedback-message" [ngClass]="{'error-text': mensajeFeedback === 'Intenta otra vez', 'success-text': mensajeFeedback === '¡Bien! ⭐'}">
+          {{ mensajeFeedback }}
+        </p>
+      } @else {
+        <p class="subtitle">Selecciona el cuadrado correcto</p>
+      }
+    </div>
+
+    <div class="color-grid">
+      
+      <button class="color-button" 
+        [ngClass]="{'selected-border': colorSeleccionado === 'rojo', 'force-highlight': resaltarCorrecto}"
+        (click)="seleccionarColor('rojo')">
+        <div class="color-box box-red"></div>
+        <span class="color-label">rojo</span>
+      </button>
+
+      <button class="color-button" 
+        [ngClass]="{'selected-border': colorSeleccionado === 'azul'}"
+        (click)="seleccionarColor('azul')">
+        <div class="color-box box-blue"></div>
+        <span class="color-label">azul</span>
+      </button>
+
+      <button class="color-button" 
+        [ngClass]="{'selected-border': colorSeleccionado === 'verde'}"
+        (click)="seleccionarColor('verde')">
+        <div class="color-box box-green"></div>
+        <span class="color-label">verde</span>
+      </button>
+
+      <button class="color-button" 
+        [ngClass]="{'selected-border': colorSeleccionado === 'amarillo'}"
+        (click)="seleccionarColor('amarillo')">
+        <div class="color-box box-yellow"></div>
+        <span class="color-label">amarillo</span>
+      </button>
+      
+    </div>
+  </main>
+
+</div>

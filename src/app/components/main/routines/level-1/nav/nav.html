@@ -1,0 +1,36 @@
+<div class="teacch-container">
+  
+  <header class="teacch-header">
+    <div class="header-info">
+      <span class="step-badge">Paso {{ currentStep }} de {{ totalSteps }}</span>
+      <h2 class="step-title">{{ getStepTitle() }}</h2>
+    </div>
+    
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar-fill" [style.width.%]="progressPercentage"></div>
+    </div>
+  </header>
+
+  <main class="teacch-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="teacch-footer">
+    <button class="btn-nav" [disabled]="currentStep === 1" (click)="navigatePrevious()">
+      ← Anterior
+    </button>
+    
+    <div class="footer-status">
+      @if (currentStep === totalSteps) {
+        <span>🎉 ¡Casi terminado!</span>
+      } @else {
+        <span>En curso</span>
+      }
+    </div>
+    
+    <button class="btn-nav" [disabled]="currentStep === totalSteps" (click)="navigateNext()">
+      Siguiente →
+    </button>
+  </footer>
+
+</div>

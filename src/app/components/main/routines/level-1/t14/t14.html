@@ -1,0 +1,87 @@
+<div class="teacch-screen-wrapper">
+  
+  <main class="canvas-container">
+    <div class="cards-grid">
+      
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[0].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[0].esParteDelParObjetivo}"
+        (click)="voltearCarta(0)">
+        
+        @if (estadoCartas[0].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[0].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[1].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[1].esParteDelParObjetivo}"
+        (click)="voltearCarta(1)">
+        @if (estadoCartas[1].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[1].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[2].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[2].esParteDelParObjetivo}"
+        (click)="voltearCarta(2)">
+        @if (estadoCartas[2].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[2].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[3].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[3].esParteDelParObjetivo}"
+        (click)="voltearCarta(3)">
+        @if (estadoCartas[3].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[3].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[4].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[4].esParteDelParObjetivo}"
+        (click)="voltearCarta(4)">
+        @if (estadoCartas[4].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[4].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+      <button class="card-button" 
+        [ngClass]="{'card-revealed': estadoCartas[5].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[5].esParteDelParObjetivo}"
+        (click)="voltearCarta(5)">
+        @if (estadoCartas[5].revelada) {
+          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[5].icono }}</span>
+        } @else {
+          <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
+        }
+      </button>
+
+    </div>
+  </main>
+
+</div>
+
+<nav class="action-navbar">
+  <div class="nav-item-inactive">
+    <span class="material-symbols-outlined">assignment</span>
+    <span class="nav-label">Tareas</span>
+  </div>
+
+  <button class="btn-next" (click)="procesarSiguiente()">
+    <span class="btn-next-text">Siguiente</span>
+    <span class="material-symbols-outlined">arrow_forward</span>
+  </button>
+
+  <div class="nav-item-inactive">
+    <span class="material-symbols-outlined">settings</span>
+    <span class="nav-label">Ajustes</span>
+  </div>
+</nav>

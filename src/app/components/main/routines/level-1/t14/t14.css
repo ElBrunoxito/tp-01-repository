@@ -1,0 +1,205 @@
+/* --- RESETEO E INYECCIÓN ANTISCROLL --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONTENEDOR RÍGIDO (OCUPA EL CRISTAL DE LA PANTALLA) --- */
+.teacch-screen-wrapper {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  background-color: #f9f9f9;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding-bottom: 96px; /* Deja libre el espacio de la navbar inferior */
+  z-index: 10;
+}
+
+/* --- CANVAS CENTRAL FLEXIBLE --- */
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* --- ENCABEZADO DE TEXTOS --- */
+.question-header {
+  text-align: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.main-title {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 600;
+  color: #42617d;
+  margin-bottom: 2px;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 26px;
+  color: #42474d;
+}
+
+.feedback-message {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.error-text { color: #ba1a1a; }
+.success-text { color: #49654c; }
+
+/* --- TRACKER DE PROGRESO "FIRST-THEN" --- */
+.progress-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 440px;
+  background-color: #eeeeee;
+  border: 2px solid #c2c7ce;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.progress-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #42617d;
+  white-space: nowrap;
+}
+
+.progress-bar-bg {
+  flex-grow: 1;
+  margin-left: 16px;
+  height: 16px;
+  background-color: #e2e2e2;
+  border-radius: 9999px;
+  border: 1px solid #73777e;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  width: 40%;
+  height: 100%;
+  background-color: #42617d;
+}
+
+/* --- GRID MATRICIAL DE CARTAS (MÁXIMO 40% DEL ALTO DE PANTALLA) --- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 40vh; /* Control absoluto para evitar desbordamiento vertical */
+}
+
+/* --- BOTÓN DE CARTA (CUADRADOS DE MEMORIA) --- */
+.card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a7c7e7; /* Fondo primario contenedor (oculto) */
+  border: 2px solid #42617d;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1; /* Garantiza simetría de lona */
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 75ms ease-in-out, transform 75ms;
+}
+
+.card-button:active {
+  transform: scale(0.96);
+}
+
+/* Estado de Carta Volteada/Revelada */
+.card-button.card-revealed {
+  background-color: #ffffff !important;
+  border: 4px solid #42617d !important;
+}
+
+/* ✨ Resalte por inactividad o error repetido en el par objetivo */
+.card-button.force-highlight {
+  border: 6px solid #ba1a1a !important;
+  background-color: #ffdad6 !important;
+  animation: pulse-card 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-card {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.card-icon {
+  font-size: 48px !important; /* Ajustado para que no rompa los márgenes de la tarjeta */
+}
+
+/* --- BARRA DE ACCIÓN FIJA INFERIOR --- */
+.action-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border-top: 4px solid #0f172a;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+.nav-item-inactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1e293b;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 32px;
+  background-color: #42617d;
+  color: #ffffff;
+  border-radius: 12px;
+  border: 4px solid #001d32;
+  cursor: pointer;
+  transition: all 75ms ease-in-out;
+}
+
+.btn-next-text {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

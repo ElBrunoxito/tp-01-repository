@@ -1,0 +1,142 @@
+/* --- RESETEO ANTISCROLL GLOBAL --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONTENEDOR DE PANTALLA FIJA (PEGA TODO AL BORDE) --- */
+.teacch-screen-wrapper {
+  font-family: 'Lexend', sans-serif;
+  color: #1a1c1c;
+  background-color: #f9f9f9;
+  
+  /* Posicionamiento fijo absoluto en las 4 esquinas del navegador */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Bloqueo estricto del viewport */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* --- CANVAS CENTRAL FLEXIBLE --- */
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden; /* No permite desbordamientos internos */
+}
+
+/* --- ENCABEZADO DE LA PREGUNTA --- */
+.question-header {
+  text-align: center;
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Impide que el texto colapse o altere el layout */
+}
+
+.main-title {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 600;
+  color: #1a1c1c;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 26px;
+  color: #42474d;
+  margin: 0;
+}
+
+/* TEXTOS DE RECOMPENSA O REINTENTO */
+.feedback-message {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.error-text { color: #ba1a1a; }
+.success-text { color: #49654c; }
+
+/* --- BENTO GRID COMPACTO --- */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 540px; /* Reducido para dar máxima estabilidad visual */
+  max-height: 50vh; /* Obliga a la cuadrícula a usar máximo la mitad del alto real de pantalla */
+}
+
+/* --- TARJETAS DE BOTONES --- */
+.color-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #73777e;
+  cursor: pointer;
+  height: auto; /* Se ajusta de forma elástica sin forzar el alto */
+  box-sizing: border-box;
+  transition: background-color 75ms ease-in-out;
+}
+
+.color-button:hover {
+  background-color: #eeeeee;
+}
+
+/* Borde por click del usuario o autocompletado */
+.color-button.selected-border {
+  border: 4px solid #42617d !important;
+  background-color: rgba(167, 199, 231, 0.08);
+}
+
+/* ✨ Resalte instruccional por doble fallo */
+.color-button.force-highlight {
+  border: 6px solid #ba1a1a !important;
+  background-color: #ffdad6 !important;
+  animation: pulse-highlight 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-highlight {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* --- CUADRADOS COGNITIVOS DE COLOR --- */
+.color-box {
+  width: 100%;
+  max-width: 95px; /* Tamaño prudente ideal para evitar empujar la lona */
+  aspect-ratio: 1 / 1; /* Cuadrado simétrico automático */
+  border-radius: 8px;
+  border: 2px solid #73777e;
+  margin-bottom: 8px;
+}
+
+.box-red { background-color: #ff0000; }
+.box-blue { background-color: #0000ff; }
+.box-green { background-color: #008000; }
+.box-yellow { background-color: #ffff00; }
+
+.color-label {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: #1a1c1c;
+}

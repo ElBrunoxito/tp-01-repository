@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap');
+
+:host {
+  font-family: 'Lexend', sans-serif;
+  display: block;
+}
+
+/* --- Base Layout 1080p Estricto Sin Scroll --- */
+.screen-wrapper {
+  width: 100vw;
+  height: 100vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* --- Main Framework (Ocupa todo el alto al no haber nav) --- */
+.main-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.5rem 4rem 4.5rem 4rem;
+  box-sizing: border-box;
+}
+
+/* --- Barra de Progreso Superior (10/10) --- */
+.progress-container {
+  width: 100%;
+  max-width: 44rem;
+  background-color: #e2e2e2;
+  border: 4px solid #0f172a;
+  border-radius: 9999px;
+  height: 2.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  background-color: #42617d;
+  height: 100%;
+  width: 100%; /* Lleno completo */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+.progress-text {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* --- Mensaje de Despedida con Imagen --- */
+.message-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.image-container {
+  width: 12rem;
+  height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.success-star-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Títulos descriptivos */
+.congrats-title {
+  font-size: 3.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+}
+
+.congrats-subtitle {
+  font-size: 1.5rem;
+  color: #42474d;
+  margin: 0;
+  max-width: 36rem;
+  line-height: 1.5;
+}
+
+/* --- Botón Central de Finalización --- */
+.action-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-finalizar {
+  width: 100%;
+  max-width: 25rem;
+  height: 5.5rem;
+  background-color: #cbebca; /* Verde suave de la paleta */
+  border: 4px solid #0f172a;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #0f172a;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-finalizar:hover {
+  background-color: #afcfaf;
+}
+
+.btn-finalizar:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #0f172a;
+}
+
+.icon-check {
+  font-size: 2.25rem;
+  color: #0f172a;
+}
+
+.label-finalizar {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+
+
+
+/* ... manteniendo tus estilos existentes y añadiendo esto ... */
+
+.btn-finalizar {
+  width: 100%;
+  max-width: 25rem;
+  height: 5.5rem;
+  background-color: #cbebca;
+  border: 4px solid #0f172a;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #0f172a;
+  transition: all 0.3s ease;
+}
+
+/* ❌ CONDICIÓN TEACCH: Resalto visual de inactividad */
+.resaltar-boton {
+  border: 8px solid #ba1a1a !important;
+  background-color: #ffdad6 !important;
+  transform: scale(1.05);
+  animation: pulso-atencion 1.5s infinite;
+}
+
+@keyframes pulso-atencion {
+  0% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(186, 26, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+}
+
+/* Forzar que nada se salga del viewport */
+.screen-wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 2rem;
+}
+

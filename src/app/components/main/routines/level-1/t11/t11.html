@@ -1,0 +1,27 @@
+<div class="saludo-component-box">
+
+  <div class="saludo-card">
+    
+    <div class="image-wrapper">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY9g_6JJfeXXl2b27T9rJQFy-4A_yF_7DxDckRl6Yb8COIEXHFGT9dkeZczYkTKVyCJv_BSCYzonte16iZjIVYsuVt8-JoO__i5pJOLiLdUnwiitzn_teLVAd2f0yLCYP4qQjnU5pdWGp73IIINn9krRKCo2abxqZ9ZAOHPPfFZnGnyp6G0eVGuTpe7m5OfJ7iYpLs4HKOWTBCJMqSo9cszpj1WyC3jdeWZYEpH_I94nbGC_NLu1TIyjw5_A1BfYjG-Xn1ULrwab4" alt="Ilustración Saludo" class="teacch-image" />
+    </div>
+
+    <div class="text-content">
+      <h1 class="heading-title">Hola, ¿listo para aprender?</h1>
+      <p class="subheading-text">Vamos a empezar una nueva actividad juntos.</p>
+    </div>
+
+    <button 
+      class="btn-empezar" 
+      [ngClass]="{ 'highlight-alert-danger': highlightStartBtn }" 
+      (click)="startFlow()"
+      >
+      <span class="icon-play">►</span>
+      <span class="btn-text">Empezar</span>
+    </button>
+  </div>
+ 
+
+
+
+</div>
