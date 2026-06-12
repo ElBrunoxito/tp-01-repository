@@ -48,7 +48,7 @@ import { Nav } from './components/main/routines/level-1/nav/nav';
 
 export const routes: Routes = [
     {
-        path:'',redirectTo:'app',pathMatch:'full'
+        path:'',redirectTo:'login',pathMatch:'full'
     },
     /*{
         path:'load',

@@ -2,7 +2,6 @@
   <div class="header-container">
     <h1 class="header-title">Resultados de Evaluación</h1>
     <div class="header-actions">
-      <span class="header-pagination">{{ currentIndex }} de {{ totalIndex }}</span>
       <button class="icon-button" (click)="printResults()">print</button>
     </div>
   </div>
@@ -14,7 +13,7 @@
     <div class="hero-progress-container">
       <div class="circular-progress" [style.background]="getCircularProgressBg()">
         <div class="progress-inner">
-          <span class="progress-value">{{ data.indice_general }}%</span>
+          <span class="progress-value">{{ data.idc }}%</span>
           <span class="progress-label">Índice</span>
         </div>
       </div>
@@ -29,10 +28,10 @@
       </p>
       <div class="tag-container">
         <span class="tag" [ngClass]="{
-          'tag-high': getPerformanceLevel(data.indice_general) === 'Alto',
-          'tag-medium': getPerformanceLevel(data.indice_general) === 'Medio',
-          'tag-low': getPerformanceLevel(data.indice_general) === 'Bajo'
-        }">Nivel {{ getPerformanceLevel(data.indice_general) }}</span>
+          'tag-high': getPerformanceLevel(data.idc) === 'Alto',
+          'tag-medium': getPerformanceLevel(data.idc) === 'Medio',
+          'tag-low': getPerformanceLevel(data.idc) === 'Bajo'
+        }">Nivel {{ getPerformanceLevel(data.idc) }}</span>
         <span class="tag tag-neutral">Evaluación Completa</span>
       </div>
     </div>
@@ -70,45 +69,45 @@
         <div class="stat-item">
           <div class="stat-header">
             <span class="stat-name">Atención Visual</span>
-            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.atencion) === 'Alto'}">{{ data.atencion }}%</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.attention) === 'Alto'}">{{ data.attention }}%</span>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill" [style.width.%]="data.atencion" [ngClass]="{'bg-secondary': getPerformanceLevel(data.atencion) === 'Alto', 'bg-primary': getPerformanceLevel(data.atencion) !== 'Alto'}"></div>
+            <div class="progress-bar-fill" [style.width.%]="data.attention" [ngClass]="{'bg-secondary': getPerformanceLevel(data.attention) === 'Alto', 'bg-primary': getPerformanceLevel(data.attention) !== 'Alto'}"></div>
           </div>
           <div class="stat-footer-labels">
-            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.atencion) === 'Bajo'}">Bajo</span>
-            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.atencion) === 'Medio'}">Medio</span>
-            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.atencion) === 'Alto'}">Alto</span>
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.attention) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.attention) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.attention) === 'Alto'}">Alto</span>
           </div>
         </div>
 
         <div class="stat-item">
           <div class="stat-header">
             <span class="stat-name">Memoria</span>
-            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.memoria) === 'Alto'}">{{ data.memoria }}%</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.memory) === 'Alto'}">{{ data.memory }}%</span>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill" [style.width.%]="data.memoria" [ngClass]="{'bg-secondary': getPerformanceLevel(data.memoria) === 'Alto', 'bg-primary': getPerformanceLevel(data.memoria) !== 'Alto'}"></div>
+            <div class="progress-bar-fill" [style.width.%]="data.memory" [ngClass]="{'bg-secondary': getPerformanceLevel(data.memory) === 'Alto', 'bg-primary': getPerformanceLevel(data.memory) !== 'Alto'}"></div>
           </div>
           <div class="stat-footer-labels">
-            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.memoria) === 'Bajo'}">Bajo</span>
-            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.memoria) === 'Medio'}">Medio</span>
-            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.memoria) === 'Alto'}">Alto</span>
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.memory) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.memory) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.memory) === 'Alto'}">Alto</span>
           </div>
         </div>
 
         <div class="stat-item">
           <div class="stat-header">
             <span class="stat-name">Asociación</span>
-            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.asociacion) === 'Alto'}">{{ data.asociacion }}%</span>
+            <span class="stat-score" [ngClass]="{'text-secondary': getPerformanceLevel(data.association) === 'Alto'}">{{ data.association }}%</span>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill" [style.width.%]="data.asociacion" [ngClass]="{'bg-secondary': getPerformanceLevel(data.asociacion) === 'Alto', 'bg-primary': getPerformanceLevel(data.asociacion) !== 'Alto'}"></div>
+            <div class="progress-bar-fill" [style.width.%]="data.association" [ngClass]="{'bg-secondary': getPerformanceLevel(data.association) === 'Alto', 'bg-primary': getPerformanceLevel(data.association) !== 'Alto'}"></div>
           </div>
           <div class="stat-footer-labels">
-            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.asociacion) === 'Bajo'}">Bajo</span>
-            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.asociacion) === 'Medio'}">Medio</span>
-            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.asociacion) === 'Alto'}">Alto</span>
+            <span [ngClass]="{'active-level-low': getPerformanceLevel(data.association) === 'Bajo'}">Bajo</span>
+            <span [ngClass]="{'active-level-med': getPerformanceLevel(data.association) === 'Medio'}">Medio</span>
+            <span [ngClass]="{'active-level-high': getPerformanceLevel(data.association) === 'Alto'}">Alto</span>
           </div>
         </div>
 
@@ -119,24 +118,24 @@
         <div class="card mini-card">
           <span class="mini-card-title">Secuencia Lógica</span>
           <div class="mini-card-body">
-            <div class="mini-card-value">{{ data.secuenciacion }}%</div>
+            <div class="mini-card-value">{{ data.logicalSequencing }}%</div>
             <span class="mini-badge" [ngClass]="{
-              'badge-high': getPerformanceLevel(data.secuenciacion) === 'Alto',
-              'badge-medium': getPerformanceLevel(data.secuenciacion) === 'Medio',
-              'badge-low': getPerformanceLevel(data.secuenciacion) === 'Bajo'
-            }">Nivel {{ getPerformanceLevel(data.secuenciacion) }}</span>
+              'badge-high': getPerformanceLevel(data.logicalSequencing) === 'Alto',
+              'badge-medium': getPerformanceLevel(data.logicalSequencing) === 'Medio',
+              'badge-low': getPerformanceLevel(data.logicalSequencing) === 'Bajo'
+            }">Nivel {{ getPerformanceLevel(data.logicalSequencing) }}</span>
           </div>
         </div>
 
         <div class="card mini-card">
           <span class="mini-card-title">Clasificación</span>
           <div class="mini-card-body">
-            <div class="mini-card-value">{{ data.clasificacion }}%</div>
+            <div class="mini-card-value">{{ data.classification }}%</div>
             <span class="mini-badge" [ngClass]="{
-              'badge-high': getPerformanceLevel(data.clasificacion) === 'Alto',
-              'badge-medium': getPerformanceLevel(data.clasificacion) === 'Medio',
-              'badge-low': getPerformanceLevel(data.clasificacion) === 'Bajo'
-            }">Nivel {{ getPerformanceLevel(data.clasificacion) }}</span>
+              'badge-high': getPerformanceLevel(data.classification) === 'Alto',
+              'badge-medium': getPerformanceLevel(data.classification) === 'Medio',
+              'badge-low': getPerformanceLevel(data.classification) === 'Bajo'
+            }">Nivel {{ getPerformanceLevel(data.classification) }}</span>
           </div>
         </div>
 
@@ -146,9 +145,9 @@
   </div>
 
   <div class="action-row">
-    <button class="btn-primary" (click)="downloadReport()">
+    <button class="btn-primary" (click)="printResults()">
       <span class="icon">description</span>
-      Descargar Informe Detallado
+      Descargar Informe 
     </button>
   </div>
 </main>

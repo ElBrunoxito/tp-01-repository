@@ -1,29 +1,30 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { ResponseUserDTO } from '../model/User';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-private readonly RES_KEY = 'respuestasTestTea';
 
-  // Inyectamos el identificador de la plataforma para saber si es servidor o navegador
+  private readonly USER_KEY = 'saveUserKey';
+  private readonly RES_KEY = 'respuestasTestTea';
+
+
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   setQuestions(respuestas: any): void {
-    // Solo ejecuta si estamos en el navegador del cliente
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.RES_KEY, JSON.stringify(respuestas));
     }
   }
 
   getQuestions(): any {
-    // Si se ejecuta en el servidor (durante el primer renderizado), evita usar localStorage
     if (isPlatformBrowser(this.platformId)) {
       const data = localStorage.getItem(this.RES_KEY);
       return data ? JSON.parse(data) : null;
     }
-    // Retorna null por defecto si está en el servidor para que no explote
     return null;
   }
 
@@ -32,5 +33,30 @@ private readonly RES_KEY = 'respuestasTestTea';
       localStorage.removeItem(this.RES_KEY);
     }
   }
+
+  
+
+  setUser(user: ResponseUserDTO): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    }
+  }
+
+  getUser(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      const data = localStorage.getItem(this.USER_KEY);
+      return data ? JSON.parse(data) : null;
+    }
+    return null;
+  }
+
+  dropUser(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.USER_KEY);
+    }
+  }
+
+
+
   
 }

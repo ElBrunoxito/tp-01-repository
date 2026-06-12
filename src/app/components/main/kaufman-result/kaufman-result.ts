@@ -1,13 +1,15 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { StorageService } from '../../../service/storage-service';
+import { ResponseUserDTO } from '../../../model/User';
 export interface ResultadosKaufman {
-  indice_general: number;
-  clasificacion: number;
-  secuenciacion: number;
-  asociacion: number;
-  memoria: number;
+  idc: number;
+  attention: number;
+  memory: number;
+  association: number
+  logicalSequencing : number
+  classification:number;
   visual: number;
-  atencion: number;
 }
 @Component({
   selector: 'app-kaufman-result',
@@ -17,24 +19,26 @@ export interface ResultadosKaufman {
 })
 export class KaufmanResult implements OnInit {
   
+  storage = inject(StorageService)
+
   // Tu DTO directo
   data: ResultadosKaufman = {
-    indice_general:90,
-    atencion: 60,      // 1. Arriba
-    memoria: 66,       // 2. Derecha Superior
-    asociacion: 50,    // 3. Derecha Inferior
-    secuenciacion: 45, // 4. Izquierda Inferior
-    clasificacion: 90, // 5. Izquierda Superior
+    idc:90,
+    attention: 60,      // 1. Arriba
+    memory: 66,       // 2. Derecha Superior
+    association: 50,    // 3. Derecha Inferior
+    logicalSequencing: 45, // 4. Izquierda Inferior
+    classification: 90, // 5. Izquierda Superior
     visual: 78
   };
 
   userName: string = 'Alexander';
-  currentIndex: number = 1;
-  totalIndex: number = 10;
   radarPoints: string = '';
 
   ngOnInit(): void {
     this.generateRadarPolygon();
+    this.userName = (this.storage.getUser() as ResponseUserDTO).nameChild
+
   }
 
   // Llama a esta función cada vez que modifiques dinámicamente un valor de 'data'
@@ -49,11 +53,11 @@ export class KaufmanResult implements OnInit {
 
     // ORDEN CORREGIDO: Sigue estrictamente las manecillas del reloj alineado a las etiquetas SVG
     const scores = [
-      this.data.atencion,       // Vértice 1: Arriba
-      this.data.memoria,        // Vértice 2: Derecha Superior
-      this.data.asociacion,     // Vértice 3: Derecha Inferior
-      this.data.secuenciacion,  // Vértice 4: Izquierda Inferior
-      this.data.clasificacion   // Vértice 5: Izquierda Superior
+      this.data.association,       // Vértice 1: Arriba
+      this.data.memory,        // Vértice 2: Derecha Superior
+      this.data.association,     // Vértice 3: Derecha Inferior
+      this.data.logicalSequencing,  // Vértice 4: Izquierda Inferior
+      this.data.classification   // Vértice 5: Izquierda Superior
     ];
 
     const points = scores.map((score, i) => {
@@ -77,7 +81,7 @@ export class KaufmanResult implements OnInit {
 
   getCircularProgressBg(): string {
     return `radial-gradient(closest-side, white 82%, transparent 83% 100%),
-            conic-gradient(#075fab ${this.data.indice_general}%, #e7e8e9 0)`;
+            conic-gradient(#075fab ${this.data.idc}%, #e7e8e9 0)`;
   }
 
   printResults(): void {

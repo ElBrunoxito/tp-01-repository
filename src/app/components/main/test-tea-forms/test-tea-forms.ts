@@ -116,6 +116,7 @@ export class TestTeaForms implements OnInit {
     this.storage.dropQuestions();
     //OBTENER ID DEL BACKEND
     let id = '1'; 
+
     this.router.navigate([`/app/resultados/${id}`]); 
     /*this.router.navigate(['/load'], { 
       state: { 
@@ -123,7 +124,7 @@ export class TestTeaForms implements OnInit {
         destino: '/kaufman'                                      // A dónde irá después del tiempo random
       } 
     });*/
-
+    console.log(this.listaPreguntas)
     let count = 0;
     this.listaPreguntas.forEach(p => {
       console.log(`${count + 1}: Respuesta: ${p.respuestaSeleccionada}`);
