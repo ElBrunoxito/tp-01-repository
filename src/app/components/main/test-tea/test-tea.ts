@@ -1,32 +1,28 @@
-import { NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { GetTestTeaDTO } from '../../../model/TestTea';
+import { Router } from '@angular/router';
 
-interface HistoryEntry {
-  id: number;
-  date: string;
-  time: string;
-  grade: number;
-  percentage: number;
-  gradeClass: string;
-}
+
 
 @Component({
   selector: 'app-test-tea',
-  imports: [NgClass],
+  imports: [NgClass, DatePipe],
   templateUrl: './test-tea.html',
   styleUrl: './test-tea.css',
 })
 export class TestTea implements OnInit {
 
   lastEvaluationLevel: any;
-  historyEntries: HistoryEntry[] = [];
+  historyEntries: GetTestTeaDTO[] = [];
 
   constructor() {}
+  router = inject(Router)
 
   ngOnInit(): void {
 
     this.getAll();
-    this.lastEvaluationLevel = this.historyEntries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0].grade.toString();
+    this.lastEvaluationLevel = this.historyEntries.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())[0].levelTEA.toString();
 
   }
 
@@ -34,84 +30,22 @@ export class TestTea implements OnInit {
         // Mapeo estructurado y tipado de los registros clínicos de la tabla dense-data
     this.historyEntries = [
       {
-        id: 1,
-        date: '12-10-2027',
-        time: '14:20',
-        grade: 2,
-        percentage: 65,
-        gradeClass: 'pill-grade-2'
+        id: "31232132131",
+        createdDate: '2027-12-10 14:20',
+        levelTEA: 2,
+        points: 8
       },
       {
-        id: 2,
-        date: '28-09-2023',
-        time: '10:15',
-        grade: 2,
-        percentage: 62,
-        gradeClass: 'pill-grade-2'
+        id: "2",
+        createdDate: '2023-09-09 10:15',
+        levelTEA: 2,
+        points:1
       },
       {
-        id: 3,
-        date: '05-09-2023',
-        time: '16:45',
-        grade: 3,
-        percentage: 1,
-        gradeClass: 'pill-grade-3'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
-      },
-      {
-        id: 4,
-        date: '15-08-2023',
-        time: '09:00',
-        grade: 2,
-        percentage: 68,
-        gradeClass: 'pill-grade-2'
+        id: "3",
+        createdDate: '2023-05-09 16:45',
+        levelTEA: 3,
+        points: 15
       }
     ];
   }
@@ -131,11 +65,12 @@ export class TestTea implements OnInit {
     console.log('Exportando el historial clínico completo en formato PDF/Excel...');
   }
 
-  onViewTest(entry: HistoryEntry): void {
+  onViewTest(entry: GetTestTeaDTO): void {
     console.log(`Fila seleccionada. Abriendo detalles del registro ID: ${entry.id}`);
   }
 
-  onRowActions(entry: HistoryEntry): void {
-    console.log(`Desplegando menú de acciones rápidas para el registro: ${entry.date}`);
+  onRowActions(entry: GetTestTeaDTO): void {
+    this.router.navigate([`/app/resultados/${entry.id}`]);
+
   }
 }

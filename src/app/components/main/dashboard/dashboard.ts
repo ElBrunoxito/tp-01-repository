@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
+import { StorageService } from '../../../service/storage-service';
+import { ResponseUserDTO } from '../../../model/User';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,31 +15,38 @@ export class Dashboard implements OnInit, AfterViewInit {
   currentProgress! : number;
   animateBars: boolean = false;
 
-  social!: number;
-  communication!: number;
-  motor!: number;
-  cognitive!: number;
-  
+  memory!: number;
+  association!: number;
+  logicalSequencing!: number;
+  classification!: number;
+  attention!:number
+
   nameChild!: string;
   levelChild!: number;
   ageChild!: number;
 
+
+
   router = inject(Router)
+  storage = inject(StorageService)
 
   constructor() {}
 
   ngOnInit(): void {
     // Inicialización de los datos clínicos de la vista
-    this.currentProgress = 45;
 
-    this.nameChild = 'Salazar Garcia';
-    this.ageChild = 6;
-    this.levelChild = 1;
+
+    this.currentProgress = 0;
+    const user:ResponseUserDTO = this.storage.getUser()
+    this.nameChild = user.nameChild;
+    this.ageChild = user.ageChild;
+    this.levelChild = user.levelTEA;
     
-    this.social = 68;
-    this.communication = 72;
-    this.motor = 55;
-    this.cognitive = 80;
+    this.memory = 68;
+    this.association = 72;
+    this.logicalSequencing = 55;
+    this.classification = 80;
+    this.attention = 50
   }
 
   ngAfterViewInit(): void {

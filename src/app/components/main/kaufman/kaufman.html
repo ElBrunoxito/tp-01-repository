@@ -34,7 +34,7 @@
   <section class="table-card">
     <div class="table-header">
       <h3>Historial de Evaluaciones</h3>
-      <button (click)="onNuevaEvaluacion()" class="btn btn-primary">
+      <button [routerLink]="'/app/kaufman/test'" class="btn btn-primary">
         <span class="material-symbols-outlined">add</span>
         Nueva Evaluación
       </button>
@@ -50,21 +50,23 @@
             <th>Memoria</th>
             <th>Secuencia</th>
             <th>Asociación</th>
+            <th>Visual</th>
             <th class="text-center">Índice</th>
             <th class="text-right">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          @for (item of evaluaciones; track item.fecha) {
+          @for (item of evaluaciones; track item.createdDate) {
             <tr>
-              <td class="font-medium">{{ item.fecha }}</td>
-              <td>{{ item.atencion }}</td>
-              <td>{{ item.clasificacion }}</td>
-              <td>{{ item.memoria }}</td>
-              <td>{{ item.secuencia }}</td>
-              <td>{{ item.asociacion }}</td>
+              <td class="font-medium">{{ item.createdDate }}</td>
+              <td>{{ item.attention }}</td>
+              <td>{{ item.classification }}</td>
+              <td>{{ item.memory }}</td>
+              <td>{{ item.logicalSequencing }}</td>
+              <td>{{ item.association }}</td>
+              <td>{{ item.visual }}</td>
               <td class="text-center">
-                <span class="badge-index">{{ item.indice }}</span>
+                <span class="badge-index">{{ item.idc }}</span>
               </td>
               <td class="text-right">
                 <button (click)="verDetalle(item)" class="btn-link">

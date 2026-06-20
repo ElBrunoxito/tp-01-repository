@@ -46,7 +46,8 @@
         <table class="dense-data-table">
           <thead>
             <tr>
-              <th>Día Registrado</th>
+              <th>Dia Registrado</th>
+              <th>Puntos</th>
               <th>Nivel</th>
               <th class="text-right-aligned">Acciones</th>
             </tr>
@@ -56,13 +57,18 @@
               <tr class="table-row-interactive" (click)="onViewTest(entry)">
                 <td>
                   <div class="date-stacked-cell">
-                    <span class="cell-primary-text">{{ entry.date }}</span>
-                    <span class="cell-sub-text">{{ entry.time }}</span>
+                    <span class="cell-primary-text">{{ entry.createdDate | date: 'dd-MM-yyyy' }}</span>
+                    <span class="cell-sub-text">{{ entry.createdDate | date: 'HH:mm' }}</span>
                   </div>
                 </td>
                 <td>
-                  <span class="grade-pill-tag" [ngClass]="entry.gradeClass">
-                    Grado {{ entry.grade}}
+                  <div class="date-stacked-cell">
+                    <span class="cell-primary-text">{{ entry.points}}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="grade-pill-tag" [ngClass]="`pill-grade-${entry.levelTEA}`">
+                    Grado {{ entry.levelTEA}}
                   </span>
                 </td>
 

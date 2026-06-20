@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { KaufmanService } from '../../../service/kaufman-service';
+import { ResultadosKaufman } from '../../../model/Kaufman';
 
-interface ResultadosKaufman {
-  indice_general: number;
-  clasificacion: number;
-  secuenciacion: number;
-  asociacion: number;
-  memoria: number;
-  visual: number;
-  atencion: number;
-}
 
 @Component({
   selector: 'app-kaufman-test',
@@ -32,6 +26,11 @@ export class KaufmanTest implements OnInit {
     { id: 1, nombre: 'Perrito Juguete', categoria: 'Animales', asignado: '' },
     { id: 2, nombre: 'Manzana Plástica', categoria: 'Otros', asignado: '' }
   ];
+
+
+  router = inject(Router)
+  kaufmanService = inject(KaufmanService)
+
 
   ngOnInit(): void {}
 
@@ -91,16 +90,19 @@ export class KaufmanTest implements OnInit {
     const indice_general = ((P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10) / 10) * 100;
 
     const estructuraResultado: ResultadosKaufman = {
-      "indice_general": Math.round(indice_general),
-      "clasificacion":  Math.round(clasificacion),
-      "secuenciacion":  Math.round(secuenciacion),
-      "asociacion":     Math.round(asociacion),
-      "memoria":        Math.round(memoria),
+      "idc": Math.round(indice_general),
+      "classification":  Math.round(clasificacion),
+      "logicalSequencing":  Math.round(secuenciacion),
+      "association":     Math.round(asociacion),
+      "memory":        Math.round(memoria),
       "visual":         Math.round(visual),
-      "atencion":       Math.round(atencion)
+      "attention":       Math.round(atencion)
     };
     console.log(JSON.stringify(estructuraResultado, null, 2));
-    alert("¡Test finalizado con éxito! Datos procesados e impresos en la consola.");
+    this.kaufmanService.saveResult(estructuraResultado)
+    this.router.navigate(['/app/kaufman/result/2']);
+
+
   }
   
 }

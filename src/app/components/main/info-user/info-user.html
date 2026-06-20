@@ -1,0 +1,95 @@
+<div class="profile-container">
+  <main class="profile-content">
+    <h2>Mi Perfil</h2>
+    <p class="subtitle">Gestiona tu información personal</p>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-card">
+      
+      <div class="avatar-section">
+        <div class="avatar-wrapper">
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/017/800/528/small/user-simple-flat-icon-illustration-vector.jpg" alt="Foto de perfil" class="avatar-img">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">Nombre Completo</label>
+        <input type="text" id="fullName" formControlName="fullName" placeholder="Alejandro Martínez">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" formControlName="email" placeholder="alejandro.martinez@teacch.help">
+      </div>
+
+      <div class="form-group">
+        <label for="occupation">A qué se dedica</label>
+        <input type="text" id="occupation" formControlName="occupation" placeholder="Ej. Educador, Psicólogo, Padre">
+      </div>
+
+      <fieldset class="sub-section">
+        <legend>Información del Niño</legend>
+        
+        <div class="row">
+          <div class="form-group col-8">
+            <label for="childName">Nombre del Niño</label>
+            <input type="text" id="childName" formControlName="childName" placeholder="Nombre del menor">
+          </div>
+          <div class="form-group col-4">
+            <label for="childAge">Edad</label>
+            <input type="number" id="childAge" formControlName="childAge" placeholder="Años">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="childGender">Sexo</label>
+            <div class="select-wrapper">
+              <select id="childGender" formControlName="childGender">
+                <option value="" disabled selected>Seleccionar...</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <label for="asdLevel">Nivel detectado de TEA</label>
+            <div class="select-wrapper">
+              <select id="asdLevel" formControlName="asdLevel">
+                <option value="" disabled selected>Seleccionar nivel...</option>
+                <option value="1">Nivel 1</option>
+                <option value="2">Nivel 2</option>
+                <option value="3">Nivel 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="sub-section no-border">
+        <legend>Seguridad</legend>
+        
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="currentPassword">Contraseña Actual</label>
+            <input type="password" id="currentPassword" formControlName="currentPassword" placeholder="********">
+          </div>
+          <div class="form-group col-6">
+            <label for="newPassword">Nueva Contraseña</label>
+            <input type="password" id="newPassword" formControlName="newPassword" placeholder="Mínimo 8 caracteres">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Guardar Cambios</button>
+      </div>
+
+    </form>
+  </main>
+
+  <footer class="profile-footer">
+    © 2026 HelpWithTEACCH. Todos los derechos reservados.
+  </footer>
+</div>

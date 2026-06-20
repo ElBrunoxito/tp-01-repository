@@ -45,6 +45,7 @@ import { T18 } from './components/main/routines/level-1/t18/t18';
 import { T19 } from './components/main/routines/level-1/t19/t19';
 import { T110 } from './components/main/routines/level-1/t110/t110';
 import { Nav } from './components/main/routines/level-1/nav/nav';
+import { InfoUser } from './components/main/info-user/info-user';
 
 export const routes: Routes = [
     {
@@ -84,17 +85,18 @@ export const routes: Routes = [
             pathMatch:'full'
            },
            {
-            path:'test-tea' ,
-            component: TestTea
+            path:'test-tea' ,component: TestTea
            },
            {
-            path:'history' ,
-            component: History
+            path:'history' ,component: History
            },
            {
-            path:'kaufman' ,
-            component: Kaufman
+            path:'kaufman' ,component: Kaufman
+           },
+           {
+            path:'user/:id' ,component: InfoUser
            }
+
         ]
     },
 
@@ -113,7 +115,7 @@ export const routes: Routes = [
         component: KaufmanTest
     },
     {
-        path:'app/kaufman/result',
+        path:'app/kaufman/result/:id',
         component: KaufmanResult
     },
     {

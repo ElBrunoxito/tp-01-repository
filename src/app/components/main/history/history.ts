@@ -1,24 +1,16 @@
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 interface RoutineRecord {
   id: number;
-  date: string;
-  time: string;
+  createdDate: string;
   activityName: string;
-  grade: number;
-  gradeBadgeClass: string;
-  supportIcon: string;
-  supportLabel: string;
-  supportTypeClass: string;
-  statusText: string;
-  statusKey: 'completado' | 'en-progreso' | 'interrumpido';
-  statusBadgeClass: string;
-  statusDotClass: string;
+  level: number;
+  status: string;
 }
 
 @Component({
   selector: 'app-history',
-  imports: [NgClass],
+  imports: [NgClass,DatePipe],
   templateUrl: './history.html',
   styleUrl: './history.css',
 })
@@ -33,48 +25,24 @@ export class History implements OnInit {
     this.routineRecords = [
       {
         id: 1,
-        date: '14 Oct, 2023',
-        time: '09:15 AM',
+        createdDate: '2026-08-14 09:15',
         activityName: 'Rutina de Lavado de Manos',
-        grade: 2,
-        gradeBadgeClass: 'tea-badge-grade2',
-        supportIcon: 'visibility',
-        supportLabel: 'Visual',
-        supportTypeClass: 'support-icon-visual',
-        statusText: 'Completado',
-        statusKey: 'completado',
-        statusBadgeClass: 'status-pill-completado',
-        statusDotClass: 'dot-completado',
+        level: 2,
+        status: 'Completado',
       },
       {
         id: 2,
-        date: '14 Oct, 2023',
-        time: '10:45 AM',
+        createdDate: '2023-10-14 10:45',
         activityName: 'Lectura Compartida',
-        grade: 1,
-        gradeBadgeClass: 'tea-badge-grade1',
-        supportIcon: 'accessibility_new',
-        supportLabel: 'Independiente',
-        supportTypeClass: 'support-icon-independent',
-        statusText: 'En progreso',
-        statusKey: 'en-progreso',
-        statusBadgeClass: 'status-pill-progreso',
-        statusDotClass: 'dot-progreso',
+        level: 1,
+        status: 'En progreso',
       },
       {
         id: 3,
-        date: '14 Oct, 2023',
-        time: '11:30 AM',
+        createdDate: '2027-09-19 11:30',
         activityName: 'Tiempo de Juego Social',
-        grade: 3,
-        gradeBadgeClass: 'tea-badge-grade3',
-        supportIcon: 'front_hand',
-        supportLabel: 'Físico',
-        supportTypeClass: 'support-icon-physical',
-        statusText: 'En progreso',
-        statusKey: 'en-progreso',
-        statusBadgeClass: 'status-pill-progreso',
-        statusDotClass: 'dot-progreso',
+        level: 3,
+        status: 'En progreso',
       }
     ];
     this.filteredRecords = this.routineRecords;
@@ -89,13 +57,13 @@ export class History implements OnInit {
         if(selectedValue === '') {
           return true; 
         }
-        return record.grade.toString() === selectedValue;
+        return record.level.toString() === selectedValue;
       }
       if (filterType === 'estado') {
         if(selectedValue === '') {
           return true; 
         }
-        return record.statusKey === selectedValue;
+        return record.status === selectedValue;
       }
       return true;
 

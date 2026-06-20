@@ -41,89 +41,99 @@
         <span class="material-symbols-outlined">add_circle</span>
         <span class="btn-label">Nueva Rutina</span>
       </button>
-      <button class="action-card-btn btn-secondary-theme" (click)="triggerAction('start-test')" routerLink="test-tea-forms">
+      <button class="action-card-btn btn-secondary-theme" routerLink="test-tea-forms">
         <span class="material-symbols-outlined">play_arrow</span>
         <span class="btn-label">Iniciar Test</span>
       </button>
-      <button class="action-card-btn btn-outline-theme" (click)="triggerAction('view-report')">
+      <button class="action-card-btn btn-outline-theme" routerLink="kaufman/test">
         <span class="material-symbols-outlined">calendar_today</span>
-        <span class="btn-label" c>Ver Reporte Semanal</span>
+        <span class="btn-label" c>Realizar test Kaufman-adaptado</span>
       </button>
     </section>
 
     <section class="competencies-block">
-      <h3 class="block-heading-title">Desarrollo de Competencias</h3>
-      <div class="competencies-cards-layout">
-        
-        <div class="competency-metric-card">
-          <div class="comp-card-header">
-            <div class="comp-icon-box box-social">
-              <span class="material-symbols-outlined">groups</span>
-            </div>
-            <span class="comp-level-text">Nivel 3</span>
-          </div>
-          <h4 class="comp-card-title">Social</h4>
-          <div class="comp-progress-info">
-            <span class="comp-sub-label">Interacción</span>
-            <span class="comp-percent-number">{{ social }}%</span>
-          </div>
-          <div class="comp-track">
-            <div class="comp-fill fill-social" [style.width.%]="animateBars ? social : 0"></div>
-          </div>
-        </div>
-
-        <div class="competency-metric-card">
-          <div class="comp-card-header">
-            <div class="comp-icon-box box-communication">
-              <span class="material-symbols-outlined">record_voice_over</span>
-            </div>
-            <span class="comp-level-text">Nivel 2</span>
-          </div>
-          <h4 class="comp-card-title">Comunicación</h4>
-          <div class="comp-progress-info">
-            <span class="comp-sub-label">Expresión</span>
-            <span class="comp-percent-number">{{ communication }}%</span>
-          </div>
-          <div class="comp-track">
-            <div class="comp-fill fill-communication" [style.width.%]="animateBars ? communication : 0"></div>
-          </div>
-        </div>
-
-        <div class="competency-metric-card">
-          <div class="comp-card-header">
-            <div class="comp-icon-box box-motor">
-              <span class="material-symbols-outlined">directions_run</span>
-            </div>
-            <span class="comp-level-text">Nivel 4</span>
-          </div>
-          <h4 class="comp-card-title">Motricidad</h4>
-          <div class="comp-progress-info">
-            <span class="comp-sub-label">Coordinación</span>
-            <span class="comp-percent-number">{{ motor }}%</span>
-          </div>
-          <div class="comp-track">
-            <div class="comp-fill fill-motor" [style.width.%]="animateBars ? motor : 0"></div>
-          </div>
-        </div>
-
-        <div class="competency-metric-card">
-          <div class="comp-card-header">
-            <div class="comp-icon-box box-cognitive">
-              <span class="material-symbols-outlined">lightbulb</span>
-            </div>
-            <span class="comp-level-text">Nivel 3</span>
-          </div>
-          <h4 class="comp-card-title">Cognitivo</h4>
-          <div class="comp-progress-info">
-            <span class="comp-sub-label">Atención</span>
-            <span class="comp-percent-number">{{ cognitive }}%</span>
-          </div>
-          <div class="comp-track">
-            <div class="comp-fill fill-cognitive" [style.width.%]="animateBars ? cognitive : 0"></div>
-          </div>
-        </div>
-
+      <h3 class="block-heading-title">Ultimo test Kaufman-adaptado</h3>
+<div class="competency-grid">
+  <div class="competency-metric-card">
+    <div class="comp-card-header">
+      <div class="comp-icon-box box-attention">
+        <span class="material-symbols-outlined">center_focus_strong</span>
       </div>
+    </div>
+    <h4 class="comp-card-title">Atención</h4>
+    <div class="comp-progress-info">
+      <span class="comp-sub-label">Enfoque</span>
+      <span class="comp-percent-number">{{ attention }}%</span>
+    </div>
+    <div class="comp-track">
+      <div class="comp-fill fill-attention" [style.width.%]="animateBars ? attention : 0"></div>
+    </div>
+  </div>
+
+  <div class="competency-metric-card">
+    <div class="comp-card-header">
+      <div class="comp-icon-box box-memory">
+        <span class="material-symbols-outlined">memory</span>
+      </div>
+    </div>
+    <h4 class="comp-card-title">Memoria</h4>
+    <div class="comp-progress-info">
+      <span class="comp-sub-label">Retención</span>
+      <span class="comp-percent-number">{{ memory }}%</span>
+    </div>
+    <div class="comp-track">
+      <div class="comp-fill fill-memory" [style.width.%]="animateBars ? memory : 0"></div>
+    </div>
+  </div>
+
+  <div class="competency-metric-card">
+    <div class="comp-card-header">
+      <div class="comp-icon-box box-association">
+        <span class="material-symbols-outlined">hub</span>
+      </div>
+    </div>
+    <h4 class="comp-card-title">Asociación</h4>
+    <div class="comp-progress-info">
+      <span class="comp-sub-label">Conexión</span>
+      <span class="comp-percent-number">{{ association }}%</span>
+    </div>
+    <div class="comp-track">
+      <div class="comp-fill fill-association" [style.width.%]="animateBars ? association : 0"></div>
+    </div>
+  </div>
+
+  <div class="competency-metric-card">
+    <div class="comp-card-header">
+      <div class="comp-icon-box box-logic">
+        <span class="material-symbols-outlined">psychology_alt</span>
+      </div>
+    </div>
+    <h4 class="comp-card-title">Secuencia</h4>
+    <div class="comp-progress-info">
+      <span class="comp-sub-label">Orden Lógico</span>
+      <span class="comp-percent-number">{{ logicalSequencing }}%</span>
+    </div>
+    <div class="comp-track">
+      <div class="comp-fill fill-logic" [style.width.%]="animateBars ? logicalSequencing : 0"></div>
+    </div>
+  </div>
+
+  <div class="competency-metric-card">
+    <div class="comp-card-header">
+      <div class="comp-icon-box box-classification">
+        <span class="material-symbols-outlined">category</span>
+      </div>
+    </div>
+    <h4 class="comp-card-title">Clasificación</h4>
+    <div class="comp-progress-info">
+      <span class="comp-sub-label">Categorización</span>
+      <span class="comp-percent-number">{{ classification }}%</span>
+    </div>
+    <div class="comp-track">
+      <div class="comp-fill fill-classification" [style.width.%]="animateBars ? classification : 0"></div>
+    </div>
+  </div>
+</div>
     </section>
 
     <section class="teacch-suggestion-banner-box">

@@ -25,8 +25,8 @@
             <label class="filter-field-label">Estado</label>
             <select class="custom-select-input" (change)="onFilterChange('estado', $event)">
               <option value="">Cualquier estado</option>
-              <option value="completado">Completado</option>
-              <option value="progreso">En progreso</option>
+              <option value="Completado">Completado</option>
+              <option value="Progreso">En progreso</option>
             </select>
           </div>
 
@@ -54,22 +54,22 @@
               <tr class="table-row-interactive">
                 <td>
                   <div class="datetime-stacked-cell">
-                    <span class="cell-primary-text">{{ row.date }}</span>
-                    <span class="cell-sub-text">{{ row.time }}</span>
+                    <span class="cell-primary-text">{{ row.createdDate | date: 'dd-MM-yyyy' }}</span>
+                    <span class="cell-sub-text">{{ row.createdDate | date: 'HH:mm'  }}</span>
                   </div>
                 </td>
                 <td>
                   <span class="activity-title-link">{{ row.activityName }}</span>
                 </td>
                 <td>
-                  <span class="tea-grade-badge" [ngClass]="row.gradeBadgeClass">
-                    Grado {{ row.grade }}
+                  <span class="tea-grade-badge" [ngClass]="`tea-badge-grade${row.level}`">
+                    Grado {{ row.level }}
                   </span>
                 </td>
                 <td>
-                  <span class="status-pill-badge" [ngClass]="row.statusBadgeClass">
-                    <span class="status-indicator-dot" [ngClass]="row.statusDotClass"></span>
-                    {{ row.statusText }}
+                  <span class="status-pill-badge status-pill-completado">
+                    <span class="status-indicator-dot dot-completado"></span>
+                    {{ row.status }}
                   </span>
                 </td>
               </tr>

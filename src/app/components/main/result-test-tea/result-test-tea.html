@@ -35,7 +35,7 @@
               r="58" 
               stroke-width="8"
               [style.strokeDasharray]="364.4"
-              [style.strokeDashoffset]="strokeDashoffset">
+              [style.strokeDashoffset]="0">
             </circle>
           </svg>
           <span class="score-text">{{ puntuacionActual }}/20</span>
@@ -58,7 +58,7 @@
     <div class="tasks-container">
       <div class="task-row item-checked">
         <span class="material-symbols-outlined icon-check">check_circle</span>
-        <span class="task-text">Estructura visual recomendada</span>
+        <span class="task-text">{{observation}}</span>
       </div>
       <div class="task-row item-pending">
         <span class="material-symbols-outlined icon-pending">pending_actions</span>

@@ -2,15 +2,10 @@ import { NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { StorageService } from '../../../service/storage-service';
 import { ResponseUserDTO } from '../../../model/User';
-export interface ResultadosKaufman {
-  idc: number;
-  attention: number;
-  memory: number;
-  association: number
-  logicalSequencing : number
-  classification:number;
-  visual: number;
-}
+import { ResultadosKaufman } from '../../../model/Kaufman';
+import { ActivatedRoute } from '@angular/router';
+import { KaufmanService } from '../../../service/kaufman-service';
+
 @Component({
   selector: 'app-kaufman-result',
   imports: [NgClass],
@@ -20,6 +15,8 @@ export interface ResultadosKaufman {
 export class KaufmanResult implements OnInit {
   
   storage = inject(StorageService)
+  kaufmanService = inject(KaufmanService)
+
 
   // Tu DTO directo
   data: ResultadosKaufman = {
@@ -35,11 +32,29 @@ export class KaufmanResult implements OnInit {
   userName: string = 'Alexander';
   radarPoints: string = '';
 
+  route = inject(ActivatedRoute)
   ngOnInit(): void {
     this.generateRadarPolygon();
+
+    const id = this.route.snapshot.paramMap.get('id');
+    console.info(id)
+    this.getTestKaufmanbyid(id)
     this.userName = (this.storage.getUser() as ResponseUserDTO).nameChild
 
   }
+
+  getTestKaufmanbyid(id:any){
+    this.kaufmanService.getResultById(id).subscribe({
+      next:(res)=>{
+        this.data = res as ResultadosKaufman
+      },
+      error: (err)=>{
+        
+      }
+
+    })
+  }
+
 
   // Llama a esta función cada vez que modifiques dinámicamente un valor de 'data'
   generateRadarPolygon(): void {
@@ -47,11 +62,8 @@ export class KaufmanResult implements OnInit {
     const centerY = 100;
     const maxRadius = 80;
     
-    // -90 grados (en radianes) apunta directamente hacia ARRIBA en un plano cartesiano estándar.
-    // Como el diseño original ya contempla la rotación en el CSS/SVG, usamos -Math.PI / 2
     const angleOffset = -Math.PI / 2; 
 
-    // ORDEN CORREGIDO: Sigue estrictamente las manecillas del reloj alineado a las etiquetas SVG
     const scores = [
       this.data.association,       // Vértice 1: Arriba
       this.data.memory,        // Vértice 2: Derecha Superior
@@ -61,7 +73,6 @@ export class KaufmanResult implements OnInit {
     ];
 
     const points = scores.map((score, i) => {
-      // Divide el círculo en 5 partes iguales (72 grados por sección)
       const angle = (i * 2 * Math.PI / 5) + angleOffset;
       const radius = (score / 100) * maxRadius;
       

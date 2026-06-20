@@ -20,7 +20,7 @@
     </div>
     <div class="hero-text-container">
       <div class="user-info">
-        Evaluación para: <strong>{{ userName }}</strong>
+        Evaluación de: <strong>{{ userName }}</strong>
       </div>
       <h2 class="section-title">Resumen General</h2>
       <p class="summary-paragraph">
@@ -119,11 +119,11 @@
           <span class="mini-card-title">Secuencia Lógica</span>
           <div class="mini-card-body">
             <div class="mini-card-value">{{ data.logicalSequencing }}%</div>
-            <span class="mini-badge" [ngClass]="{
+            <!-- <span class="mini-badge" [ngClass]="{
               'badge-high': getPerformanceLevel(data.logicalSequencing) === 'Alto',
               'badge-medium': getPerformanceLevel(data.logicalSequencing) === 'Medio',
               'badge-low': getPerformanceLevel(data.logicalSequencing) === 'Bajo'
-            }">Nivel {{ getPerformanceLevel(data.logicalSequencing) }}</span>
+            }">Nivel {{ getPerformanceLevel(data.logicalSequencing) }}</span> -->
           </div>
         </div>
 
@@ -131,11 +131,11 @@
           <span class="mini-card-title">Clasificación</span>
           <div class="mini-card-body">
             <div class="mini-card-value">{{ data.classification }}%</div>
-            <span class="mini-badge" [ngClass]="{
+            <!-- <span class="mini-badge" [ngClass]="{
               'badge-high': getPerformanceLevel(data.classification) === 'Alto',
               'badge-medium': getPerformanceLevel(data.classification) === 'Medio',
               'badge-low': getPerformanceLevel(data.classification) === 'Bajo'
-            }">Nivel {{ getPerformanceLevel(data.classification) }}</span>
+            }">Nivel {{ getPerformanceLevel(data.classification) }}</span> -->
           </div>
         </div>
 

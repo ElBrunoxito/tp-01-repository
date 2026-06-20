@@ -534,3 +534,17 @@
   display: inline-block;
   line-height: 1;
 }
+
+.competency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+/* Ejemplo de colores únicos para cada barra */
+.fill-attention { background-color: #4CAF50; }
+.fill-memory { background-color: #2196F3; }
+.fill-association { background-color: #9C27B0; }
+.fill-logic { background-color: #FF9800; }
+.fill-classification { background-color: #F44336; }
