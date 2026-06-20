@@ -1,6 +1,10 @@
+import th from '@angular/common/locales/th';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from '../../../service/storage-service';
+import { AuthService } from '../../../service/auth-service';
+import { LoginDTO, UpdateUserDTO } from '../../../model/User';
 
 @Component({
   selector: 'app-recuper-contrasena-nueva',
@@ -13,6 +17,8 @@ export class RecuperContrasenaNueva {
   showNewPassword = false;
   showConfirmPassword = false;
   router = inject(Router);
+  storage = inject(StorageService)
+  auth = inject(AuthService)
   // Objeto de enlace bidireccional para ngModel
   passwords = {
     new: '',
@@ -25,9 +31,22 @@ export class RecuperContrasenaNueva {
    */
   onResetPassword(form: NgForm): void {
     if (form.valid && this.passwords.new === this.passwords.confirm) {
-      console.log('Solicitud enviada con éxito. Nueva clave lista para actualizar.');
-      // Aquí invocas tu servicio REST (ej: AuthService.updatePassword(this.passwords.new))
-      this.router.navigate(['/login']);
+      const data: LoginDTO = {
+        username: this.storage.getEmail(),
+        password: this.passwords.confirm
+      }
+
+      this.auth.change(data).subscribe({
+        next: (res)=>{
+          this.storage.dropEmail()
+          this.router.navigate(['/login']);
+        },
+        error: (err)=>{
+          if(err.status == 404){
+            alert(err.error.message)
+          }
+        }
+      })
     }
   }
 

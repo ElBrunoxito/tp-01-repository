@@ -2,6 +2,10 @@ import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from '../../../service/storage-service';
+import { AuthService } from '../../../service/auth-service';
+import { CodeDTO } from '../../../model/User';
+import da from '@angular/common/locales/da';
 
 @Component({
   selector: 'app-recuper-contrasena-confirmar',
@@ -17,7 +21,10 @@ export class RecuperContrasenaConfirmar {
   otpValues: string[] = ['', '', '', '', '', ''];
   
   router = inject(Router);
+  storage = inject(StorageService)
+  auth = inject(AuthService)
 
+  
   private location = inject(Location);
   /**
    * Controla el comportamiento automático cuando el usuario digita un valor
@@ -60,11 +67,21 @@ export class RecuperContrasenaConfirmar {
   onVerify(): void {
     if (this.isOtpComplete()) {
       const fullCode = this.otpValues.join('');
-      console.log('Código OTP armado listo para validar:', fullCode);
-      if (fullCode === '123456') {
-        this.router.navigate(['/recuperar-contrasena/nueva']);
+      const data: CodeDTO = {
+        username: this.storage.getEmail(),
+        code: fullCode
       }
-      // Aquí amarras tu servicio HTTP para consumir tu API (ej. AuthService.verifyOtp(fullCode))
+
+      this.auth.validateCode(data).subscribe({
+        next: (res)=>{
+          this.router.navigate(['/recuperar-contrasena/nueva']);
+        },
+        error: (err)=>{
+          if(err.status == 404 || err.status == 401){
+            alert(err.error.message)
+          }
+        }
+      })
     }
   }
 

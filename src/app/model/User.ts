@@ -11,3 +11,24 @@ export interface ResponseUserDTO {
   genderChild: string;
   levelTEA: number;
 }
+
+export interface LoginDTO{
+  username:string
+  password:string
+}
+
+export interface UpdateUserDTO {
+  name: string;
+  username: string;
+  work: string;
+  password: string;
+  currentPassword?: string; 
+  nameChild: string;
+  ageChild: number;
+  genderChild: string;
+}
+
+export interface CodeDTO{
+  username: string
+  code?: string
+}

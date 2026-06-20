@@ -2,7 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from "@angular/router";
 import { StorageService } from '../../../service/storage-service';
-import { ResponseUserDTO } from '../../../model/User';
+import { LoginDTO, ResponseUserDTO } from '../../../model/User';
+import { AuthService } from '../../../service/auth-service';
+import da from '@angular/common/locales/da';
 
 @Component({
   selector: 'app-login',
@@ -17,29 +19,28 @@ export class Login {
   };
   router = inject(Router);
   storage = inject(StorageService)
+  auth = inject(AuthService)
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      console.log('Formulario procesado con éxito:', this.credentials);
+      var data:LoginDTO = {
+        username: this.credentials.email,
+        password: this.credentials.password
+      }
       
-      //LOGIN CON BACKEND
-      const user: ResponseUserDTO = {
-  id: "550e8400-e29b-41d4-a716-446655440000",
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-  name: "Juan Pérez",
-  username: "juanperez_dev",
-  email: "juan.perez@example.com",
-  work: "Ingeniero de Software",
-  idChild: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-  nameChild: "Mateo Pérez",
-  ageChild: 6,
-  genderChild: "Masculino",
-  levelTEA: 1
-};
-
-    this.storage.setUser(user)
-
-      this.router.navigate(['/app']);
+      this.auth.login(data).subscribe({
+        next: (res)=>{
+          this.router.navigate(['/app']);
+          this.storage.setUser(res)
+          this.storage.dropEmail()
+        },
+        error: (err)=>{
+          console.error(err.status + ": " + err.message)
+          if(err.status == 403){
+            alert("Usuario o contraseña incorrectos")
+          }
+        }
+      })
     }
   }
 

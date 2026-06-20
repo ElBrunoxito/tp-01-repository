@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { NgClass } from "../../../../../node_modules/@angular/common/types/_common_module-chunk";
+import { LoginDTO } from '../../../model/User';
+import { AuthService } from '../../../service/auth-service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +16,8 @@ export class Register {
     email: '',
     password: ''
   };
+  auth = inject(AuthService)
+  router = inject(Router);
 
   /**
    * Ejecuta la autenticación cuando el formulario es válido
@@ -21,8 +25,22 @@ export class Register {
    */
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      console.log('Datos listos para enviar al servicio Auth:', this.credentials);
-      // Aquí amarras tu HTTP Client Service
+      var data:LoginDTO = {
+        username: this.credentials.email,
+        password: this.credentials.password
+      }
+      
+      this.auth.login(data).subscribe({
+        next: (res)=>{
+          this.router.navigate(['/app']);
+        },
+        error: (err)=>{
+          console.error(err.status + ": " + err.message)
+          if(err.status == 403){
+            alert("Usuario o contraseña incorrectos")
+          }
+        }
+      })
     }
   }
 

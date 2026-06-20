@@ -9,6 +9,7 @@ export class StorageService {
 
   private readonly USER_KEY = 'saveUserKey';
   private readonly RES_KEY = 'respuestasTestTea';
+  private readonly EMAIL_KEY = 'erekey'
 
 
 
@@ -53,6 +54,26 @@ export class StorageService {
   dropUser(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.USER_KEY);
+    }
+  }
+
+  setEmail(email:string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.EMAIL_KEY, email);
+    }
+  }
+
+  getEmail(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      const data = localStorage.getItem(this.EMAIL_KEY);
+      return data ? data : "";
+    }
+    return "";
+  }
+
+  dropEmail(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.EMAIL_KEY);
     }
   }
 
