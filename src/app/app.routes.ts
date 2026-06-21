@@ -46,8 +46,11 @@ import { T19 } from './components/main/routines/level-1/t19/t19';
 import { T110 } from './components/main/routines/level-1/t110/t110';
 import { Nav } from './components/main/routines/level-1/nav/nav';
 import { InfoUser } from './components/main/info-user/info-user';
+import { authGuardGuard } from './guards/auth-guard-guard';
+import { loginGuardGuard } from './guards/login-guard-guard';
 
 export const routes: Routes = [
+
     {
         path:'',redirectTo:'login',pathMatch:'full'
     },
@@ -57,6 +60,7 @@ export const routes: Routes = [
     },*/
     {
         path:'login', 
+        canActivate: [loginGuardGuard],
         component: Login
     },
     {
@@ -77,6 +81,7 @@ export const routes: Routes = [
     },
     {
         path:'app', 
+        canActivate: [authGuardGuard],
         component: Main,
         children: [   
            {
@@ -103,23 +108,28 @@ export const routes: Routes = [
     //TEST-TEA
     {
         path:'app/test-tea-forms',
+        canActivate: [authGuardGuard],
         component: TestTeaForms
     },
     {
         path:'app/resultados/:id',
+        canActivate: [authGuardGuard],
         component: ResultTestTea
     },
     //KAUFMAN
     {
         path:'app/kaufman/test',
+        canActivate: [authGuardGuard],
         component: KaufmanTest
     },
     {
         path:'app/kaufman/result/:id',
+        canActivate: [authGuardGuard],
         component: KaufmanResult
     },
     {
         path:'app/routine/level-1',
+        canActivate: [authGuardGuard],
         component: Nav,
         children: [
             
@@ -142,6 +152,7 @@ export const routes: Routes = [
     },
     {
         path:'app/routine/level-2',
+        canActivate: [authGuardGuard],
         children: [
             
             {
@@ -163,6 +174,7 @@ export const routes: Routes = [
     },
     {
         path:'app/routine/level-3',
+        canActivate: [authGuardGuard],
         children: [
             
             {
