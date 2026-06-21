@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { StorageService } from '../../../service/storage-service';
 import { ResponseUserDTO } from '../../../model/User';
 import { ResultadosKaufman } from '../../../model/Kaufman';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { KaufmanService } from '../../../service/kaufman-service';
 
 @Component({
@@ -25,6 +25,7 @@ export class KaufmanResult implements OnInit {
   radarPoints: string = '';
   
   route = inject(ActivatedRoute)
+  router = inject(Router)
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -90,7 +91,9 @@ export class KaufmanResult implements OnInit {
   printResults(): void {
     window.print();
   }
-
+  goToHome(){
+    this.router.navigate(['/app']);
+  }
   downloadReport(): void {
     console.log('Descargando informe para:', this.userName);
   }

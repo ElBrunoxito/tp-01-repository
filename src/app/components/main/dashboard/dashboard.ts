@@ -37,7 +37,7 @@ export class Dashboard implements OnInit, AfterViewInit {
     const user:ResponseUserDTO = this.storage.getUser()
 
     if(user.idChild){
-      this.currentProgress = 0;
+      this.currentProgress = user.currentProgress;
       this.nameChild = user.nameChild;
       this.ageChild = user.ageChild;
       this.levelChild = user.levelTEA;
@@ -60,6 +60,9 @@ export class Dashboard implements OnInit, AfterViewInit {
   triggerAction(actionType: string): void {
     console.log(`Acción del panel derecho ejecutada: [${actionType}]`);
     if(actionType === "new-routine"){
+      if(this.levelChild == 0 ){
+        alert("Debes realizar el test de la derecha")
+      }
       this.router.navigate([`/app/routine/level-${this.levelChild}`]);
     }
   }

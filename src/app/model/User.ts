@@ -10,6 +10,7 @@ export interface ResponseUserDTO {
   ageChild: number;
   genderChild: string;
   levelTEA: number;
+  currentProgress: number | 0
 }
 
 export interface LoginDTO{
