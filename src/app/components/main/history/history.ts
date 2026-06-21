@@ -1,12 +1,9 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-interface RoutineRecord {
-  id: number;
-  createdDate: string;
-  activityName: string;
-  level: number;
-  status: string;
-}
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { RoutineService } from '../../../service/routine-service';
+import { StorageService } from '../../../service/storage-service';
+import { ResponseUserDTO } from '../../../model/User';
+
 
 @Component({
   selector: 'app-history',
@@ -15,37 +12,29 @@ interface RoutineRecord {
   styleUrl: './history.css',
 })
 export class History implements OnInit {
-  routineRecords: RoutineRecord[] = [];
-  filteredRecords: RoutineRecord[] = [];
+  routineRecords: RoutineGetDTO[] = [];
+  filteredRecords: RoutineGetDTO[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  cdr = inject(ChangeDetectorRef)
+  idChild!: any
 
+  constructor() {}
+  
   ngOnInit(): void {
-    // Inicialización y tipado exacto del modelo maestro del historial clínico
-    this.routineRecords = [
-      {
-        id: 1,
-        createdDate: '2026-08-14 09:15',
-        activityName: 'Rutina de Lavado de Manos',
-        level: 2,
-        status: 'Completado',
+    this.idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.getRoutinesByIdChild(this.idChild).subscribe({
+      next: (res) => {
+        this.routineRecords = res
+        this.filteredRecords = this.routineRecords;
+        this.cdr.detectChanges()
       },
-      {
-        id: 2,
-        createdDate: '2023-10-14 10:45',
-        activityName: 'Lectura Compartida',
-        level: 1,
-        status: 'En progreso',
-      },
-      {
-        id: 3,
-        createdDate: '2027-09-19 11:30',
-        activityName: 'Tiempo de Juego Social',
-        level: 3,
-        status: 'En progreso',
+      error: (err) => {
+        console.error(err.error)
       }
-    ];
-    this.filteredRecords = this.routineRecords;
+    })
+
   }
 
 

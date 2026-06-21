@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 @Component({
   selector: 'app-t28',
@@ -15,8 +18,9 @@ export class T28 implements OnInit, OnDestroy {
   private timerInterval: any;
 
   constructor(private cdr: ChangeDetectorRef) {}
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
-
   ngOnInit(): void {
     this.iniciarTemporizador();
   }
@@ -49,8 +53,15 @@ export class T28 implements OnInit, OnDestroy {
 
   onContinuar(): void {
     if (this.tiempoTerminado) {
-      this.router.navigate(['/app/routine/level-2/9']);
-
+      const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+      this.routine.registerRoutine(idChild,28).subscribe({
+        next: (res)=>{
+          this.router.navigate(['/app/routine/level-2/9']);
+        },
+        error: (err)=>{
+          console.error("error al guardar en backend")
+        }
+      }); 
     }
   }
 

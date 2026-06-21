@@ -30,14 +30,14 @@ export class Register {
         password: this.credentials.password
       }
       
-      this.auth.login(data).subscribe({
+      this.auth.register(data).subscribe({
         next: (res)=>{
-          this.router.navigate(['/app']);
+          this.router.navigate(['/login']);
         },
         error: (err)=>{
           console.error(err.status + ": " + err.message)
           if(err.status == 403){
-            alert("Usuario o contraseña incorrectos")
+            alert("Ya existe un usuario con ese correo")
           }
         }
       })

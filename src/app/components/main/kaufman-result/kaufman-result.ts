@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { StorageService } from '../../../service/storage-service';
 import { ResponseUserDTO } from '../../../model/User';
 import { ResultadosKaufman } from '../../../model/Kaufman';
@@ -16,44 +16,36 @@ export class KaufmanResult implements OnInit {
   
   storage = inject(StorageService)
   kaufmanService = inject(KaufmanService)
-
+  cdr = inject(ChangeDetectorRef)
 
   // Tu DTO directo
-  data: ResultadosKaufman = {
-    idc:90,
-    attention: 60,      // 1. Arriba
-    memory: 66,       // 2. Derecha Superior
-    association: 50,    // 3. Derecha Inferior
-    logicalSequencing: 45, // 4. Izquierda Inferior
-    classification: 90, // 5. Izquierda Superior
-    visual: 78
-  };
+  data!: ResultadosKaufman 
 
-  userName: string = 'Alexander';
+  userName: string = '';
   radarPoints: string = '';
-
+  
   route = inject(ActivatedRoute)
-  ngOnInit(): void {
-    this.generateRadarPolygon();
 
+  ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.info(id)
-    this.getTestKaufmanbyid(id)
     this.userName = (this.storage.getUser() as ResponseUserDTO).nameChild
 
-  }
-
-  getTestKaufmanbyid(id:any){
+    console.warn(id)
     this.kaufmanService.getResultById(id).subscribe({
       next:(res)=>{
-        this.data = res as ResultadosKaufman
+        this.data = res
+        this.generateRadarPolygon();
+        this.cdr.detectChanges();
       },
       error: (err)=>{
-        
+        console.warn("A ocurrido un error al obtner la data")
       }
 
     })
+
   }
+
+
 
 
   // Llama a esta función cada vez que modifiques dinámicamente un valor de 'data'
@@ -92,7 +84,7 @@ export class KaufmanResult implements OnInit {
 
   getCircularProgressBg(): string {
     return `radial-gradient(closest-side, white 82%, transparent 83% 100%),
-            conic-gradient(#075fab ${this.data.idc}%, #e7e8e9 0)`;
+            conic-gradient(#075fab ${this.data.icg}%, #e7e8e9 0)`;
   }
 
   printResults(): void {

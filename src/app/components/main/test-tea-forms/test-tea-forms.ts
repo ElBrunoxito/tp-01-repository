@@ -2,6 +2,9 @@ import { NgClass} from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { StorageService } from '../../../service/storage-service';
 import { Router } from '@angular/router';
+import { TestTeaService } from '../../../service/test-tea-service';
+import { TestTeaDTO } from '../../../model/TestTea';
+import { ResponseUserDTO } from '../../../model/User';
 
 interface Question {
   id: number;
@@ -45,10 +48,12 @@ export class TestTeaForms implements OnInit {
 
   storage = inject(StorageService);
   router = inject(Router);
-
+  testTea = inject(TestTeaService)
+  idChild:any 
   constructor() {}
 
   ngOnInit(): void {
+    this.idChild = (this.storage.getUser() as ResponseUserDTO).idChild
     const preguntasGuardadas = this.storage.getQuestions();
     if (preguntasGuardadas) {
       this.listaPreguntas = preguntasGuardadas;
@@ -115,21 +120,29 @@ export class TestTeaForms implements OnInit {
   finalizarTest(){
     this.storage.dropQuestions();
     //OBTENER ID DEL BACKEND
-    let id = '1'; 
 
-    this.router.navigate([`/app/resultados/${id}`]); 
-    /*this.router.navigate(['/load'], { 
-      state: { 
-        texto: 'El algoritmo combinado está midiendo tu puntuación', // El texto que tú quieras
-        destino: '/kaufman'                                      // A dónde irá después del tiempo random
-      } 
-    });*/
-    console.log(this.listaPreguntas)
-    let count = 0;
-    this.listaPreguntas.forEach(p => {
-      console.log(`${count + 1}: Respuesta: ${p.respuestaSeleccionada}`);
-      count++;
-    });
+    const data: TestTeaDTO = {
+      idChild: this.idChild,
+      test: this.listaPreguntas.reduce((acc,q) =>{
+        if (q.respuestaSeleccionada !== null) {
+          acc[q.id.toString()] = q.respuestaSeleccionada;
+        }
+        return acc;
+      },{} as { [key: string]: number })
+    }
+
+    this.testTea.saveResult(data).subscribe({
+      next: (res)=>{
+        const user:ResponseUserDTO = this.storage.getUser()
+        user.levelTEA = res.levelTEA
+        this.storage.setUser(user)
+        this.router.navigate([`/app/resultados/${res.id}`]); 
+      },
+      error: (err)=>{
+        console.error("Error con backend")
+      }
+    })
+
   }
 
 }

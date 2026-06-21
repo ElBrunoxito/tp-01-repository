@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 interface ElementoClasificable {
   id: string;
@@ -42,6 +45,8 @@ export class T29 implements OnInit {
   conteoErrores: number = 0;
   mostrarGuiaAyuda: boolean = false;
   actividadCompletada: boolean = false;
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -105,12 +110,20 @@ export class T29 implements OnInit {
   }
 
   onSiguiente(): void {
-    this.router.navigate(['/app/routine/level-2/10']);
+      const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+      this.routine.registerRoutine(idChild,29).subscribe({
+        next: (res)=>{
+          this.router.navigate(['/app/routine/level-2/10']);
+        },
+        error: (err)=>{
+          console.error("error al guardar en backend")
+        }
+      }); 
   }
 
   onListo(): void {
     if (this.actividadCompletada) {
-      this.router.navigate(['/app/routine/level-2/10']);
+      this.onSiguiente()
     }
   }
 }

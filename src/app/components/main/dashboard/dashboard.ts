@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { StorageService } from '../../../service/storage-service';
 import { ResponseUserDTO } from '../../../model/User';
@@ -29,19 +29,19 @@ export class Dashboard implements OnInit, AfterViewInit {
 
   router = inject(Router)
   storage = inject(StorageService)
-
+  cdr = inject(ChangeDetectorRef)
   constructor() {}
 
   ngOnInit(): void {
     // Inicialización de los datos clínicos de la vista
-
-
-    this.currentProgress = 0;
     const user:ResponseUserDTO = this.storage.getUser()
-    this.nameChild = user.nameChild;
-    this.ageChild = user.ageChild;
-    this.levelChild = user.levelTEA;
-    
+
+    if(user.idChild){
+      this.currentProgress = 0;
+      this.nameChild = user.nameChild;
+      this.ageChild = user.ageChild;
+      this.levelChild = user.levelTEA;
+    }
     this.memory = 68;
     this.association = 72;
     this.logicalSequencing = 55;
@@ -50,10 +50,8 @@ export class Dashboard implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Retardo controlado para ejecutar de forma fluida las barras de competencias en pantalla
-    setTimeout(() => {
-      this.animateBars = true;
-    }, 100);
+    this.animateBars = true;
+    this.cdr.detectChanges();
   }
 
   /**

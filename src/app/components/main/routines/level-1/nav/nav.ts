@@ -1,6 +1,9 @@
 import id from '@angular/common/locales/id';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 interface Step {
   id:number | string,
@@ -19,23 +22,29 @@ export class Nav implements OnInit {
   totalSteps: number = 10;
   progressPercentage: number = 10;
 
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
 // Lista estática y fija de las rutas de tu rutina
   stepTitles: Step[] = [
-    { id: 1, nombre: 'Saludo y Bienvenida', ruta: '/app/routine/level-1/1' },
-    { id: 2, nombre: 'Elección de Actividad', ruta: '/app/routine/level-1/2' },
-    { id: 3, nombre: 'Identificación de Colores', ruta: '/app/routine/level-1/3' },
-    { id: 4, nombre: 'Juego de Memoria (Pares)', ruta: '/app/routine/level-1/4' },
-    { id: 5, nombre: 'Secuencia Lógica Dinámica', ruta: '/app/routine/level-1/5' },
-    { id: 6, nombre: 'Resolución de Problema Simple', ruta: '/app/routine/level-1/6' },
-    { id: 7, nombre: 'Selección de Objeto', ruta: '/app/routine/level-1/7' },
-    { id: 8, nombre: 'Tiempo de Descanso Controlado', ruta: '/app/routine/level-1/8' },
-    { id: 9, nombre: 'Clasificación por Categorías', ruta: '/app/routine/level-1/9' },
+    { id: 11, nombre: 'Saludo y Bienvenida', ruta: '/app/routine/level-1/1' },
+    { id: 12, nombre: 'Elección de Actividad', ruta: '/app/routine/level-1/2' },
+    { id: 13, nombre: 'Identificación de Colores', ruta: '/app/routine/level-1/3' },
+    { id: 14, nombre: 'Juego de Memoria (Pares)', ruta: '/app/routine/level-1/4' },
+    { id: 15, nombre: 'Secuencia Lógica Dinámica', ruta: '/app/routine/level-1/5' },
+    { id: 16, nombre: 'Resolución de Problema Simple', ruta: '/app/routine/level-1/6' },
+    { id: 17, nombre: 'Selección de Objeto', ruta: '/app/routine/level-1/7' },
+    { id: 18, nombre: 'Tiempo de Descanso Controlado', ruta: '/app/routine/level-1/8' },
+    { id: 19, nombre: 'Clasificación por Categorías', ruta: '/app/routine/level-1/9' },
     { id: 10, nombre: 'Despedida y Cierre', ruta: '/app/routine/level-1/10' }
   ];
-constructor(private router: Router) {}
+constructor() {}
 
   ngOnInit() {
-    // Escuchamos el router para sincronizar el paso visual con la URL actual
+    const urlSegments = this.router.url.split('/');
+    this.currentStep = Number(urlSegments[urlSegments.length - 1]);
+    console.warn(this.currentStep)
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateStepByRoute(event.urlAfterRedirects);
@@ -64,10 +73,17 @@ constructor(private router: Router) {}
   navigateNext() {
     if (this.currentStep < this.totalSteps) {
       const proximoId = this.currentStep + 1;
-      const proximoPaso = this.stepTitles.find(step => step.id === proximoId);
-      
+      const proximoPaso = this.stepTitles[proximoId-1]
       if (proximoPaso) {
-        this.router.navigate([proximoPaso.ruta]);
+        const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+        this.routine.registerRoutine(idChild,this.stepTitles[this.currentStep-1].id).subscribe({
+          next: (res)=>{
+            this.router.navigate([proximoPaso.ruta]);
+          },
+          error: (err)=>{
+            console.error("error al guardar en backend")
+          }
+        }); 
       }
     }
   }
@@ -75,10 +91,18 @@ constructor(private router: Router) {}
   navigatePrevious() {
     if (this.currentStep > 1) {
       const idAnterior = this.currentStep - 1;
-      const pasoAnterior = this.stepTitles.find(step => step.id === idAnterior);
+      const pasoAnterior = this.stepTitles[idAnterior-1]
       
       if (pasoAnterior) {
-        this.router.navigate([pasoAnterior.ruta]);
+        const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+        this.routine.registerRoutine(idChild,this.stepTitles[this.currentStep-1].id).subscribe({
+          next: (res)=>{
+            this.router.navigate([pasoAnterior.ruta]);
+          },
+          error: (err)=>{
+            console.error("error al guardar en backend")
+          }
+        }); 
       }
     }
   }

@@ -77,6 +77,12 @@ export class StorageService {
     }
   }
 
+  dropAll(){
+    this.dropEmail();
+    this.dropQuestions();
+    this.dropUser();
+  }
+
 
 
   

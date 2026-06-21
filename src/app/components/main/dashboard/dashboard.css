@@ -160,7 +160,6 @@
   height: 100%;
   background-color: var(--primary);
   border-radius: 9999px;
-  transition: width 1s ease-out;
 }
 
 /* 2. Botones de Acciones Rápidas */
@@ -190,7 +189,7 @@
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .action-card-btn:hover {

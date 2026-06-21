@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t31',
@@ -19,9 +22,11 @@ export class T31 implements OnInit, OnDestroy {
   
   readonly TIMEOUT_LIMIT = 3000; 
 
-  router = inject(Router);
-  // Inyectamos ChangeDetectorRef en el constructor
-  constructor(private cdr: ChangeDetectorRef) {}
+  cdr = inject(ChangeDetectorRef)
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
+  constructor() {}
 
   ngOnInit() {
     this.startInactivityCheck();
@@ -33,10 +38,19 @@ export class T31 implements OnInit, OnDestroy {
 
   onContinuar(): void {
     console.log(`⏱️ Botón presionado a los ${this.segundosTranscurridos} segundos.`);
+
     this.clearTimers();
     this.isButtonShaking = false;
-    this.cdr.detectChanges(); // Forzamos actualización al limpiar
-    this.router.navigate(['/app/routine/level-3/2']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,31).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/2']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    });
+    this.cdr.detectChanges();
   }
 
   startInactivityCheck(): void {

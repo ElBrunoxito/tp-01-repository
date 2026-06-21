@@ -1,6 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { ResultadosKaufman } from '../../../model/Kaufman';
+import { KaufmanService } from '../../../service/kaufman-service';
+import { StorageService } from '../../../service/storage-service';
+import { ResponseUserDTO } from '../../../model/User';
+import id from '@angular/common/locales/id';
 
 
 @Component({
@@ -17,17 +21,29 @@ export class Kaufman implements OnInit {
   public totalTests: number = 24;
   
   // Datos de la tabla reactiva
-  public evaluaciones: ResultadosKaufman[] = [
-    { id:"1",createdDate: '12-03-2024', visual: 14,attention: 14, classification: 11, memory: 15, logicalSequencing: 12, association: 10, idc: 116 },
-    { createdDate: '05-02-2024', visual: 14, attention: 12, classification: 10, memory: 14, logicalSequencing: 11, association: 9,  idc: 108 },
-    { createdDate: '15-12-2023', visual: 14, attention: 13, classification: 12, memory: 13, logicalSequencing: 10, association: 11, idc: 112 },
-    { createdDate: '20-10-2023', visual: 14, attention: 11, classification: 9,  memory: 12, logicalSequencing: 10, association: 8,  idc: 102 }
-  ];
+  public evaluaciones: ResultadosKaufman[] = [];
 
   router = inject(Router)
   constructor() {}
+  kaufmanService = inject(KaufmanService)
+  storage = inject(StorageService)
+  cdr = inject(ChangeDetectorRef)
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const idChild= (this.storage.getUser() as ResponseUserDTO).idChild
+
+    this.kaufmanService.getKaufmanLogs(idChild).subscribe({
+      next:(res)=>{
+        this.evaluaciones = res
+        this.cdr.detectChanges();
+      },
+      error: (err)=>{
+        console.warn("A ocurrido un error al obtener la data")
+      }
+
+    })
+
+  }
 
 
 

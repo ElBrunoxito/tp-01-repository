@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+.inside-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
 /* --- CONTENEDOR ANCLADO AL CRISTAL DE LA PANTALLA --- */
 .teacch-screen-wrapper {
   font-family: 'Lexend', sans-serif;

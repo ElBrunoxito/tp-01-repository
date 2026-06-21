@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 interface BloqueSecuencia {
   id: number;
@@ -45,6 +48,8 @@ export class T39 implements OnInit, OnDestroy {
   readonly NO_RESPONSE_LIMIT = 8000;       // ⚡ Límite exacto de 8 segundos por inactividad
   readonly WAIT_TIME_BEFORE_NAV = 2000;     // ⚡ Retención visual de 2 segundos antes de cambiar de pantalla
 
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
   constructor(private zone: NgZone, private cdr: ChangeDetectorRef) {}
 
@@ -189,8 +194,15 @@ export class T39 implements OnInit, OnDestroy {
   }
 
   navegarASiguientePantalla(): void {
-    console.log('🚀 Avanzando automáticamente hacia la Pantalla 10...');
-    this.router.navigate(['/app/routine/level-3/10']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,39).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/10']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

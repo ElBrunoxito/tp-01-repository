@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t38',
@@ -24,7 +27,9 @@ export class T38 implements OnInit, OnDestroy {
   consoleTimer: any;
   segundosTranscurridos: number = 0;
 
-  router = inject(Router);
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
   // PARÁMETROS DE CALIBRACIÓN REQUERIDOS
   readonly NO_RESPONSE_LIMIT = 8000;       // ⚡ 8 segundos de límite por inactividad
   readonly WAIT_TIME_BEFORE_NAV = 2000;     // ⚡ 2 segundos de feedback fijo antes de cambiar de pantalla
@@ -126,8 +131,15 @@ export class T38 implements OnInit, OnDestroy {
    * Enrutador centralizado hacia la Pantalla 9
    */
   navegarASiguientePantalla(): void {
-    console.log('🚀 Cambiando hacia la siguiente actividad (Pantalla 9)...');
-    this.router.navigate(['/app/routine/level-3/9']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,38).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/9']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

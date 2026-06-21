@@ -26,25 +26,18 @@
     </nav>
 
     <div class="sidebar-footer-profile">
-      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'perfil'}" href="#" (click)="onNavigate($event, 'perfil')">
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'perfil'}" href="#" (click)="onNavigate($event, `user/${this.id}`)">
         <span class="material-symbols-outlined nav-icon">account_circle</span>
         <span class="nav-text">Mi Perfil</span>
       </a>
-      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'ajustes'}" href="#" (click)="onNavigate($event, 'ajustes')">
-        <span class="material-symbols-outlined nav-icon">settings</span>
-        <span class="nav-text">Ajustes</span>
+      <a class="nav-item" [ngClass]="{active : this.activeRoute == 'ajustes'}" href="#" (click)="logout()">
+        <span class="material-symbols-outlined nav-icon">logout</span>
+        <span class="nav-text">Cerrar sesión</span>
       </a>
     </div>
 
   </div>
 </aside>
 
-<header class="mobile-top-bar">
-  <div class="mobile-bar-content">
-    <button class="menu-toggle-btn" (click)="toggleMobileSidebar()">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-    <h1 class="mobile-app-title">Help with TEACCH</h1>
-  </div>
-</header>
+
 

@@ -1,5 +1,8 @@
 import { Component, inject, NgZone, OnDestroy, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 @Component({
   selector: 'app-t110',
@@ -8,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './t110.css',
 })
 export class T110 implements OnInit {
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
 
@@ -18,7 +23,15 @@ constructor() {}
   }
 
   onFinalizar(): void {
-    this.router.navigate(['/app']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,10).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
 
   }
 }

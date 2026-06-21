@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t310',
@@ -22,6 +25,8 @@ export class T310 implements OnInit, OnDestroy {
 
   constructor(private zone: NgZone, private cdr: ChangeDetectorRef) {}
 
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
   ngOnInit() {
@@ -73,8 +78,15 @@ export class T310 implements OnInit, OnDestroy {
   }
 
   completarFlujoRutina(): void {
-    // Aquí invocas el Router de tu tesis para volver al panel general
-    this.router.navigate(['/app']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,30).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 interface CartaMemoria {
   id: number;
@@ -30,6 +33,8 @@ export class T25 implements OnInit {
     { id: 4, icono: 'star', colorClase: 'icon-yellow', descubierta: false }
   ];
 
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
 
@@ -156,14 +161,21 @@ export class T25 implements OnInit {
   }
 
   onSiguiente(): void {
-    this.router.navigate(['/app/routine/level-2/6']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,25).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-2/6']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
 
   }
 
   onListo(): void {
     if (this.intentoExitoso) {
-      this.router.navigate(['/app/routine/level-2/6']);
-
+      this.onSiguiente()
     }
   }
 

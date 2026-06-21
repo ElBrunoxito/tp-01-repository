@@ -10,6 +10,9 @@ export class AuthService {
     private http = inject(HttpClient)
     private readonly baseUrl = "http://localhost:8080/auth"
 
+    getById(idUser:any){
+      return this.http.get<ResponseUserDTO>(`${this.baseUrl}/${idUser}`)
+    }
     login(data:LoginDTO) {
       return this.http.post<ResponseUserDTO>(`${this.baseUrl}/login`,data)
     }
@@ -17,8 +20,8 @@ export class AuthService {
       return this.http.post<ResponseUserDTO>(`${this.baseUrl}/register`,data)
     }
 
-    update(data:UpdateUserDTO){
-      return this.http.post<ResponseUserDTO>(`${this.baseUrl}/update`,data)
+    update(idUser:any, data:UpdateUserDTO){
+      return this.http.put<ResponseUserDTO>(`${this.baseUrl}/${idUser}`,data)
     }
 
     sendCode(data:CodeDTO){
@@ -30,6 +33,5 @@ export class AuthService {
     }
     change(data:LoginDTO){
       return this.http.post<any>(`${this.baseUrl}/change`,data)
-
     }
 }

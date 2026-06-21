@@ -1,6 +1,6 @@
 export interface ResultadosKaufman {
   id?: any
-  idc: number;
+  icg: number;
   attention: number;
   memory: number;
   association: number

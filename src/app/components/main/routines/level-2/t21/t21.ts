@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t21',
@@ -8,17 +11,25 @@ import { Router } from '@angular/router';
   styleUrl: './t21.css',
 })
 export class T21 {
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
-constructor() {}
+  constructor() {}
 
   onSiguiente(): void {
-    console.log('Botón Siguiente presionado. Avanzando al siguiente paso del algoritmo...');
-    // Aquí puedes implementar el router para cambiar de vista, por ejemplo:
-    this.router.navigate(['/app/routine/level-2/2']);
+    this.onListo()
   }
 
   onListo(): void {
-    console.log('Botón Listo presionado. Tarea actual guardada o verificada.');
-    this.router.navigate(['/app/routine/level-2/2']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,21).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-2/2']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
+
   }
 }

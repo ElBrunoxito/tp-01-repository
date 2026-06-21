@@ -1,6 +1,9 @@
 <div class="teacch-screen-wrapper">
-  
+
   <main class="canvas-container">
+    <div class="question-header">
+      <h1 class="main-title" >Abre las tarjetas y une los pares</h1>
+    </div>
     <div class="cards-grid">
       
       <button class="card-button" 
@@ -8,7 +11,8 @@
         (click)="voltearCarta(0)">
         
         @if (estadoCartas[0].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[0].icono }}</span>
+          <!-- <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[0].icono }}</span> -->
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[0].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }
@@ -18,7 +22,7 @@
         [ngClass]="{'card-revealed': estadoCartas[1].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[1].esParteDelParObjetivo}"
         (click)="voltearCarta(1)">
         @if (estadoCartas[1].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[1].icono }}</span>
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[1].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }
@@ -28,7 +32,7 @@
         [ngClass]="{'card-revealed': estadoCartas[2].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[2].esParteDelParObjetivo}"
         (click)="voltearCarta(2)">
         @if (estadoCartas[2].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[2].icono }}</span>
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[2].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }
@@ -38,7 +42,7 @@
         [ngClass]="{'card-revealed': estadoCartas[3].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[3].esParteDelParObjetivo}"
         (click)="voltearCarta(3)">
         @if (estadoCartas[3].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[3].icono }}</span>
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[3].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }
@@ -48,7 +52,7 @@
         [ngClass]="{'card-revealed': estadoCartas[4].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[4].esParteDelParObjetivo}"
         (click)="voltearCarta(4)">
         @if (estadoCartas[4].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[4].icono }}</span>
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[4].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }
@@ -58,7 +62,7 @@
         [ngClass]="{'card-revealed': estadoCartas[5].revelada, 'force-highlight': resaltarParCorrecto && estadoCartas[5].esParteDelParObjetivo}"
         (click)="voltearCarta(5)">
         @if (estadoCartas[5].revelada) {
-          <span class="material-symbols-outlined card-icon text-primary">{{ estadoCartas[5].icono }}</span>
+          <img class="inside-image card-icon text-primary" [src]="estadoCartas[5].icono" alt="manzana">
         } @else {
           <span class="material-symbols-outlined card-icon text-on-primary-container">question_mark</span>
         }

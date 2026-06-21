@@ -23,7 +23,7 @@
           
           @if (slot.pasoContenido) {
             <div class="slot-inner-content">
-              <span class="slot-label">{{ slot.pasoContenido.titulo }}</span>
+              <img class="inside-image pictogram" [src]="slot.imgUrl" alt="manzana">
             </div>
           } @else {
             <div class="slot-placeholder">
@@ -47,10 +47,7 @@
           (click)="seleccionarPasoOrigen(paso.id)">
           
           <div class="image-wrapper">
-            @if (paso.id === 'enjuagar') { <span class="material-symbols-outlined pictogram">water_drop</span> }
-            @if (paso.id === 'pasta') { <span class="material-symbols-outlined pictogram">brush</span> }
-            @if (paso.id === 'cepillar') { <span class="material-symbols-outlined pictogram">clean_hands</span> }
-            @if (paso.id === 'limpiar') { <span class="material-symbols-outlined pictogram">soap</span> }
+              <img class="inside-image pictogram" [src]="paso.imgUrl" alt="manzana">
           </div>
           <p class="step-title">{{ paso.titulo }}</p>
         </button>

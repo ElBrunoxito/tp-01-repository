@@ -353,6 +353,12 @@
   display: inline-block;
 }
 
+
+.pill-grade-1 {
+  background-color: greenyellow;
+  color: var(--on-secondary-container);
+}
+
 .pill-grade-2 {
   background-color: var(--secondary-container);
   color: var(--on-secondary-container);

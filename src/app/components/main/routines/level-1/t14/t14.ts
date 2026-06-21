@@ -17,12 +17,12 @@ export class T14 implements OnInit, OnDestroy {
 
   // Mapeo inicial de las 6 cartas (3 pares, por ejemplo 'apple', 'apple', etc.)
   estadoCartas: Carta[] = [
-    { icono: 'nutrition', revelada: false, esParteDelParObjetivo: true },
-    { icono: 'brightness_5', revelada: false, esParteDelParObjetivo: false },
-    { icono: 'star', revelada: false, esParteDelParObjetivo: false },
-    { icono: 'brightness_5', revelada: false, esParteDelParObjetivo: false },
-    { icono: 'nutrition', revelada: false, esParteDelParObjetivo: true },
-    { icono: 'star', revelada: false, esParteDelParObjetivo: false }
+    { icono: 'https://static.vecteezy.com/system/resources/thumbnails/008/085/931/small/apple-clip-art-illustration-vector.jpg', revelada: false, esParteDelParObjetivo: true },
+    { icono: 'https://i.pinimg.com/736x/3b/19/80/3b1980ae78ad4de47eed5bee037c25f6.jpg', revelada: false, esParteDelParObjetivo: false },
+    { icono: 'https://png.pngtree.com/png-clipart/20250122/original/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_19855052.png', revelada: false, esParteDelParObjetivo: false },
+    { icono: 'https://i.pinimg.com/736x/3b/19/80/3b1980ae78ad4de47eed5bee037c25f6.jpg', revelada: false, esParteDelParObjetivo: false },
+    { icono: 'https://static.vecteezy.com/system/resources/thumbnails/008/085/931/small/apple-clip-art-illustration-vector.jpg', revelada: false, esParteDelParObjetivo: true },
+    { icono: 'https://png.pngtree.com/png-clipart/20250122/original/pngtree-cute-yellow-cartoon-star-clipart-illustration-png-image_19855052.png', revelada: false, esParteDelParObjetivo: false }
   ];
 
   cartasSeleccionadasIndices: number[] = [];

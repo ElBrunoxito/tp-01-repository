@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 @Component({
   selector: 'app-t33',
@@ -29,6 +32,8 @@ instructionText: string = 'Une iguales';
   readonly NO_RESPONSE_LIMIT = 8000;      // 10 segundos máximos de espera por inactividad
   readonly WAIT_TIME_BEFORE_NAV = 2000;     // 2 segundos de espera fija antes de cambiar de pestaña
 
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
   constructor(
     private zone: NgZone,
@@ -127,8 +132,17 @@ instructionText: string = 'Une iguales';
    * Enrutador centralizado del flujo de pantallas
    */
   navegarASiguientePantalla(): void {
-    console.log('🚀 Cambiando de pestaña hacia la siguiente actividad...');
-    this.router.navigate(['/app/routine/level-3/4']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,33).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/4']);
+
+
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

@@ -4,7 +4,11 @@
   margin: 0;
   padding: 0;
 }
-
+.inside-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
 /* --- CONTENEDOR RÍGIDO (OCUPA EL CRISTAL DE LA PANTALLA) --- */
 .teacch-screen-wrapper {
   font-family: 'Lexend', sans-serif;
@@ -39,7 +43,6 @@
 /* --- ENCABEZADO DE TEXTOS --- */
 .question-header {
   text-align: center;
-  margin-bottom: 12px;
   flex-shrink: 0;
 }
 

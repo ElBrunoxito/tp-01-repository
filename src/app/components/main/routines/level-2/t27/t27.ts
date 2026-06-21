@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 interface TarjetaSecuencia {
   id: string;
@@ -36,6 +39,8 @@ export class T27 implements OnInit {
     { paso: 3, elementoContenido: null },
     { paso: 4, elementoContenido: null }
   ];
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
   // Controles adaptativos
@@ -121,12 +126,20 @@ export class T27 implements OnInit {
   }
 
   onSiguiente(): void {
-    this.router.navigate(['/app/routine/level-2/8']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,27).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-2/8']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   onListo(): void {
     if (this.actividadCompletada) {
-      this.router.navigate(['/app/routine/level-2/8']);
+      this.onSiguiente()
     }
   }
 }

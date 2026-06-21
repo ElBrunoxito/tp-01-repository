@@ -56,7 +56,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of evaluaciones; track item.createdDate) {
+          @for (item of evaluaciones; track item.id) {
             <tr>
               <td class="font-medium">{{ item.createdDate }}</td>
               <td>{{ item.attention }}</td>
@@ -66,7 +66,7 @@
               <td>{{ item.association }}</td>
               <td>{{ item.visual }}</td>
               <td class="text-center">
-                <span class="badge-index">{{ item.idc }}</span>
+                <span class="badge-index">{{ item.icg }}</span>
               </td>
               <td class="text-right">
                 <button (click)="verDetalle(item)" class="btn-link">

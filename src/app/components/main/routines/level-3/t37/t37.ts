@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponseUserDTO } from '../../../../../model/User';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
 
 @Component({
   selector: 'app-t37',
@@ -21,7 +24,9 @@ export class T37 implements OnInit, OnDestroy {
   consoleTimer: any;
   segundosTranscurridos: number = 0;
 
-  router = inject(Router);
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
 
   // CONSTANTES DE TIEMPO REQUERIDAS
   readonly NO_RESPONSE_LIMIT = 8000;       // ⚡ 8 segundos máximos por inactividad
@@ -101,8 +106,15 @@ export class T37 implements OnInit, OnDestroy {
    * Enrutador hacia la siguiente actividad (Pantalla 8)
    */
   navegarASiguientePantalla(): void {
-    console.log('🚀 Avanzando automáticamente hacia la Pantalla 8...');
-    this.router.navigate(['/app/routine/level-3/8']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,37).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/8']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

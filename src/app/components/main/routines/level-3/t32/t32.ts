@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t32',
@@ -26,7 +29,9 @@ export class T32 implements OnInit, OnDestroy {
   consoleTimer: any;
   segundosTranscurridos: number = 0;
 
-  router = inject(Router);
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
   // TIEMPOS CONDICIONALES
   readonly FIRST_ALERT_LIMIT = 3000; // 10 segundos para alertar el paso
   readonly SECOND_ALERT_LIMIT = 5000;  // 5 segundos adicionales para alertar el botón
@@ -49,9 +54,19 @@ export class T32 implements OnInit, OnDestroy {
     this.clearAllTimers();
     this.isFirstStepHighlighted = false;
     this.isButtonShaking = false;
+    
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,32).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/3']);
+
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    });    
     this.cdr.detectChanges();
     
-    this.router.navigate(['/app/routine/level-3/3']);
     console.log('Avanzando al Paso 3...');
   }
 

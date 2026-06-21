@@ -1,24 +1,32 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { GetTestTeaDTO } from '../model/TestTea';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { GetTestTeaDTO, TestTeaDTO } from '../model/TestTea';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TestTeaService {
   
-  data :GetTestTeaDTO = {
-    id: "1",
-    levelTEA:3,
-    createdDate: "2026-06-01 17:05",
-    obs: "",
-    points:15
-  }
-  saveResult(data:any){
-    this.data = data
+
+  private readonly baseUrl = "http://localhost:8080/test-tea"
+  private http = inject(HttpClient)
+
+  saveResult(data:TestTeaDTO){
+    return this.http.post<GetTestTeaDTO>(`${this.baseUrl}/process`,data)
   }
 
-  getTestById(id:any):Observable<GetTestTeaDTO>{
-    return  of(this.data)
+  getTestById(id:any){
+    return this.http.get<GetTestTeaDTO>(`${this.baseUrl}/${id}`)
+  }
+  getChildTestsTea(idChild:any){
+    return this.http.get<GetTestTeaDTO[]>(`${this.baseUrl}/list/${idChild}`).pipe(
+      map((res) => {
+        return [...res].sort((a, b) => {
+          return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
+          });
+        })
+    )
+
   }
 }

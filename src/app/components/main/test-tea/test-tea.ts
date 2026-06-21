@@ -1,7 +1,10 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { GetTestTeaDTO } from '../../../model/TestTea';
 import { Router } from '@angular/router';
+import { StorageService } from '../../../service/storage-service';
+import { ResponseUserDTO } from '../../../model/User';
+import { TestTeaService } from '../../../service/test-tea-service';
 
 
 
@@ -18,36 +21,22 @@ export class TestTea implements OnInit {
 
   constructor() {}
   router = inject(Router)
+  storage = inject(StorageService)
+  testTea = inject(TestTeaService)
+  cdr = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
-
-    this.getAll();
-    this.lastEvaluationLevel = this.historyEntries.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())[0].levelTEA.toString();
-
-  }
-
-  getAll(){
-        // Mapeo estructurado y tipado de los registros clínicos de la tabla dense-data
-    this.historyEntries = [
-      {
-        id: "31232132131",
-        createdDate: '2027-12-10 14:20',
-        levelTEA: 2,
-        points: 8
+    const user = this.storage.getUser() as ResponseUserDTO
+    this.testTea.getChildTestsTea(user.idChild).subscribe({
+      next: (res)=>{
+        this.historyEntries = res
+        this.lastEvaluationLevel = res[0].levelTEA.toString();
+        this.cdr.detectChanges();
       },
-      {
-        id: "2",
-        createdDate: '2023-09-09 10:15',
-        levelTEA: 2,
-        points:1
-      },
-      {
-        id: "3",
-        createdDate: '2023-05-09 16:45',
-        levelTEA: 3,
-        points: 15
+      error: (err)=>{
+        console.error(err.message)
       }
-    ];
+    })
   }
 
 

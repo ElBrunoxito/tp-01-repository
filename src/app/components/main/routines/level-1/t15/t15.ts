@@ -4,12 +4,14 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angula
 interface PasoSecuencia {
   id: string;
   titulo: string;
+  imgUrl: string;
   ordenCorrectoIndex: number; // Posición reglamentaria (0-3)
   colocado: boolean;
 }
 
 interface SlotDestino {
   pasoContenido: PasoSecuencia | null;
+  imgUrl: string;
 }
 
 @Component({
@@ -22,18 +24,18 @@ export class T15 implements OnInit, OnDestroy {
 
   // Definición ordenada de la secuencia real (TEACCH / Rutina diaria)
   pasosOrigen: PasoSecuencia[] = [
-    { id: 'cepillar', titulo: 'Cepillar', ordenCorrectoIndex: 2, colocado: false },
-    { id: 'enjuagar', titulo: 'Enjuagar', ordenCorrectoIndex: 0, colocado: false },
-    { id: 'limpiar', titulo: 'Limpiar', ordenCorrectoIndex: 3, colocado: false },
-    { id: 'pasta', titulo: 'Poner pasta', ordenCorrectoIndex: 1, colocado: false }
+    { id: 'cepillar', titulo: 'Cepillar', imgUrl:'https://static.vecteezy.com/system/resources/previews/015/209/275/non_2x/toothbrush-with-toothpaste-icon-cartoon-style-vector.jpg', ordenCorrectoIndex: 2, colocado: false },
+    { id: 'enjuagar', titulo: 'Enjuagar', imgUrl:'https://thumbs.dreamstime.com/b/ilustraci%C3%B3n-de-dibujos-animados-dise%C3%B1o-lavar-las-manos-con-agua-para-evitar-g%C3%A9rmenes-lavarse-sobre-fondo-blanco-199712152.jpg',  ordenCorrectoIndex: 0, colocado: false },
+    { id: 'limpiar', titulo: 'Limpiar', imgUrl:'https://us.123rf.com/450wm/djvstock/djvstock2006/djvstock200662193/150365688-limpieza-de-manos-con-toalla-sobre-fondo-blanco-dise%C3%B1o-de-ilustraciones-vectoriales.jpg?ver=6', ordenCorrectoIndex: 3, colocado: false },
+    { id: 'pasta', titulo: 'Poner pasta', imgUrl:'https://static.vecteezy.com/system/resources/previews/029/310/770/non_2x/cartoon-illustration-toothpaste-and-toothbrush-icon-in-doodle-style-vector.jpg',  ordenCorrectoIndex: 1, colocado: false }
   ];
 
   // Cuatro espacios inicializados vacíos
   slotsDestino: SlotDestino[] = [
-    { pasoContenido: null },
-    { pasoContenido: null },
-    { pasoContenido: null },
-    { pasoContenido: null }
+    { pasoContenido: null, imgUrl:'https://thumbs.dreamstime.com/b/ilustraci%C3%B3n-de-dibujos-animados-dise%C3%B1o-lavar-las-manos-con-agua-para-evitar-g%C3%A9rmenes-lavarse-sobre-fondo-blanco-199712152.jpg'},
+    { pasoContenido: null, imgUrl: 'https://static.vecteezy.com/system/resources/previews/029/310/770/non_2x/cartoon-illustration-toothpaste-and-toothbrush-icon-in-doodle-style-vector.jpg'},
+    { pasoContenido: null, imgUrl:'https://static.vecteezy.com/system/resources/previews/015/209/275/non_2x/toothbrush-with-toothpaste-icon-cartoon-style-vector.jpg' },
+    { pasoContenido: null, imgUrl:'https://us.123rf.com/450wm/djvstock/djvstock2006/djvstock200662193/150365688-limpieza-de-manos-con-toalla-sobre-fondo-blanco-dise%C3%B1o-de-ilustraciones-vectoriales.jpg?ver=6' }
   ];
 
   pasoSeleccionadoId: string | null = null;

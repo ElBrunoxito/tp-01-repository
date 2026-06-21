@@ -8,24 +8,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class KaufmanService {
 
-  data :ResultadosKaufman = {
-  "idc": 90,
-  "classification": 100,
-  "logicalSequencing": 100,
-  "association": 67,
-  "memory": 100,
-  "visual": 100,
-  "attention": 100
-}
   private http = inject(HttpClient)
+  private readonly baseUrl = "http://localhost:8080/kaufman"
 
-
-
-  saveResult(data:any){
-    this.data = data
+  getResultById(id:any){
+    return this.http.get<ResultadosKaufman>(`${this.baseUrl}/${id}`)
+  }
+  
+  getLastKaufmanLog(idChild:any){
+    return this.http.get<ResultadosKaufman>(`${this.baseUrl}/${idChild}/getLast`)
   }
 
-  getResultById(id:any):Observable<ResultadosKaufman>{
-    return  of(this.data)
+  getKaufmanLogs(idChild:any){
+    return this.http.get<ResultadosKaufman[]>(`${this.baseUrl}/child/${idChild}`)
+  }
+  saveResult(idChild:any, data:ResultadosKaufman){
+    return this.http.post<ResultadosKaufman>(`${this.baseUrl}/${idChild}`,data)
   }
 }

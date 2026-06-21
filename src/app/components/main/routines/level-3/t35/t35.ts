@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 @Component({
   selector: 'app-t35',
@@ -25,7 +28,9 @@ export class T35 implements OnInit, OnDestroy {
   // PROCESO ASÍNCRONO
   countdownTimer: any;
 
-  router = inject(Router);
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
+  router = inject(Router)
 
   constructor(
     private zone: NgZone,
@@ -92,8 +97,15 @@ export class T35 implements OnInit, OnDestroy {
   }
 
   navegarASiguientePantalla(): void {
-    // Tu enrutador de Angular directo hacia la Pantalla 6:
-    this.router.navigate(['/app/routine/level-3/6']);
+    const idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+    this.routine.registerRoutine(idChild,35).subscribe({
+      next: (res)=>{
+        this.router.navigate(['/app/routine/level-3/6']);
+      },
+      error: (err)=>{
+        console.error("error al guardar en backend")
+      }
+    }); 
   }
 
   clearAllTimers(): void {

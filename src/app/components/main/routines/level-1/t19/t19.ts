@@ -1,6 +1,9 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoutineService } from '../../../../../service/routine-service';
+import { StorageService } from '../../../../../service/storage-service';
+import { ResponseUserDTO } from '../../../../../model/User';
 
 interface ElementoClasificable {
   id: string;
@@ -42,6 +45,8 @@ export class T19 implements OnInit {
   conteoErrores: number = 0;
   mostrarGuiaAyuda: boolean = false;
   actividadCompletada: boolean = false;
+  routine = inject(RoutineService)
+  storage = inject(StorageService)
   router = inject(Router)
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -104,14 +109,7 @@ export class T19 implements OnInit {
     }
   }
 
-  onSiguiente(): void {
-    this.router.navigate(['/app/routine/level-2/10']);
-  }
 
-  onListo(): void {
-    if (this.actividadCompletada) {
-      this.router.navigate(['/app/routine/level-2/10']);
-    }
-  }
+
 
 }

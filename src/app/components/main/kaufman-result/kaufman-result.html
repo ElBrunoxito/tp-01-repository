@@ -13,7 +13,7 @@
     <div class="hero-progress-container">
       <div class="circular-progress" [style.background]="getCircularProgressBg()">
         <div class="progress-inner">
-          <span class="progress-value">{{ data.idc }}%</span>
+          <span class="progress-value">{{ data.icg }}%</span>
           <span class="progress-label">Índice</span>
         </div>
       </div>
@@ -28,10 +28,10 @@
       </p>
       <div class="tag-container">
         <span class="tag" [ngClass]="{
-          'tag-high': getPerformanceLevel(data.idc) === 'Alto',
-          'tag-medium': getPerformanceLevel(data.idc) === 'Medio',
-          'tag-low': getPerformanceLevel(data.idc) === 'Bajo'
-        }">Nivel {{ getPerformanceLevel(data.idc) }}</span>
+          'tag-high': getPerformanceLevel(data.icg) === 'Alto',
+          'tag-medium': getPerformanceLevel(data.icg) === 'Medio',
+          'tag-low': getPerformanceLevel(data.icg) === 'Bajo'
+        }">Nivel {{ getPerformanceLevel(data.icg) }}</span>
         <span class="tag tag-neutral">Evaluación Completa</span>
       </div>
     </div>

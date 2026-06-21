@@ -1,7 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, RESPONSE_INIT } from '@angular/core';
 import { Router } from '@angular/router';
 import { KaufmanService } from '../../../service/kaufman-service';
 import { ResultadosKaufman } from '../../../model/Kaufman';
+import { StorageService } from '../../../service/storage-service';
+import id from '@angular/common/locales/id';
+import { ResponseUserDTO } from '../../../model/User';
 
 
 @Component({
@@ -27,12 +30,15 @@ export class KaufmanTest implements OnInit {
     { id: 2, nombre: 'Manzana Plástica', categoria: 'Otros', asignado: '' }
   ];
 
-
+  idChild: any
+  storage = inject(StorageService)
   router = inject(Router)
   kaufmanService = inject(KaufmanService)
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idChild = (this.storage.getUser() as ResponseUserDTO).idChild
+  }
 
   siguientePantalla(): void {
     if (this.pantallaActual < 10) {
@@ -90,7 +96,7 @@ export class KaufmanTest implements OnInit {
     const indice_general = ((P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10) / 10) * 100;
 
     const estructuraResultado: ResultadosKaufman = {
-      "idc": Math.round(indice_general),
+      "icg": Math.round(indice_general),
       "classification":  Math.round(clasificacion),
       "logicalSequencing":  Math.round(secuenciacion),
       "association":     Math.round(asociacion),
@@ -98,9 +104,16 @@ export class KaufmanTest implements OnInit {
       "visual":         Math.round(visual),
       "attention":       Math.round(atencion)
     };
-    console.log(JSON.stringify(estructuraResultado, null, 2));
-    this.kaufmanService.saveResult(estructuraResultado)
-    this.router.navigate(['/app/kaufman/result/2']);
+    //console.log(JSON.stringify(estructuraResultado, null, 2));
+    this.kaufmanService.saveResult(this.idChild, estructuraResultado).subscribe({
+      next: (res)=>{
+        (res.icg)
+        this.router.navigate([`/app/kaufman/result/${res.id}`]);
+      },
+      error: (err)=>{
+        console.log("A ocurrido un error")
+      }
+    })
 
 
   }
