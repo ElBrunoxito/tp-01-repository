@@ -44,6 +44,7 @@ export class TestTea implements OnInit {
     console.log('Iniciando nuevo nivel de evaluación interactiva TEA...');
     if (this.lastEvaluationLevel) {
       //Empezar nivel
+      this.router.navigate([`/app/routine/level-${this.lastEvaluationLevel}`])
     }
     else{
       alert('No se tiene un nivel TEA registrado. Por favor realice una evaluación primero.');

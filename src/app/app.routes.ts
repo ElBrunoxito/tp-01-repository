@@ -48,6 +48,7 @@ import { Nav } from './components/main/routines/level-1/nav/nav';
 import { InfoUser } from './components/main/info-user/info-user';
 import { authGuardGuard } from './guards/auth-guard-guard';
 import { loginGuardGuard } from './guards/login-guard-guard';
+import { RenderMode } from '@angular/ssr';
 
 export const routes: Routes = [
 
@@ -99,7 +100,8 @@ export const routes: Routes = [
             path:'kaufman' ,component: Kaufman
            },
            {
-            path:'user/:id' ,component: InfoUser
+            path:'user/:id' ,component: InfoUser, 
+            data: { RenderMode: 'Client'}
            }
 
         ]
@@ -114,7 +116,9 @@ export const routes: Routes = [
     {
         path:'app/resultados/:id',
         canActivate: [authGuardGuard],
-        component: ResultTestTea
+        component: ResultTestTea,
+        data: { RenderMode: 'Client'}
+
     },
     //KAUFMAN
     {
@@ -125,7 +129,9 @@ export const routes: Routes = [
     {
         path:'app/kaufman/result/:id',
         canActivate: [authGuardGuard],
-        component: KaufmanResult
+        component: KaufmanResult,
+        data: { RenderMode: 'Client'}
+
     },
     {
         path:'app/routine/level-1',
